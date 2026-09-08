@@ -35,17 +35,17 @@ export const site = {
     },
     {
       no: "03",
-      key: "Tagline",
+      key: "What we mean",
       text: "One click is a sale. **Click again is a business.**",
     },
     {
       no: "04",
-      key: "Brand Philosophy",
+      key: "What we believe",
       text: "Anyone can buy attention. We build the reason people **come back**.",
     },
     {
       no: "05",
-      key: "Brand Meaning",
+      key: "Where it leads",
       text: "Connect → Click → Trust → Return → **Refer**.",
     },
   ],
