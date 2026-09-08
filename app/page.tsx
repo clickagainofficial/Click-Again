@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import NotifyForm from "@/components/NotifyForm";
 import Wordmark from "@/components/Wordmark";
@@ -96,9 +97,11 @@ export default function Home() {
 
         <footer className="footer">
           <span>
-            © {year} {site.name}. All rights reserved.
+            © {year} {site.name} — a brand of {site.legal.entity}.
           </span>
           <span className="links">
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
             <a href={`mailto:${site.email}`}>{site.email}</a>
             {site.socials.map((s) => (
               <a key={s.label} href={s.href} target="_blank" rel="noreferrer">

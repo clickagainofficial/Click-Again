@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 type State = "idle" | "sending" | "done" | "error";
@@ -68,7 +69,12 @@ export default function NotifyForm() {
         </button>
       </form>
       <p className={`form-note${state === "done" ? " ok" : ""}`} role="status">
-        {note || "No spam. One email when we launch."}
+        {note || (
+          <>
+            No spam. One email when we launch — see our{" "}
+            <Link href="/privacy">Privacy Policy</Link>.
+          </>
+        )}
       </p>
     </div>
   );

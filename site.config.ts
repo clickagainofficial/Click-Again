@@ -12,6 +12,21 @@ export const site = {
   email: "clickagainofficial@gmail.com",
   phone: "",
 
+  /**
+   * Company details used on the Privacy Policy and Terms pages.
+   * "Click Again" is the brand; the company behind it is the legal entity.
+   */
+  legal: {
+    entity: "Magizh Digital Marketing Solutions Private Limited",
+    cin: "", // TODO: Corporate Identity Number from the incorporation certificate
+    address: "3/508, Bharathi Street, Muneswaran Nagar, Iyer Bungalow, Madurai, Tamil Nadu 625014",
+    city: "Madurai",
+    state: "Tamil Nadu",
+    grievanceEmail: "clickagainofficial@gmail.com",
+    // Shown as "Last updated" on both pages. Bump it whenever the text changes.
+    updated: "8 September 2026",
+  },
+
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/clickagainofficial/" },
     {

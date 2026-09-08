@@ -456,3 +456,144 @@ a { color: inherit; text-decoration: none; }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------------- legal pages ---------------- */
+.legal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.legal-nav .logo-sm {
+  display: block;
+  width: 132px;
+  height: auto;
+}
+
+.legal-back {
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  color: var(--ink-60);
+  transition: color 0.25s var(--ease);
+}
+
+.legal-back:hover { color: var(--red); }
+
+.legal {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(40px, 7vw, 72px) 0 clamp(56px, 8vw, 88px);
+}
+
+.legal h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 5.5vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.legal .updated {
+  margin: 12px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-40);
+}
+
+.legal .intro {
+  margin: 28px 0 0;
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--ink-80);
+}
+
+.legal section {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.legal h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.12rem;
+  letter-spacing: 0.01em;
+  margin: 0 0 14px;
+  display: flex;
+  gap: 12px;
+}
+
+.legal h2 .n {
+  color: var(--red);
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+
+.legal p,
+.legal li {
+  font-size: 15.5px;
+  line-height: 1.68;
+  color: var(--ink-60);
+  margin: 0 0 14px;
+}
+
+.legal li { margin-bottom: 9px; }
+.legal ul { margin: 0 0 14px; padding-left: 20px; }
+.legal li::marker { color: var(--ink-20); }
+
+.legal b,
+.legal strong { color: var(--ink); font-weight: 600; }
+
+.legal a {
+  color: var(--red-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.legal a:hover { color: var(--red); }
+
+/* key-value block for the company details */
+.legal .facts {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 10px 20px;
+  margin: 0;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.legal .facts dt {
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-40);
+}
+
+.legal .facts dd {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-80);
+}
+
+@media (max-width: 620px) {
+  .legal .facts { grid-template-columns: 1fr; gap: 4px 0; }
+  .legal .facts dd { margin-bottom: 10px; }
+}
+
+.form-note a {
+  color: var(--ink-60);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.25s var(--ease);
+}
+
+.form-note a:hover { color: var(--red); }
