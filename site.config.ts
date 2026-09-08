@@ -18,7 +18,7 @@ export const site = {
    */
   legal: {
     entity: "Magizh Digital Marketing Solutions Private Limited",
-    cin: "", // TODO: Corporate Identity Number from the incorporation certificate
+    cin: "U63999TN2024PTC172597",
     address: "3/508, Bharathi Street, Muneswaran Nagar, Iyer Bungalow, Madurai, Tamil Nadu 625014",
     city: "Madurai",
     state: "Tamil Nadu",
