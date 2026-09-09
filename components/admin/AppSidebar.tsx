@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ExternalLink, LayoutDashboard, Users } from "lucide-react";
+import { Calculator, ExternalLink, LayoutDashboard, Users } from "lucide-react";
 
 import LogoutButton from "@/components/admin/LogoutButton";
 import {
@@ -25,6 +25,7 @@ import {
 const modules = [
   { title: "Overview", href: "/admin", icon: LayoutDashboard },
   { title: "Waitlist", href: "/admin/waitlist", icon: Users },
+  { title: "Calculator", href: "/admin/calculator", icon: Calculator },
 ];
 
 export default function AppSidebar({ waitlistCount }: { waitlistCount: number }) {
