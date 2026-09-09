@@ -57,6 +57,24 @@ function doPost(e) {
       sheet.setColumnWidth(2, 260);
     }
 
+    // the admin dashboard reads the list back through this same endpoint
+    if (body.action === 'list') {
+      var rows = [];
+      if (sheet.getLastRow() > 1) {
+        var values = sheet.getRange(2, 1, sheet.getLastRow() - 1, 4).getValues();
+        for (var i = 0; i < values.length; i++) {
+          var when = values[i][0];
+          rows.push({
+            timestamp: when instanceof Date ? when.toISOString() : String(when),
+            email: String(values[i][1] || ''),
+            source: String(values[i][2] || ''),
+            userAgent: String(values[i][3] || ''),
+          });
+        }
+      }
+      return reply({ ok: true, rows: rows });
+    }
+
     // skip duplicates so one person cannot fill the sheet
     if (sheet.getLastRow() > 1) {
       var existing = sheet

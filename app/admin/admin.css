@@ -1,0 +1,84 @@
+/**
+ * Tailwind + the shadcn token layer, imported only by the admin layout so it
+ * never reaches the public pages. Colours follow the brand: paper ground,
+ * white cards, logo red as the primary.
+ */
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans: var(--font-inter), Inter, "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-poppins), Poppins, "Segoe UI", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.65rem;
+
+  --background: #f4f3ef;
+  --foreground: #101010;
+
+  --card: #ffffff;
+  --card-foreground: #101010;
+  --popover: #ffffff;
+  --popover-foreground: #101010;
+
+  /* the logo red */
+  --primary: #be0919;
+  --primary-foreground: #ffffff;
+
+  --secondary: #eceae4;
+  --secondary-foreground: #1a1a1a;
+
+  --muted: #eceae4;
+  --muted-foreground: #6d6a63;
+
+  --accent: #eceae4;
+  --accent-foreground: #1a1a1a;
+
+  --destructive: #b3261e;
+
+  --border: #ddd9d1;
+  --input: #ddd9d1;
+  --ring: #be0919;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+  }
+
+  /* the public stylesheet paints a fixed tint over everything; the admin
+     screens want a plain ground */
+  body::before {
+    content: none;
+  }
+}
