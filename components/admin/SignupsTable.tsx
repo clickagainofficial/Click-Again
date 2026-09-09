@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/table";
 
 type Signup = {
-  timestamp: string;
+  createdAt: string;
   email: string;
   source: string;
   userAgent: string;
@@ -58,7 +58,7 @@ export default function SignupsTable({ rows }: { rows: Signup[] }) {
       (r) =>
         r.email.toLowerCase().includes(q) ||
         r.source.toLowerCase().includes(q) ||
-        formatWhen(r.timestamp).toLowerCase().includes(q)
+        formatWhen(r.createdAt).toLowerCase().includes(q)
     );
   }, [rows, query]);
 
@@ -114,7 +114,7 @@ export default function SignupsTable({ rows }: { rows: Signup[] }) {
                     </a>
                   </TableCell>
                   <TableCell className="text-muted-foreground px-4">
-                    {formatWhen(r.timestamp)}
+                    {formatWhen(r.createdAt)}
                   </TableCell>
                   <TableCell className="px-4">
                     <Badge variant="secondary">{r.source || "—"}</Badge>

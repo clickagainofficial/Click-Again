@@ -1,13 +1,9 @@
 import { NextResponse } from "next/server";
+import { addSignup } from "@/lib/waitlist";
 
 /**
- * Waitlist endpoint -> Google Sheet.
- *
- * Set SHEET_WEBHOOK_URL and SHEET_WEBHOOK_TOKEN in .env.local (and in the
- * Vercel project settings). Setup steps: docs/google-sheet-setup.md
- *
- * With no webhook configured the address is only logged, so local development
- * keeps working without secrets.
+ * Waitlist endpoint. Signups go straight into MongoDB — the same collection
+ * the admin dashboard reads.
  */
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -58,41 +54,14 @@ export async function POST(req: Request) {
     );
   }
 
-  const webhook = process.env.SHEET_WEBHOOK_URL;
-
-  if (!webhook) {
-    console.warn("[clickagain] SHEET_WEBHOOK_URL not set — signup not stored:", email);
-    return NextResponse.json({ ok: true });
-  }
-
   try {
-    const res = await fetch(webhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        token: process.env.SHEET_WEBHOOK_TOKEN ?? "",
-        email,
-        source: "coming-soon",
-        userAgent: req.headers.get("user-agent") ?? "",
-      }),
-      // Apps Script is occasionally slow to warm up
-      signal: AbortSignal.timeout(9000),
+    await addSignup({
+      email,
+      source: "coming-soon",
+      userAgent: req.headers.get("user-agent") ?? "",
     });
-
-    if (!res.ok) throw new Error(`sheet webhook returned ${res.status}`);
-
-    // Apps Script answers 200 even when the script itself throws, so the
-    // status code alone proves nothing — the body has to confirm the write.
-    const text = (await res.text()).slice(0, 500);
-    let saved = false;
-    try {
-      saved = JSON.parse(text)?.ok === true;
-    } catch {
-      saved = false;
-    }
-    if (!saved) throw new Error(`sheet webhook did not confirm: ${text}`);
   } catch (err) {
-    console.error("[clickagain] sheet webhook failed:", err, "| email:", email);
+    console.error("[clickagain] could not save signup:", err, "| email:", email);
     return NextResponse.json(
       { error: "Couldn't save that right now. Please try again." },
       { status: 502 }

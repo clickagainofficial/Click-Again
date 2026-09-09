@@ -4,16 +4,15 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LogOut } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { SidebarMenuButton } from "@/components/ui/sidebar";
 
 export default function LogoutButton() {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
 
   return (
-    <Button
-      variant="ghost"
-      size="sm"
+    <SidebarMenuButton
+      tooltip="Sign out"
       disabled={busy}
       onClick={async () => {
         setBusy(true);
@@ -23,7 +22,7 @@ export default function LogoutButton() {
       }}
     >
       <LogOut />
-      Sign out
-    </Button>
+      <span>Sign out</span>
+    </SidebarMenuButton>
   );
 }

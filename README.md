@@ -48,12 +48,22 @@ changes.
 - **[site.config.ts](site.config.ts)** — launch date for the countdown, contact
   email, social links, and the five brand principles.
 - **[app/api/notify/route.ts](app/api/notify/route.ts)** — the waitlist endpoint.
-  It posts each signup to a Google Sheet via an Apps Script webhook. Follow
-  [docs/google-sheet-setup.md](docs/google-sheet-setup.md) once, then fill in
-  `SHEET_WEBHOOK_URL` and `SHEET_WEBHOOK_TOKEN` (see `.env.example`). Until that
-  URL is set the endpoint only logs and **nothing is stored**.
+  Signups go straight into MongoDB; see
+  [docs/waitlist-storage.md](docs/waitlist-storage.md).
 - **[components/Wordmark.tsx](components/Wordmark.tsx)** — the hero logo lockup.
+
+## Admin
+
+A private dashboard lives at `/admin` — sign-in, an overview, and the waitlist
+module. Setup and the security model are in [docs/admin.md](docs/admin.md).
+
+## Environment
+
+Copy `.env.example` to `.env.local` and fill in `MONGODB_URI`, `ADMIN_EMAIL`,
+`ADMIN_PASSWORD` and `AUTH_SECRET`. The same four go in the Vercel project
+settings.
 
 ## Deploy
 
-Zero-config on Vercel. Point `clickagain.in` at the project in Vercel → Domains.
+Zero-config on Vercel; `clickagain.in` is pointed at the project under
+Vercel → Domains.

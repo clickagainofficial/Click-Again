@@ -54,17 +54,25 @@ Protections in place:
 
 ## Reading the waitlist
 
-The dashboard reads the sheet through the same Apps Script webhook that saves
-signups, sending `{token, action: "list"}`. The script must be the current
-version in [google-sheet-setup.md](google-sheet-setup.md) — the one containing
-the `body.action === 'list'` block.
+Both admin pages read MongoDB directly through `lib/waitlist.ts`. Set
+`MONGODB_URI` and they work — see [waitlist-storage.md](waitlist-storage.md).
 
-If it is not, the dashboard shows *"Can't read the waitlist"* with the reason.
-**Signups keep saving normally either way** — only reading them back here is
-affected.
+If the database cannot be reached the page still renders, with a red card
+naming the reason. Signups are unaffected by a dashboard problem and vice
+versa; they share only the collection.
 
-After updating the script, remember: *Deploy → Manage deployments → ✏️ →
-Version: **New version***. Saving alone does not change what `/exec` serves.
+## Modules
+
+The sidebar lists the admin modules:
+
+| Module   | Route             | What it does                                        |
+| -------- | ----------------- | --------------------------------------------------- |
+| Overview | `/admin`          | stat tiles and a 14-day signups chart               |
+| Waitlist | `/admin/waitlist` | searchable table of every signup, plus a CSV export |
+
+To add another, drop a page under `app/admin/(dash)/` and add one entry to
+`modules` in `components/admin/AppSidebar.tsx`. The `(dash)` route group carries
+the sidebar; `/admin/login` sits outside it, so the sign-in screen stays bare.
 
 ## Adding more shadcn components
 
