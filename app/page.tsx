@@ -96,9 +96,7 @@ export default function Home() {
         </section>
 
         <footer className="footer">
-          <span>
-            © {year} {site.name} — a brand of {site.legal.entity}.
-          </span>
+          <span>© {year} {site.name}. All rights reserved.</span>
           <span className="links">
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
