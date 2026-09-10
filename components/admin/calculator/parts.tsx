@@ -95,12 +95,15 @@ export function Row({
   label,
   value,
   hint,
+  formula,
   strong,
   tone,
 }: {
   label: string;
   value: string;
   hint?: string;
+  /** the arithmetic behind the number, so it can be shown to a client */
+  formula?: string;
   strong?: boolean;
   tone?: "primary" | "muted";
 }) {
@@ -115,6 +118,11 @@ export function Row({
         {label}
         {hint ? (
           <span className="text-muted-foreground ml-2 text-[11px]">{hint}</span>
+        ) : null}
+        {formula ? (
+          <span className="text-muted-foreground/80 mt-0.5 block font-mono text-[10.5px]">
+            {formula}
+          </span>
         ) : null}
       </span>
       <span

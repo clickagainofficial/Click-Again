@@ -337,6 +337,7 @@ export default function EcommerceMode() {
                     label="Break-even ROAS"
                     value={multiple(r.breakevenRoas)}
                     hint="profit 0% — sari-samam"
+                    formula={`${money(num(f.aov))} ÷ ${money(r.contribution)}  (AOV ÷ contribution)`}
                     strong
                     tone="primary"
                   />
@@ -344,6 +345,7 @@ export default function EcommerceMode() {
                     label="Target ROAS"
                     value={multiple(r.targetRoas)}
                     hint={`profit ${percent(netMarginAtRoas(r.contributionPct, r.targetRoas))} of revenue`}
+                    formula={`${r.breakevenRoas.toFixed(2)} ÷ ${(1 - num(f.desiredMargin) / 100).toFixed(2)}  (break-even ÷ (1 − ${num(f.desiredMargin)}%))`}
                     strong
                   />
                   <Separator className="my-2" />
@@ -351,8 +353,13 @@ export default function EcommerceMode() {
                     label="Max CPA"
                     value={money(r.maxCpa, true)}
                     hint="idhukku mela nashtam"
+                    formula="= contribution"
                   />
-                  <Row label="Target CPA" value={money(r.targetCpa, true)} />
+                  <Row
+                    label="Target CPA"
+                    value={money(r.targetCpa, true)}
+                    formula={`${money(r.maxCpa)} × ${(1 - num(f.desiredMargin) / 100).toFixed(2)}`}
+                  />
                 </div>
 
                 <Separator />

@@ -402,20 +402,48 @@ export default function ServiceMode() {
                   label="Max CPL"
                   value={money(r.maxCpl)}
                   hint="idhukku mela nashtam"
+                  formula={`${money(r.maxCac)} × ${percent(r.closeRate * 100, 2)}  (max CAC × close rate)`}
                   strong
                   tone="primary"
                 />
-                <Row label="Target CPL" value={money(r.targetCpl)} hint="goal" strong />
+                <Row
+                  label="Target CPL"
+                  value={money(r.targetCpl)}
+                  hint="goal"
+                  formula={`${money(r.targetCac)} × ${percent(r.closeRate * 100, 2)}`}
+                  strong
+                />
                 <Separator className="my-2" />
-                <Row label="Max CAC" value={money(r.maxCac)} />
-                <Row label="Target CAC" value={money(r.targetCac)} />
+                <Row
+                  label="Max CAC"
+                  value={money(r.maxCac)}
+                  formula="= contribution per deal"
+                />
+                <Row
+                  label="Target CAC"
+                  value={money(r.targetCac)}
+                  formula={`${money(r.maxCac)} × ${(1 - num(f.desiredMargin) / 100).toFixed(2)}`}
+                />
                 <Separator className="my-2" />
-                <Row label="Overall close rate" value={percent(r.closeRate * 100, 2)} />
-                <Row label="Leads per deal" value={count(r.leadsPerDeal)} />
+                <Row
+                  label="Overall close rate"
+                  value={percent(r.closeRate * 100, 2)}
+                  formula={
+                    funnelMode === "funnel"
+                      ? `${num(f.leadToQualified)}% × ${num(f.qualifiedToMeeting)}% × ${num(f.meetingToDeal)}%`
+                      : undefined
+                  }
+                />
+                <Row
+                  label="Leads per deal"
+                  value={count(r.leadsPerDeal)}
+                  formula={`1 ÷ ${percent(r.closeRate * 100, 2)}`}
+                />
                 <Row
                   label="Break-even ROAS"
                   value={multiple(r.breakevenRoas)}
                   hint="profit 0%"
+                  formula={`${money(r.effectiveDealValue)} ÷ ${money(r.contribution)}`}
                 />
                 <Row
                   label="Target ROAS"

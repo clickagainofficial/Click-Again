@@ -255,16 +255,32 @@ export function calcEcommerce(input: EcomInput): EcomResult {
           }
         : null;
 
+    const actualAov = revenue / orders;
+
     actual = {
       roas,
       cpa,
-      aov: revenue / orders,
+      aov: actualAov,
       grossProfit,
       netProfit,
       profitMarginPct: (netProfit / revenue) * 100,
       verdict,
       gap,
     };
+
+    // Everything above is built on the AOV that was typed in. If the orders
+    // actually placed disagree with it, the contribution — and therefore every
+    // target on the card — is wrong, so say so rather than quietly being wrong.
+    if (Math.abs(actualAov - aov) / aov > 0.1) {
+      notes.push({
+        severity: "warning",
+        text:
+          `AOV ${money(aov)} nu potteenga, aana actual ${money(actualAov)} ` +
+          `(${money(revenue)} ÷ ${orders} orders). Contribution-um targets-um ` +
+          "andha AOV-a vechu thaan kanakku — AOV-a update pannunga, illaina " +
+          "indha numbers ellame thappu.",
+      });
+    }
   }
 
   return {

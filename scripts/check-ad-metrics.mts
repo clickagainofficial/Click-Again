@@ -121,5 +121,17 @@ console.log("\nguards: nothing throws on empty or silly input");
   is("100% desired margin safe", Number.isFinite(fullMargin.targetRoas), false);
 }
 
+console.log("\nfix: a wrong AOV is called out against the real orders");
+{
+  const wrong = ecom({ aov: 500, cogs: 280, shipping: 40, gatewayPct: 2,
+    adSpend: 45000, revenue: 187000, orders: 75 });
+  near("actual AOV", wrong.actual!.aov, 2493.33);
+  is("mismatch warned", wrong.notes.some((n) => n.text.includes("aana actual")), true);
+
+  const right = ecom({ aov: 2493, cogs: 1000, shipping: 80, gatewayPct: 2,
+    adSpend: 45000, revenue: 187000, orders: 75 });
+  is("matching AOV quiet", right.notes.some((n) => n.text.includes("aana actual")), false);
+}
+
 console.log(`\n${failures === 0 ? "ALL CHECKS PASSED" : failures + " CHECK(S) FAILED"}`);
 process.exit(failures === 0 ? 0 : 1);
