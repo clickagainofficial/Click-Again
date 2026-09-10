@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "logo": "node scripts/build-logo.js"
+    "logo": "node scripts/build-logo.js",
+    "check:calc": "node --experimental-strip-types scripts/check-ad-metrics.mts"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.15",

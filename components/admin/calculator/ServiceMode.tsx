@@ -73,13 +73,14 @@ const initial: Fields = {
   desiredMargin: "30",
 };
 
+// a stray minus sign would inflate the margin, so costs floor at zero
 const num = (v: string) => {
   const n = Number.parseFloat(v);
-  return Number.isFinite(n) ? n : 0;
+  return Number.isFinite(n) ? Math.max(0, n) : 0;
 };
 const maybe = (v: string) => {
   const n = Number.parseFloat(v);
-  return Number.isFinite(n) ? n : null;
+  return Number.isFinite(n) ? Math.max(0, n) : null;
 };
 
 export default function ServiceMode() {
@@ -116,7 +117,7 @@ export default function ServiceMode() {
     [f, deliveryUnit, recurring, funnelMode]
   );
 
-  const ready = num(f.dealValue) > 0 && num(f.delivery) > 0;
+  const ready = num(f.dealValue) > 0 && f.delivery.trim() !== "";
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">

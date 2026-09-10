@@ -69,13 +69,14 @@ const initial: Fields = {
   orders: "",
 };
 
+// a stray minus sign would inflate the margin, so costs floor at zero
 const num = (v: string) => {
   const n = Number.parseFloat(v);
-  return Number.isFinite(n) ? n : 0;
+  return Number.isFinite(n) ? Math.max(0, n) : 0;
 };
 const maybe = (v: string) => {
   const n = Number.parseFloat(v);
-  return Number.isFinite(n) ? n : null;
+  return Number.isFinite(n) ? Math.max(0, n) : null;
 };
 
 export default function EcommerceMode() {
@@ -107,7 +108,7 @@ export default function EcommerceMode() {
     [f, cogsUnit]
   );
 
-  const ready = num(f.aov) > 0 && num(f.cogs) > 0;
+  const ready = num(f.aov) > 0 && f.cogs.trim() !== "";
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">

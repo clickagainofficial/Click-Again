@@ -138,6 +138,13 @@ export type EcomResult = {
   fatal: string | null;
 };
 
+/** Names any percentage field that has been pushed past 100. */
+function overHundred(fields: Record<string, number>) {
+  return Object.entries(fields)
+    .filter(([, v]) => v > 100)
+    .map(([k]) => k);
+}
+
 export function calcEcommerce(input: EcomInput): EcomResult {
   const notes: Note[] = [];
 
@@ -174,7 +181,16 @@ export function calcEcommerce(input: EcomInput): EcomResult {
   /* validation (§5) */
   let fatal: string | null = null;
 
-  if (!(aov > 0)) {
+  const badPercents = overHundred({
+    "Payment gateway": input.gatewayPct,
+    "RTO rate": input.rtoRate,
+    "Desired profit margin": input.desiredMargin,
+    ...(input.cogsUnit === "percent" ? { "Product cost": input.cogs } : {}),
+  });
+
+  if (badPercents.length > 0) {
+    fatal = `${badPercents.join(", ")} — percentage 100-ku mela irukka mudiyaadhu.`;
+  } else if (!(aov > 0)) {
     fatal = "Order value 0-ku mela irukkanum.";
   } else if (cogs >= aov) {
     fatal = "Product cost, selling price-a vida adhigam. Check pannunga.";
@@ -365,7 +381,22 @@ export function calcService(input: ServiceInput): ServiceResult {
   /* validation (§5) */
   let fatal: string | null = null;
 
-  if (!(input.dealValue > 0)) {
+  const badPercents = overHundred({
+    "Payment gateway": input.gatewayPct,
+    "Desired profit margin": input.desiredMargin,
+    ...(input.deliveryUnit === "percent" ? { "Delivery cost": input.delivery } : {}),
+    ...(input.funnelMode === "funnel"
+      ? {
+          "Lead → Qualified": input.leadToQualified,
+          "Qualified → Meeting": input.qualifiedToMeeting,
+          "Meeting → Deal": input.meetingToDeal,
+        }
+      : { "Lead → Customer": input.leadToCustomer }),
+  });
+
+  if (badPercents.length > 0) {
+    fatal = `${badPercents.join(", ")} — percentage 100-ku mela irukka mudiyaadhu.`;
+  } else if (!(input.dealValue > 0)) {
     fatal = "Deal value 0-ku mela irukkanum.";
   } else if (deliveryPerPeriod >= input.dealValue && !input.recurring) {
     fatal = "Delivery cost, deal value-a vida adhigam. Check pannunga.";
@@ -450,9 +481,11 @@ export function calcService(input: ServiceInput): ServiceResult {
       verdict,
     };
 
-    // the trap this calculator exists to catch: cheap leads that never close
+    // The trap this calculator exists to catch: cheap leads that never close.
+    // Only judge it once deals have actually been entered — a blank field is
+    // "not filled in yet", not "nothing closed".
     const assumedPct = closeRate * 100;
-    if (deals >= 0 && closeRatePct < assumedPct * 0.7) {
+    if (input.deals !== null && closeRatePct < assumedPct * 0.7) {
       const shortfall = ((assumedPct - closeRatePct) / assumedPct) * 100;
       notes.push({
         severity: "warning",
