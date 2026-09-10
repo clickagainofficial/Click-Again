@@ -380,10 +380,30 @@ export default function EcommerceMode() {
                 <CardContent className="grid gap-4">
                   <VerdictBadge verdict={r.actual.verdict} />
 
+                  {r.actual.estimatedRevenue || r.actual.estimatedOrders ? (
+                    <p className="text-muted-foreground bg-muted/50 rounded-md px-3 py-2 text-[11px] leading-relaxed">
+                      {r.actual.estimatedRevenue
+                        ? `Revenue podala, so ${money(num(f.aov))} AOV-a vechu kanakku pannirken.`
+                        : `Orders podala, so ${money(num(f.aov))} AOV-a vechu kanakku pannirken.`}{" "}
+                      Rendaiyum podunga — appo AOV sariyaa nu naan check panren.
+                    </p>
+                  ) : null}
+
                   <div>
-                    <Row label="ROAS" value={multiple(r.actual.roas)} strong />
-                    <Row label="CPA" value={money(r.actual.cpa)} />
-                    <Row label="Actual AOV" value={money(r.actual.aov)} />
+                    <Row
+                      label="ROAS"
+                      value={multiple(r.actual.roas)}
+                      hint={r.actual.estimatedRevenue ? "estimate" : undefined}
+                      strong
+                    />
+                    <Row
+                      label="CPA"
+                      value={money(r.actual.cpa)}
+                      hint={r.actual.estimatedOrders ? "estimate" : undefined}
+                    />
+                    {!r.actual.estimatedRevenue && !r.actual.estimatedOrders ? (
+                      <Row label="Actual AOV" value={money(r.actual.aov)} />
+                    ) : null}
                     <Separator className="my-2" />
                     <Row label="Gross profit" value={money(r.actual.grossProfit)} />
                     <Row

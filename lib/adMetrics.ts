@@ -131,6 +131,9 @@ export type EcomResult = {
     netProfit: number;
     profitMarginPct: number;
     verdict: Verdict;
+    /** true when that side was derived from the assumed AOV, not measured */
+    estimatedRevenue: boolean;
+    estimatedOrders: boolean;
     gap: null | {
       roasGap: number;
       revenueNeeded: number;
@@ -240,10 +243,20 @@ export function calcEcommerce(input: EcomInput): EcomResult {
   const revenue = input.revenue ?? 0;
   const orders = input.orders ?? 0;
 
-  if (spend > 0 && revenue > 0 && orders > 0 && !fatal) {
-    const roas = revenue / spend;
-    const cpa = spend / orders;
-    const grossProfit = revenue - totalVariableCost * orders;
+  // Spend plus EITHER revenue or orders is enough. Plenty of campaigns report
+  // only one of the two — COD, WhatsApp orders and lead forms give a count
+  // with no value attached — so the missing side is filled in from the AOV and
+  // labelled as an estimate rather than refusing to answer.
+  if (spend > 0 && (revenue > 0 || orders > 0) && !fatal) {
+    const estimatedRevenue = !(revenue > 0);
+    const estimatedOrders = !(orders > 0);
+
+    const effRevenue = estimatedRevenue ? orders * aov : revenue;
+    const effOrders = estimatedOrders ? effRevenue / aov : orders;
+
+    const roas = effRevenue / spend;
+    const cpa = spend / effOrders;
+    const grossProfit = effRevenue - totalVariableCost * effOrders;
     const netProfit = grossProfit - spend;
 
     const verdict: Verdict =
@@ -254,15 +267,15 @@ export function calcEcommerce(input: EcomInput): EcomResult {
         ? {
             roasGap: breakevenRoas - roas,
             revenueNeeded: spend * breakevenRoas,
-            revenueShort: spend * breakevenRoas - revenue,
+            revenueShort: spend * breakevenRoas - effRevenue,
             ordersNeeded: (spend * breakevenRoas) / aov,
-            ordersShort: (spend * breakevenRoas) / aov - orders,
-            maxSpendOk: revenue / breakevenRoas,
-            overspentBy: spend - revenue / breakevenRoas,
+            ordersShort: (spend * breakevenRoas) / aov - effOrders,
+            maxSpendOk: effRevenue / breakevenRoas,
+            overspentBy: spend - effRevenue / breakevenRoas,
           }
         : null;
 
-    const actualAov = revenue / orders;
+    const actualAov = effRevenue / effOrders;
 
     actual = {
       roas,
@@ -270,15 +283,23 @@ export function calcEcommerce(input: EcomInput): EcomResult {
       aov: actualAov,
       grossProfit,
       netProfit,
-      profitMarginPct: (netProfit / revenue) * 100,
+      profitMarginPct: (netProfit / effRevenue) * 100,
       verdict,
       gap,
+      estimatedRevenue,
+      estimatedOrders,
     };
 
     // Everything above is built on the AOV that was typed in. If the orders
     // actually placed disagree with it, the contribution — and therefore every
     // target on the card — is wrong, so say so rather than quietly being wrong.
-    if (Math.abs(actualAov - aov) / aov > 0.1) {
+    // Only meaningful when both sides were actually measured — comparing the
+    // AOV against a figure derived from that same AOV would always agree.
+    if (
+      !estimatedRevenue &&
+      !estimatedOrders &&
+      Math.abs(actualAov - aov) / aov > 0.1
+    ) {
       notes.push({
         severity: "warning",
         text:

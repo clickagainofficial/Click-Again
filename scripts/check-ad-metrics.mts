@@ -135,6 +135,37 @@ console.log("\nfix: a wrong AOV is called out against the real orders");
   is("matching AOV quiet", right.notes.some((n) => n.fix?.field === "aov"), false);
 }
 
+console.log("\nfix: spend plus EITHER revenue or orders is enough");
+{
+  // ₹2,499 order, ₹1,176.18 variable cost, ₹1,322.82 contribution
+  const base = { aov: 2499, cogs: 40, cogsUnit: "percent" as const, shipping: 80,
+    gatewayPct: 2, packing: 25, rtoRate: 12, rtoCost: 180 };
+
+  const both = ecom({ ...base, adSpend: 45000, revenue: 187000, orders: 75 });
+
+  const noRevenue = ecom({ ...base, adSpend: 45000, orders: 75 });
+  is("orders only works", noRevenue.actual !== null, true);
+  near("  CPA matches", noRevenue.actual!.cpa, 600);
+  is("  revenue flagged", noRevenue.actual!.estimatedRevenue, true);
+  near("  revenue = 75 × AOV", noRevenue.actual!.roas, (75 * 2499) / 45000);
+
+  const noOrders = ecom({ ...base, adSpend: 45000, revenue: 187000 });
+  is("revenue only works", noOrders.actual !== null, true);
+  near("  ROAS matches", noOrders.actual!.roas, both.actual!.roas);
+  is("  orders flagged", noOrders.actual!.estimatedOrders, true);
+
+  // with a correct AOV all three routes agree on the verdict
+  is("verdict both", both.actual!.verdict, "healthy");
+  is("verdict orders-only", noRevenue.actual!.verdict, "healthy");
+  is("verdict revenue-only", noOrders.actual!.verdict, "healthy");
+
+  // and no AOV warning can fire when one side was derived from the AOV
+  is("no false AOV warning", noOrders.notes.some((n) => n.fix?.field === "aov"), false);
+
+  const spendOnly = ecom({ ...base, adSpend: 45000 });
+  is("spend alone -> no actual", spendOnly.actual, null);
+}
+
 console.log("\nservice: deal value is checked against closed deals too");
 {
   const off = svc({ dealValue: 20000, delivery: 5000, funnelMode: "simple",
