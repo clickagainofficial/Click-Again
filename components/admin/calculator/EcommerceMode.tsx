@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Wand2 } from "lucide-react";
 
 import {
   ContributionBar,
@@ -13,6 +13,7 @@ import {
   Row,
   VerdictBadge,
 } from "./parts";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -381,12 +382,36 @@ export default function EcommerceMode() {
                   <VerdictBadge verdict={r.actual.verdict} />
 
                   {r.actual.estimatedRevenue || r.actual.estimatedOrders ? (
-                    <p className="text-muted-foreground bg-muted/50 rounded-md px-3 py-2 text-[11px] leading-relaxed">
-                      {r.actual.estimatedRevenue
-                        ? `Revenue podala, so ${money(num(f.aov))} AOV-a vechu kanakku pannirken.`
-                        : `Orders podala, so ${money(num(f.aov))} AOV-a vechu kanakku pannirken.`}{" "}
-                      Rendaiyum podunga — appo AOV sariyaa nu naan check panren.
-                    </p>
+                    <div className="bg-muted/50 rounded-md px-3 py-2.5">
+                      <p className="text-muted-foreground text-[11px] leading-relaxed">
+                        {r.actual.estimatedOrders ? "Orders" : "Revenue"} podala,
+                        so {money(num(f.aov))} AOV-a vechu kanakku pannirken —{" "}
+                        <b className="text-foreground">
+                          {r.actual.estimatedOrders
+                            ? `≈ ${count(r.actual.orders)} orders`
+                            : `≈ ${money(r.actual.revenue)}`}
+                        </b>
+                        . Sari nu thonina keezha click pannunga, appuram
+                        maathikalaam.
+                      </p>
+
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        className="mt-2"
+                        onClick={() =>
+                          r.actual!.estimatedOrders
+                            ? set("orders")(String(Math.round(r.actual!.orders)))
+                            : set("revenue")(String(Math.round(r.actual!.revenue)))
+                        }
+                      >
+                        <Wand2 />
+                        {r.actual.estimatedOrders
+                          ? `Use ${Math.round(r.actual.orders)} orders`
+                          : `Use ${money(r.actual.revenue)}`}
+                      </Button>
+                    </div>
                   ) : null}
 
                   <div>

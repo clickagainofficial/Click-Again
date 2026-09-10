@@ -131,6 +131,9 @@ export type EcomResult = {
     netProfit: number;
     profitMarginPct: number;
     verdict: Verdict;
+    /** the pair actually used — either measured, or derived from the AOV */
+    orders: number;
+    revenue: number;
     /** true when that side was derived from the assumed AOV, not measured */
     estimatedRevenue: boolean;
     estimatedOrders: boolean;
@@ -286,6 +289,8 @@ export function calcEcommerce(input: EcomInput): EcomResult {
       profitMarginPct: (netProfit / effRevenue) * 100,
       verdict,
       gap,
+      orders: effOrders,
+      revenue: effRevenue,
       estimatedRevenue,
       estimatedOrders,
     };

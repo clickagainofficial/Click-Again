@@ -164,6 +164,19 @@ console.log("\nfix: spend plus EITHER revenue or orders is enough");
 
   const spendOnly = ecom({ ...base, adSpend: 45000 });
   is("spend alone -> no actual", spendOnly.actual, null);
+
+  // the derived side is exposed so it can be shown and clicked into the form
+  near("derived orders", noOrders.actual!.orders, 187000 / 2499);
+  near("derived revenue", noRevenue.actual!.revenue, 75 * 2499);
+  near("measured orders kept", both.actual!.orders, 75);
+  near("measured revenue kept", both.actual!.revenue, 187000);
+
+  // clicking that button is the same as having typed the number
+  const clicked = ecom({ ...base, adSpend: 45000, revenue: 187000,
+    orders: Math.round(187000 / 2499) });
+  near("click -> same ROAS", clicked.actual!.roas, noOrders.actual!.roas);
+  is("click -> measured", clicked.actual!.estimatedOrders, false);
+  is("click -> no AOV warning", clicked.notes.some((n) => n.fix?.field === "aov"), false);
 }
 
 console.log("\nservice: deal value is checked against closed deals too");
