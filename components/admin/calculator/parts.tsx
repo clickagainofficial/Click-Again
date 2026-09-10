@@ -256,6 +256,67 @@ export function ContributionBar({
   );
 }
 
+/* ----------------------------------------------------- ROAS -> profit scale */
+
+/**
+ * "₹1 spend panni 4x eduthaa, profit evlo %?" — the ladder answers it without
+ * the client having to hold break-even ROAS in their head.
+ */
+export function RoasLadder({
+  rows,
+  breakeven,
+  target,
+}: {
+  rows: { roas: number; margin: number }[];
+  breakeven: number;
+  target: number;
+}) {
+  if (rows.length === 0) return null;
+
+  return (
+    <div>
+      <p className="text-muted-foreground mb-2 text-[11px] tracking-wide uppercase">
+        ROAS → profit on revenue
+      </p>
+
+      <div className="grid gap-1">
+        {rows.map((r) => {
+          const isTarget =
+            Math.abs(r.roas - target) < 0.25 && Number.isFinite(target);
+
+          return (
+            <div
+              key={r.roas}
+              className={cn(
+                "flex items-center justify-between gap-3 rounded-md px-2 py-1 text-sm tabular-nums",
+                isTarget && "bg-primary/8 font-medium"
+              )}
+            >
+              <span className="text-muted-foreground">
+                {r.roas.toFixed(2)}x
+              </span>
+
+              <span
+                className={cn(
+                  "text-right",
+                  r.margin <= 0 ? "text-muted-foreground" : "text-foreground"
+                )}
+              >
+                {r.margin <= 0 ? "no profit" : `${r.margin.toFixed(1)}%`}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      <p className="text-muted-foreground mt-2 text-[11px] leading-relaxed">
+        Break-even {breakeven.toFixed(2)}x-la profit 0%. Adhukku mela போற
+        ovvoru point-um neradiya profit.
+      </p>
+    </div>
+  );
+}
+
 /* ------------------------------------------------------------------- notes */
 
 export function NoteList({ notes }: { notes: Note[] }) {

@@ -53,6 +53,39 @@ export function count(value: number) {
   return new Intl.NumberFormat("en-IN", { maximumFractionDigits: 1 }).format(value);
 }
 
+/* -------------------------------------------------- ROAS -> profit on sales */
+
+/**
+ * What a given ROAS actually leaves as profit, as a share of revenue.
+ *
+ *   net profit = revenue × contribution% − spend
+ *   spend      = revenue ÷ ROAS
+ *   so margin  = contribution% − 1/ROAS
+ *
+ * At break-even ROAS the two terms cancel and this is 0, which is the point.
+ * It is also the honest answer to "desired margin 30%" — that 30% is a share
+ * of the contribution, not of revenue, and this turns it back into the number
+ * a business owner actually recognises.
+ */
+export function netMarginAtRoas(contributionPct: number, roas: number) {
+  if (!Number.isFinite(roas) || roas <= 0) return NaN;
+  return contributionPct - 100 / roas;
+}
+
+/** A short ladder of round ROAS values from break-even upward. */
+export function roasLadder(contributionPct: number, breakeven: number, steps = 5) {
+  if (!Number.isFinite(breakeven) || breakeven <= 0) return [];
+
+  // pick a step size that keeps the rungs readable at any margin
+  const step = breakeven < 3 ? 0.5 : breakeven < 6 ? 1 : 2;
+  const start = Math.ceil(breakeven / step) * step;
+
+  return Array.from({ length: steps }, (_, i) => {
+    const roas = start + i * step;
+    return { roas, margin: netMarginAtRoas(contributionPct, roas) };
+  });
+}
+
 /* --------------------------------------------------------------- ecommerce */
 
 export type EcomInput = {

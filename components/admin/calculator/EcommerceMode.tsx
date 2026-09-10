@@ -9,6 +9,7 @@ import {
   FatalNote,
   Field,
   NoteList,
+  RoasLadder,
   Row,
   VerdictBadge,
 } from "./parts";
@@ -30,7 +31,9 @@ import {
   count,
   money,
   multiple,
+  netMarginAtRoas,
   percent,
+  roasLadder,
   type CostUnit,
 } from "@/lib/adMetrics";
 
@@ -327,23 +330,37 @@ export default function EcommerceMode() {
                   Indha numbers-a dhaan Ad Manager-la paakanum
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <Row
-                  label="Break-even ROAS"
-                  value={multiple(r.breakevenRoas)}
-                  hint="idhukku keezha nashtam"
-                  strong
-                  tone="primary"
+              <CardContent className="grid gap-4">
+                <div>
+                  <Row
+                    label="Break-even ROAS"
+                    value={multiple(r.breakevenRoas)}
+                    hint="profit 0% — sari-samam"
+                    strong
+                    tone="primary"
+                  />
+                  <Row
+                    label="Target ROAS"
+                    value={multiple(r.targetRoas)}
+                    hint={`profit ${percent(netMarginAtRoas(r.contributionPct, r.targetRoas))} of revenue`}
+                    strong
+                  />
+                  <Separator className="my-2" />
+                  <Row
+                    label="Max CPA"
+                    value={money(r.maxCpa, true)}
+                    hint="idhukku mela nashtam"
+                  />
+                  <Row label="Target CPA" value={money(r.targetCpa, true)} />
+                </div>
+
+                <Separator />
+
+                <RoasLadder
+                  rows={roasLadder(r.contributionPct, r.breakevenRoas)}
+                  breakeven={r.breakevenRoas}
+                  target={r.targetRoas}
                 />
-                <Row
-                  label="Target ROAS"
-                  value={multiple(r.targetRoas)}
-                  hint={`${num(f.desiredMargin)}% profit-oda`}
-                  strong
-                />
-                <Separator className="my-2" />
-                <Row label="Max CPA" value={money(r.maxCpa, true)} hint="idhukku mela nashtam" />
-                <Row label="Target CPA" value={money(r.targetCpa, true)} />
               </CardContent>
             </Card>
 

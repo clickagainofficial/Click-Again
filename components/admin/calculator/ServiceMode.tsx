@@ -34,6 +34,7 @@ import {
   count,
   money,
   multiple,
+  netMarginAtRoas,
   percent,
   type CostUnit,
 } from "@/lib/adMetrics";
@@ -410,8 +411,16 @@ export default function ServiceMode() {
                 <Separator className="my-2" />
                 <Row label="Overall close rate" value={percent(r.closeRate * 100, 2)} />
                 <Row label="Leads per deal" value={count(r.leadsPerDeal)} />
-                <Row label="Break-even ROAS" value={multiple(r.breakevenRoas)} />
-                <Row label="Target ROAS" value={multiple(r.targetRoas)} />
+                <Row
+                  label="Break-even ROAS"
+                  value={multiple(r.breakevenRoas)}
+                  hint="profit 0%"
+                />
+                <Row
+                  label="Target ROAS"
+                  value={multiple(r.targetRoas)}
+                  hint={`profit ${percent(netMarginAtRoas(r.contributionPct, r.targetRoas))} of revenue`}
+                />
 
                 {r.maxCpql !== null ? (
                   <>
