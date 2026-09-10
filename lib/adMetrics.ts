@@ -14,7 +14,14 @@
 export type CostUnit = "rupees" | "percent";
 
 export type Severity = "info" | "warning" | "error";
-export type Note = { severity: Severity; text: string };
+
+/**
+ * A note can carry a one-click correction. The engine names the field and the
+ * value; whether to apply it stays the reader's call, because the figure they
+ * typed may be a deliberate what-if rather than a mistake.
+ */
+export type NoteFix = { label: string; field: string; value: number };
+export type Note = { severity: Severity; text: string; fix?: NoteFix };
 
 export type Verdict = "healthy" | "thin" | "loss";
 
@@ -275,10 +282,14 @@ export function calcEcommerce(input: EcomInput): EcomResult {
       notes.push({
         severity: "warning",
         text:
-          `AOV ${money(aov)} nu potteenga, aana actual ${money(actualAov)} ` +
-          `(${money(revenue)} ÷ ${orders} orders). Contribution-um targets-um ` +
-          "andha AOV-a vechu thaan kanakku — AOV-a update pannunga, illaina " +
-          "indha numbers ellame thappu.",
+          `AOV ${money(aov)} nu potteenga, aana indha orders-oda sarasari ` +
+          `${money(actualAov)} (${money(revenue)} ÷ ${orders}). Contribution-um ` +
+          "targets-um AOV-a vechu thaan kanakku, so ellame andha alavukku thappu.",
+        fix: {
+          label: `Use ${money(actualAov)}`,
+          field: "aov",
+          value: Math.round(actualAov),
+        },
       });
     }
   }
@@ -496,6 +507,26 @@ export function calcService(input: ServiceInput): ServiceResult {
       netProfit,
       verdict,
     };
+
+    // Same check as the ecommerce side: the deal value everything rests on
+    // should agree with what the closed deals actually brought in.
+    if (deals > 0 && closedRevenue > 0) {
+      const actualDealValue = closedRevenue / deals;
+      if (Math.abs(actualDealValue - input.dealValue) / input.dealValue > 0.1) {
+        notes.push({
+          severity: "warning",
+          text:
+            `Deal value ${money(input.dealValue)} nu potteenga, aana closed deals-oda ` +
+            `sarasari ${money(actualDealValue)} (${money(closedRevenue)} ÷ ${deals}). ` +
+            "CPL, CAC targets ellame deal value-a vechu thaan kanakku.",
+          fix: {
+            label: `Use ${money(actualDealValue)}`,
+            field: "dealValue",
+            value: Math.round(actualDealValue),
+          },
+        });
+      }
+    }
 
     // The trap this calculator exists to catch: cheap leads that never close.
     // Only judge it once deals have actually been entered — a blank field is

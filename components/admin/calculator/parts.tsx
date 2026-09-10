@@ -1,8 +1,9 @@
 "use client";
 
-import { AlertTriangle, Info } from "lucide-react";
+import { AlertTriangle, Info, Wand2 } from "lucide-react";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -327,7 +328,13 @@ export function RoasLadder({
 
 /* ------------------------------------------------------------------- notes */
 
-export function NoteList({ notes }: { notes: Note[] }) {
+export function NoteList({
+  notes,
+  onFix,
+}: {
+  notes: Note[];
+  onFix?: (fix: NonNullable<Note["fix"]>) => void;
+}) {
   if (notes.length === 0) return null;
 
   return (
@@ -347,6 +354,18 @@ export function NoteList({ notes }: { notes: Note[] }) {
           )}
           <AlertDescription className="text-[13px] leading-relaxed">
             {n.text}
+            {n.fix && onFix ? (
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                className="mt-2 flex"
+                onClick={() => onFix(n.fix!)}
+              >
+                <Wand2 />
+                {n.fix.label}
+              </Button>
+            ) : null}
           </AlertDescription>
         </Alert>
       ))}

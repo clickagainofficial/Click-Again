@@ -522,7 +522,12 @@ export default function ServiceMode() {
           </>
         )}
 
-        <NoteList notes={r.notes} />
+        <NoteList
+          notes={r.notes}
+          onFix={(fix) =>
+            setF((prev) => ({ ...prev, [fix.field]: String(fix.value) }))
+          }
+        />
       </div>
     </div>
   );

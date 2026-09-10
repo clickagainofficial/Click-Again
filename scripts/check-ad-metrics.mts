@@ -125,12 +125,27 @@ console.log("\nfix: a wrong AOV is called out against the real orders");
 {
   const wrong = ecom({ aov: 500, cogs: 280, shipping: 40, gatewayPct: 2,
     adSpend: 45000, revenue: 187000, orders: 75 });
+  const aovFix = wrong.notes.find((n) => n.fix?.field === "aov");
   near("actual AOV", wrong.actual!.aov, 2493.33);
-  is("mismatch warned", wrong.notes.some((n) => n.text.includes("aana actual")), true);
+  is("mismatch warned", aovFix !== undefined, true);
+  is("one-click value", aovFix?.fix?.value, 2493);
 
   const right = ecom({ aov: 2493, cogs: 1000, shipping: 80, gatewayPct: 2,
     adSpend: 45000, revenue: 187000, orders: 75 });
-  is("matching AOV quiet", right.notes.some((n) => n.text.includes("aana actual")), false);
+  is("matching AOV quiet", right.notes.some((n) => n.fix?.field === "aov"), false);
+}
+
+console.log("\nservice: deal value is checked against closed deals too");
+{
+  const off = svc({ dealValue: 20000, delivery: 5000, funnelMode: "simple",
+    leadToCustomer: 8, adSpend: 40000, leads: 160, deals: 3, closedRevenue: 240000 });
+  const fix = off.notes.find((n) => n.fix?.field === "dealValue");
+  is("deal value warned", fix !== undefined, true);
+  is("one-click value", fix?.fix?.value, 80000);
+
+  const ok = svc({ dealValue: 80000, delivery: 45000, funnelMode: "simple",
+    leadToCustomer: 8, adSpend: 40000, leads: 160, deals: 3, closedRevenue: 240000 });
+  is("matching deal quiet", ok.notes.some((n) => n.fix?.field === "dealValue"), false);
 }
 
 console.log(`\n${failures === 0 ? "ALL CHECKS PASSED" : failures + " CHECK(S) FAILED"}`);
