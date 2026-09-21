@@ -13,8 +13,8 @@ export default function Wordmark() {
         className="logo"
         src="/clickagain-logo.png"
         alt={`${site.name} logo`}
-        width={1128}
-        height={310}
+        width={1766}
+        height={416}
         priority
         sizes="(max-width: 860px) 86vw, 760px"
       />

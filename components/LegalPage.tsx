@@ -23,8 +23,8 @@ export default function LegalPage({
             className="logo-sm"
             src="/clickagain-logo.png"
             alt={site.name}
-            width={1128}
-            height={310}
+            width={1766}
+            height={416}
           />
         </Link>
         <Link className="legal-back" href="/">

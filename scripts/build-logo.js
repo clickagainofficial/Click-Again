@@ -3,7 +3,7 @@
  *
  *   node scripts/build-logo.js
  *
- * public/Logo/ClickAgain.png  ->  public/clickagain-logo.png
+ * public/ClickAgain.png  ->  public/clickagain-logo.png
  *
  * Three things happen:
  *   1. the empty margin around the mark is cropped off
@@ -17,9 +17,11 @@ const fs = require("fs");
 const path = require("path");
 const zlib = require("zlib");
 
-const SRC = process.argv[2] || "public/Logo/ClickAgain.png";
+const SRC = process.argv[2] || "public/ClickAgain.png";
 const OUT = process.argv[3] || "public/clickagain-logo.png";
-const SCALE = Number(process.argv[4] || 4); // integer box downsample factor
+// 1 = keep the master's resolution. The current master is modest enough that
+// downsampling would cost sharpness on retina screens.
+const SCALE = Number(process.argv[4] || 1);
 const INK = 244; // below this luminance a pixel counts as artwork, for the crop
 
 // ---------------------------------------------------------------- crc32 ----

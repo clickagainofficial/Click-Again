@@ -59,8 +59,8 @@ export default function AdminLogin() {
         <Image
           src="/clickagain-logo.png"
           alt="Click Again"
-          width={1128}
-          height={310}
+          width={1766}
+          height={416}
           className="mx-auto mb-10 w-44"
           priority
         />

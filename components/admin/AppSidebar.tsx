@@ -38,8 +38,8 @@ export default function AppSidebar({ waitlistCount }: { waitlistCount: number })
           <Image
             src="/clickagain-logo.png"
             alt="Click Again"
-            width={1128}
-            height={310}
+            width={1766}
+            height={416}
             className="w-28 group-data-[collapsible=icon]:hidden"
             priority
           />
