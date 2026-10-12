@@ -64,4 +64,86 @@ export const site = {
       text: "Connect → Click → Trust → Return → **Refer**.",
     },
   ],
+
+  /**
+   * What we sell. Order here is the order on the page.
+   * Still to add when we are ready to talk about them: Branding,
+   * Advertising (ATL), PR & Influencer, Events & Experiences,
+   * Retail / Signage / Print.
+   */
+  services: [
+    {
+      title: "Marketing Strategy",
+      items: [
+        "Market research",
+        "Customer & competitor analysis",
+        "Marketing planning",
+        "Campaign strategy",
+        "GTM",
+      ],
+    },
+    {
+      title: "Content & Creative",
+      items: [
+        "Graphic design",
+        "Copywriting",
+        "Photography",
+        "Video shoot & editing",
+        "Animation",
+        "Tamil / regional creative",
+      ],
+    },
+    {
+      title: "Website & Digital Presence",
+      items: [
+        "Website design & development",
+        "E-commerce websites",
+        "Web & mobile apps",
+        "Landing pages",
+        "SEO",
+        "AEO / AI search",
+        "Google Business Profile",
+      ],
+    },
+    {
+      title: "Social Media Marketing",
+      items: [
+        "Instagram",
+        "Facebook",
+        "LinkedIn",
+        "YouTube",
+        "Page management",
+        "Community management",
+        "Social listening",
+        "Social campaigns",
+      ],
+    },
+    {
+      title: "Performance Marketing & Analytics",
+      items: [
+        "Google Ads",
+        "Meta Ads",
+        "YouTube Ads",
+        "Marketplace ads (Amazon, Flipkart, quick-commerce)",
+        "Retargeting",
+        "Programmatic",
+        "Lead generation",
+        "CRO",
+        "Tracking setup (GA4 / GTM / Pixel)",
+        "Dashboards & reporting",
+      ],
+    },
+    {
+      title: "CRM & Retention",
+      items: [
+        "Email",
+        "WhatsApp",
+        "SMS",
+        "Chatbots",
+        "Automation",
+        "Loyalty",
+        "Repeat purchase",
+      ],
+    },
+  ],
 } as const;

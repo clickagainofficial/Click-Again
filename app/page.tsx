@@ -88,6 +88,40 @@ export default function Home() {
           ))}
         </section>
 
+        <section className="services">
+          <h2 className="sec-title">What we do</h2>
+          <p className="svc-intro">
+            Online, offline, or both — we pick what your business actually
+            needs. Retention sits in the list on purpose: making them{" "}
+            <b>come back</b> is the job, not an afterthought.
+          </p>
+
+          <div className="svc-grid">
+            {site.services.map((s, i) => (
+              <article className="svc-card" key={s.title}>
+                <span className="svc-num">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="svc-title">{s.title}</h3>
+                <p className="svc-items">
+                  {s.items.map((item, j) => (
+                    <span key={item}>
+                      {j > 0 && <span className="svc-dot">·</span>}
+                      {item}
+                    </span>
+                  ))}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          <p className="svc-more">
+            Branding · Advertising (ATL) · PR &amp; influencer · Events &amp;
+            experiences · Retail, signage &amp; print —{" "}
+            <a href={`mailto:${site.email}`}>ask us</a>
+          </p>
+        </section>
+
         <section className="closer">
           <p className="small">Don&apos;t just make them buy once.</p>
           <p className="big">
