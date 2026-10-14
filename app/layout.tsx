@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description:
-    "One click is a sale. Click again is a business. We create marketing that makes people connect with your brand — and come back to it. Launching soon.",
+    "A marketing company in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.",
   keywords: [
     "marketing agency",
     "digital marketing",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     "clickagain.in",
   ],
   openGraph: {
-    title: `${site.name} — Coming Soon`,
+    title: `${site.name} — Marketing that makes them come back`,
     description:
       "We don't sell fixed marketing packages. We find what your business actually needs.",
     url: site.url,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Coming Soon`,
+    title: `${site.name} — Marketing that makes them come back`,
     description: "One click is a sale. Click again is a business.",
   },
   robots: { index: true, follow: true },

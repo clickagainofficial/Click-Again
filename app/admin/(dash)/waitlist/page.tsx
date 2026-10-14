@@ -21,9 +21,9 @@ export default async function WaitlistPage() {
     <div className="mx-auto max-w-5xl">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold">Waitlist</h1>
+          <h1 className="font-display text-2xl font-bold">Email list</h1>
           <p className="text-muted-foreground mt-1 text-sm">
-            Everyone who asked to hear from you, newest first.
+            Everyone who signed up for email updates, newest first.
           </p>
         </div>
         <Button variant="outline" size="sm" asChild>
@@ -39,7 +39,7 @@ export default async function WaitlistPage() {
           <CardHeader>
             <CardTitle className="text-destructive flex items-center gap-2 text-base">
               <AlertTriangle className="size-4" />
-              Can&apos;t read the waitlist
+              Can&apos;t read the email list
             </CardTitle>
             <CardDescription>{result.error}</CardDescription>
           </CardHeader>

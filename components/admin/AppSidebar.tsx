@@ -3,7 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Calculator, ExternalLink, LayoutDashboard, Users } from "lucide-react";
+import {
+  Calculator,
+  ExternalLink,
+  Inbox,
+  LayoutDashboard,
+  Settings,
+  Users,
+} from "lucide-react";
 
 import LogoutButton from "@/components/admin/LogoutButton";
 import {
@@ -24,11 +31,19 @@ import {
 
 const modules = [
   { title: "Overview", href: "/admin", icon: LayoutDashboard },
-  { title: "Waitlist", href: "/admin/waitlist", icon: Users },
+  { title: "Enquiries", href: "/admin/enquiries", icon: Inbox },
+  { title: "Email list", href: "/admin/waitlist", icon: Users },
   { title: "Calculator", href: "/admin/calculator", icon: Calculator },
+  { title: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
-export default function AppSidebar({ waitlistCount }: { waitlistCount: number }) {
+export default function AppSidebar({
+  waitlistCount,
+  enquiryCount,
+}: {
+  waitlistCount: number;
+  enquiryCount: number;
+}) {
   const pathname = usePathname();
 
   return (
@@ -36,10 +51,10 @@ export default function AppSidebar({ waitlistCount }: { waitlistCount: number })
       <SidebarHeader className="p-4">
         <Link href="/admin" className="flex items-center">
           <Image
-            src="/clickagain-logo.png"
+            src="/logo/clickagain-logo.png"
             alt="Click Again"
-            width={1766}
-            height={416}
+            width={1826}
+            height={338}
             className="w-28 group-data-[collapsible=icon]:hidden"
             priority
           />
@@ -70,6 +85,9 @@ export default function AppSidebar({ waitlistCount }: { waitlistCount: number })
                   </SidebarMenuButton>
                   {item.href === "/admin/waitlist" && waitlistCount > 0 ? (
                     <SidebarMenuBadge>{waitlistCount}</SidebarMenuBadge>
+                  ) : null}
+                  {item.href === "/admin/enquiries" && enquiryCount > 0 ? (
+                    <SidebarMenuBadge>{enquiryCount}</SidebarMenuBadge>
                   ) : null}
                 </SidebarMenuItem>
               ))}

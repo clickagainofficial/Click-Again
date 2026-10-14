@@ -10,8 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { listEnquiries } from "@/lib/enquiries";
 import { dailyCounts, listSignups, summarise } from "@/lib/waitlist";
-import { site } from "@/site.config";
 
 export const dynamic = "force-dynamic";
 
@@ -42,23 +42,18 @@ function Stat({
 }
 
 export default async function Overview() {
-  const result = await listSignups();
+  const [result, enquiries] = await Promise.all([listSignups(), listEnquiries()]);
   const rows = result.ok ? result.rows : [];
   const stats = summarise(rows);
   const chart = dailyCounts(rows, 14);
-
-  const launch = new Date(site.launchDate).getTime();
-  const daysToLaunch = Math.max(
-    0,
-    Math.ceil((launch - Date.now()) / (24 * 60 * 60 * 1000))
-  );
+  const enquiryCount = enquiries.ok ? enquiries.rows.length : 0;
 
   return (
     <div className="mx-auto max-w-5xl">
       <div className="mb-6">
         <h1 className="font-display text-2xl font-bold">Overview</h1>
         <p className="text-muted-foreground mt-1 text-sm">
-          How the waitlist is filling up before launch.
+          Enquiries and email sign-ups at a glance.
         </p>
       </div>
 
@@ -67,7 +62,7 @@ export default async function Overview() {
           <CardHeader>
             <CardTitle className="text-destructive flex items-center gap-2 text-base">
               <AlertTriangle className="size-4" />
-              Can&apos;t read the waitlist
+              Can&apos;t read the email list
             </CardTitle>
             <CardDescription>{result.error}</CardDescription>
           </CardHeader>
@@ -75,29 +70,21 @@ export default async function Overview() {
       ) : null}
 
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat label="Total signups" value={stats.total} />
-        <Stat label="Today" value={stats.today} />
-        <Stat label="Last 7 days" value={stats.week} />
-        <Stat
-          label="Days to launch"
-          value={daysToLaunch}
-          hint={new Date(site.launchDate).toLocaleDateString("en-IN", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
-        />
+        <Stat label="Enquiries" value={enquiryCount} hint="From the contact form" />
+        <Stat label="Email sign-ups" value={stats.total} />
+        <Stat label="Sign-ups today" value={stats.today} />
+        <Stat label="Sign-ups, last 7 days" value={stats.week} />
       </div>
 
       <Card>
         <CardHeader className="flex-row items-center justify-between">
           <div>
-            <CardTitle className="text-base">Signups per day</CardTitle>
+            <CardTitle className="text-base">Email sign-ups per day</CardTitle>
             <CardDescription>The last 14 days</CardDescription>
           </div>
           <Button variant="outline" size="sm" asChild>
             <Link href="/admin/waitlist">
-              Open waitlist
+              Open email list
               <ArrowRight />
             </Link>
           </Button>

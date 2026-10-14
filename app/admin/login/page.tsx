@@ -57,10 +57,10 @@ export default function AdminLogin() {
     <div className="flex min-h-screen items-center justify-center px-6 py-16">
       <div className="w-full max-w-sm">
         <Image
-          src="/clickagain-logo.png"
+          src="/logo/clickagain-logo.png"
           alt="Click Again"
-          width={1766}
-          height={416}
+          width={1826}
+          height={338}
           className="mx-auto mb-10 w-44"
           priority
         />
