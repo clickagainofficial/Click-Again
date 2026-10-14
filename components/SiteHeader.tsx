@@ -41,6 +41,8 @@ export default function SiteHeader() {
   const router = useRouter();
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  // the Solutions group inside the phone menu; open already on a service page
+  const [mobileSolutions, setMobileSolutions] = useState(false);
   const [hidden, setHidden] = useState(false);
 
   /**
@@ -141,6 +143,7 @@ export default function SiteHeader() {
   useEffect(() => {
     setSolutionsOpen(false);
     setMenuOpen(false);
+    setMobileSolutions(pathname.startsWith("/solutions"));
   }, [pathname]);
 
   // Escape and click-away, so a pointer that never leaves cleanly still exits
@@ -327,22 +330,49 @@ export default function SiteHeader() {
         {menuOpen ? (
           <div className="mobile-sheet">
             <div className="shell">
-              <p className="mobile-label">Solutions</p>
-              {site.services.map((s) => (
-                <Link
-                  key={s.slug}
-                  href={`/solutions/${s.slug}`}
-                  className="mobile-item"
-                >
-                  {s.title}
+              {tabs.slice(0, 2).map((t) => (
+                <Link key={t.href} href={t.href} className="mobile-item">
+                  {t.label}
                 </Link>
               ))}
-              <Link href="/solutions" className="mobile-item is-all">
-                All solutions →
-              </Link>
 
-              <p className="mobile-label">Pages</p>
-              {tabs.map((t) => (
+              {/* Solutions sits third and opens in place to list the services */}
+              <button
+                type="button"
+                className={`mobile-item mobile-toggle${mobileSolutions ? " is-open" : ""}`}
+                aria-expanded={mobileSolutions}
+                aria-controls="mobile-solutions"
+                onClick={() => setMobileSolutions((v) => !v)}
+              >
+                Solutions
+                <span className="mobile-chevron" aria-hidden="true" />
+              </button>
+              <div
+                id="mobile-solutions"
+                className={`mobile-sub${mobileSolutions ? " is-open" : ""}`}
+              >
+                <div>
+                  {site.services.map((s) => (
+                    <Link
+                      key={s.slug}
+                      href={`/solutions/${s.slug}`}
+                      className="mobile-subitem"
+                      tabIndex={mobileSolutions ? 0 : -1}
+                    >
+                      {s.title}
+                    </Link>
+                  ))}
+                  <Link
+                    href="/solutions"
+                    className="mobile-subitem is-all"
+                    tabIndex={mobileSolutions ? 0 : -1}
+                  >
+                    All solutions →
+                  </Link>
+                </div>
+              </div>
+
+              {tabs.slice(2).map((t) => (
                 <Link
                   key={t.href}
                   href={t.href}

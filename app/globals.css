@@ -278,6 +278,59 @@ a { color: inherit; text-decoration: none; }
 
 .mobile-item.is-all { color: var(--red-deep); }
 
+/* Solutions in the phone menu: a row that opens a group of service links.
+   The group animates its height through a 0fr→1fr grid row. */
+.mobile-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  background: none;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.mobile-toggle.is-open { color: var(--red); }
+
+.mobile-chevron {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.3s var(--ease);
+}
+
+.mobile-toggle.is-open .mobile-chevron { transform: translateY(2px) rotate(-135deg); }
+
+.mobile-sub {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s var(--ease);
+}
+
+.mobile-sub.is-open { grid-template-rows: 1fr; }
+
+.mobile-sub > div { overflow: hidden; }
+
+.mobile-sub.is-open > div { padding: 4px 0 8px; border-bottom: 1px solid var(--line); }
+
+.mobile-subitem {
+  display: block;
+  padding: 10px 0 10px 16px;
+  border-left: 2px solid var(--line);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-70);
+}
+
+.mobile-subitem.is-all { color: var(--red-deep); font-weight: 600; }
+
 @media (max-width: 880px) {
   .header-nav { display: none; }
   .header-burger { display: inline-flex; }
@@ -2615,3 +2668,57 @@ a { color: inherit; text-decoration: none; }
 
 .mf-word.is-lit { color: var(--ink); opacity: 1; }
 .mf-word.is-red.is-lit { color: var(--red); }
+
+/* ============================================================ page heads == */
+/* The banner's motion, turned down for every other page: the same breathing
+   red glow, fainter, and the heading lines sliding in a shorter way. It is
+   one CSS rule on the shared .page-head, so new pages get it for free. */
+.page-head,
+.legal { position: relative; isolation: isolate; }
+
+.page-head::before,
+.legal::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: min(300px, 40%);
+  top: clamp(80px, 12vw, 140px);
+  width: min(720px, 110vw);
+  height: min(380px, 70vw);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(var(--red-rgb), 0.08), rgba(var(--red-rgb), 0.025) 55%, transparent);
+  filter: blur(18px);
+  pointer-events: none;
+  animation: head-glow 10s ease-in-out infinite alternate;
+}
+
+@keyframes head-glow {
+  from { opacity: 0.7; transform: translate(-50%, -50%) scale(0.97); }
+  to   { opacity: 1;   transform: translate(-50%, -50%) scale(1.03); }
+}
+
+.page-head .eyebrow,
+.page-head h1,
+.page-head .page-lede,
+.legal > h1,
+.legal > .updated { animation: head-in 0.7s var(--ease) both; }
+
+.page-head h1,
+.legal > h1 { animation-name: head-in-r; animation-delay: 0.06s; }
+.page-head .page-lede,
+.legal > .updated { animation-delay: 0.13s; }
+
+@keyframes head-in {
+  from { opacity: 0; transform: translateX(-18px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes head-in-r {
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-head::before,
+  .legal::before { animation: none; }
+}

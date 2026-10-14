@@ -9,8 +9,6 @@ export const metadata: Metadata = {
   title: "Insights",
   description: `Practical notes from ${site.name} on getting customers for your business, and keeping them coming back.`,
   alternates: { canonical: "/insights" },
-  // nothing to index until the first post is up
-  robots: insights.length ? { index: true, follow: true } : { index: false, follow: true },
 };
 
 function formatDate(iso: string) {
