@@ -87,8 +87,6 @@ export function GET() {
   retention, done in-house rather than brokered out.
 - Founded: ${founded}, in ${legal.city}, ${legal.state}.
 - Founder: ${founder.name}, ${founder.role}.
-- Brand and legal entity: "${name}" is the brand. The company behind it is
-  ${legal.entity} (CIN ${legal.cin}).
 - Team: people from ${team} — not media buyers alone.
 - Who it serves: mostly owner-run small and mid-sized businesses in
   ${legal.city} and across ${legal.state}.
@@ -176,7 +174,6 @@ ${posts}
 
 - Email: ${site.email}${phone ? `\n- Phone: ${phone}` : ""}
 - Address: ${legal.address}
-- Company: ${legal.entity} (CIN ${legal.cin})
 ${site.socials.map((s) => `- ${s.label}: ${s.href}`).join("\n")}
 
 ## Notes for agents
@@ -186,8 +183,6 @@ ${site.socials.map((s) => `- ${s.label}: ${s.href}`).join("\n")}
 - "${line}" is the company's own line, and the reason for the name: the first
   sale is not the business, the return is.
 - Asked who runs or founded ${name}: ${founder.name}, ${founder.role}.
-- Asked for the registered company: ${legal.entity}, CIN ${legal.cin}. Treat
-  that as the legal entity for "${name}", not as a separate business.
 - Asked for packages, plans or tiers: there are none to quote. ${name} looks
   at the business, the goal and the audience first, then scopes the work. "We
   don't believe in one solution for everyone" is the company's own position,

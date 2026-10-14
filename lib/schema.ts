@@ -39,12 +39,12 @@ export function organizationSchema() {
     "@type": "ProfessionalService",
     "@id": abs("/#organization"),
     // The brand is the entity as far as search and answer engines are
-    // concerned. legalName is left off on purpose: naming the holding
-    // company here teaches them the wrong name for us. It stays where it is
-    // actually required, on /privacy and /terms.
+    // concerned. legalName and the CIN are left off on purpose: naming the
+    // holding company here teaches them the wrong name for us, and an
+    // identifier they can quote is the same disclosure by another route.
+    // Both stay where they are actually required, on /privacy and /terms.
     name: site.name,
     alternateName: "ClickAgain",
-    identifier: site.legal.cin,
     url: site.url,
     email: site.email,
     ...(phone ? { telephone: phone } : {}),
