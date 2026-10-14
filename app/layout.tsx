@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Caveat, Inter, Poppins } from "next/font/google";
+import JsonLd from "@/components/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { site } from "@/site.config";
 import "./globals.css";
 
@@ -13,6 +15,15 @@ const poppins = Poppins({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+/** Only the founder's note is set in this — it is the one place on the site
+ *  where a person is talking, so it is written by hand. */
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-hand",
   display: "swap",
 });
 
@@ -34,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${site.name} — Marketing that makes them come back`,
     description:
-      "We don't sell fixed marketing packages. We find what your business actually needs.",
+      "A marketing company in Madurai — strategy, creative, websites, social, ads and retention. We find what your business actually needs.",
     url: site.url,
     siteName: site.name,
     locale: "en_IN",
@@ -49,7 +60,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f2f1ec",
+  // the peach ground, so the phone's browser chrome matches the page
+  themeColor: "#fff6f0",
 };
 
 export default function RootLayout({
@@ -58,8 +70,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en-IN"
+      className={`${poppins.variable} ${inter.variable} ${caveat.variable}`}
+    >
+      <body>
+        {/* the business and the site, stated once for every page below */}
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
+        {children}
+      </body>
     </html>
   );
 }

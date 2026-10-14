@@ -1,6 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
+
+import FooterLogo from "@/components/FooterLogo";
+
 import { site } from "@/site.config";
 
 // lucide dropped brand marks in v1, so these two are drawn here.
@@ -31,7 +33,6 @@ const companyLinks = [
   { text: "Home", href: "/" },
   { text: "About", href: "/about" },
   { text: "Insights", href: "/insights" },
-  { text: "All solutions", href: "/solutions" },
   { text: "Contact", href: "/contact" },
 ];
 
@@ -58,14 +59,7 @@ export default function SiteFooter() {
       <div className="shell">
         <div className="footer-top">
           <div className="footer-brand">
-            <Link href="/" className="footer-logo" aria-label={`${site.name} home`}>
-              <Image
-                src="/logo/clickagain-logo-tagline.png"
-                alt={`${site.name} — One click is a sale. Click again is a business.`}
-                width={1826}
-                height={446}
-              />
-            </Link>
+            <FooterLogo />
 
             <ul className="footer-socials">
               {site.socials.map(({ label, href }) => {
@@ -83,22 +77,22 @@ export default function SiteFooter() {
 
           <nav className="footer-cols" aria-label="Footer">
             <div>
-              <p className="footer-head">Solutions</p>
+              <p className="footer-head">Company</p>
               <ul>
-                {site.services.map((s) => (
-                  <li key={s.slug}>
-                    <Link href={`/solutions/${s.slug}`}>{s.title}</Link>
+                {companyLinks.map(({ text, href }) => (
+                  <li key={text}>
+                    <Link href={href}>{text}</Link>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div>
-              <p className="footer-head">Company</p>
+              <p className="footer-head">Solutions</p>
               <ul>
-                {companyLinks.map(({ text, href }) => (
-                  <li key={text}>
-                    <Link href={href}>{text}</Link>
+                {site.services.map((s) => (
+                  <li key={s.slug}>
+                    <Link href={`/solutions/${s.slug}`}>{s.title}</Link>
                   </li>
                 ))}
               </ul>

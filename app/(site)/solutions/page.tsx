@@ -32,13 +32,18 @@ export default function SolutionsIndex() {
             <p className="svc-tagline">{s.tagline}</p>
             <p className="svc-items">
               {s.items.map((item, j) => (
-                <span key={item}>
+                <span key={item.name}>
                   {j > 0 && <span className="svc-dot">·</span>}
-                  {item}
+                  {item.name}
                 </span>
               ))}
             </p>
-            <span className="svc-go">Read more →</span>
+            <span className="svc-go">
+              Read more
+              <span className="svc-arrow" aria-hidden="true">
+                →
+              </span>
+            </span>
           </Link>
         ))}
       </div>

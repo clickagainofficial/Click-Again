@@ -11,6 +11,12 @@ export type Insight = {
   date: string;
   /** Short topic label, e.g. "Google", "WhatsApp", "Websites". */
   tag: string;
+  /**
+   * The post itself. A plain string is a paragraph; prefix one with "## " to
+   * make it a subheading. Kept deliberately small — these are short practical
+   * notes, not a CMS.
+   */
+  body: string[];
 };
 
 export const insights: Insight[] = [];

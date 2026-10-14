@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import { site } from "@/site.config";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -19,6 +21,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: service.title,
     description: service.tagline,
+    alternates: { canonical: `/solutions/${service.slug}` },
     openGraph: {
       title: `${service.title} — ${site.name}`,
       description: service.tagline,
@@ -32,11 +35,22 @@ export default async function ServicePage({ params }: Params) {
   if (index === -1) notFound();
 
   const service = site.services[index];
-  const others = site.services.filter((s) => s.slug !== slug);
 
   return (
     <div className="shell">
-      <section className="page-head">
+      <JsonLd
+        data={[
+          serviceSchema(service.slug)!,
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Solutions", path: "/solutions" },
+            { name: service.title, path: `/solutions/${service.slug}` },
+          ]),
+        ]}
+      />
+
+      {/* the head carries the whole lead-in now: the line, then the intro */}
+      <section className="page-head is-service">
         <p className="eyebrow">
           <Link href="/solutions">Solutions</Link>
           <span className="eyebrow-sep">/</span>
@@ -44,28 +58,23 @@ export default async function ServicePage({ params }: Params) {
         </p>
         <h1>{service.title}</h1>
         <p className="page-lede">{service.tagline}</p>
+        <p className="page-intro">{service.intro}</p>
       </section>
 
-      <section className="service-body">
-        <div className="service-main">
-          <p className="service-intro">{service.intro}</p>
-
-          <h2 className="service-h2">What changes for you</h2>
-          <ul className="outcome-list">
-            {service.outcomes.map((o) => (
-              <li key={o}>{o}</li>
-            ))}
-          </ul>
+      {/* the work itself — one card per thing we do under this solution */}
+      <section className="service-detail">
+        <h2 className="sec-title">What we actually do</h2>
+        <div className="item-grid">
+          {service.items.map((item) => (
+            <article className="item-card" key={item.name}>
+              <span className="item-rule" aria-hidden="true" />
+              <h3 className="item-name">{item.name}</h3>
+              <p className="item-text">{item.text}</p>
+            </article>
+          ))}
         </div>
 
-        <aside className="service-aside">
-          <p className="aside-head">What&apos;s included</p>
-          <ul className="include-list">
-            {service.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-
+        <div className="detail-cta">
           <Link className="aside-cta" href={`/contact?service=${service.slug}`}>
             Talk to us about this
           </Link>
@@ -73,18 +82,6 @@ export default async function ServicePage({ params }: Params) {
             Not sure this is the part you need? That&apos;s the conversation —
             we work out what the business needs before we quote anything.
           </p>
-        </aside>
-      </section>
-
-      <section className="service-next">
-        <p className="sec-title">Other solutions</p>
-        <div className="next-grid">
-          {others.map((s) => (
-            <Link key={s.slug} href={`/solutions/${s.slug}`} className="next-card">
-              <span className="next-title">{s.title}</span>
-              <span className="next-tag">{s.tagline}</span>
-            </Link>
-          ))}
         </div>
       </section>
     </div>

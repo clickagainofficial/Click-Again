@@ -448,36 +448,78 @@ a { color: inherit; text-decoration: none; }
 
 .svc-intro b { color: var(--ink); font-weight: 600; }
 
-/* one sheet with hairlines between, so this reads as a list of what we do
-   rather than six cards floating on their own */
+/* six separate sheets rather than one gridded block — a wide radius, a
+   hairline that only shows when you look for it, and the weight carried by a
+   long diffuse shadow. Hover lifts the card off the ground, wipes the logo
+   gradient across the top edge and walks the arrow forward. */
 .svc-grid {
   display: grid;
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  overflow: hidden;
+  gap: 18px;
 }
 
 .svc-card {
-  display: block;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 28px 26px 26px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
   background: var(--card);
-  padding: 28px 26px 30px;
-  transition: background 0.3s var(--ease);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
+              box-shadow 0.35s var(--ease);
 }
 
-.svc-card:hover { background: var(--card-hover); }
+/* the rail: the logo gradient drawn across the top edge, left to right */
+.svc-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--grad-a);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
 
+.svc-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--red-rgb), 0.28);
+  box-shadow: 0 1px 2px rgba(var(--red-rgb), 0.05),
+              0 30px 54px -34px rgba(var(--red-rgb), 0.5);
+}
+
+.svc-card:hover::before { transform: scaleX(1); }
+
+/* the index as a counter rather than an eyebrow: a ringed badge that fills
+   with the logo red on hover */
 .svc-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  align-self: flex-start;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--peach);
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 11.5px;
-  letter-spacing: 0.14em;
-  color: var(--ink-30);
-  transition: color 0.3s var(--ease);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-50);
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease),
+              color 0.3s var(--ease);
 }
 
-.svc-card:hover .svc-num { color: var(--red); }
+.svc-card:hover .svc-num {
+  background: var(--grad-a);
+  border-color: transparent;
+  color: #fff;
+}
 
 .svc-title {
   font-family: var(--font-display);
@@ -485,8 +527,11 @@ a { color: inherit; text-decoration: none; }
   font-size: 1.15rem;
   line-height: 1.26;
   letter-spacing: -0.015em;
-  margin: 10px 0 8px;
+  margin: 16px 0 8px;
+  transition: color 0.3s var(--ease);
 }
+
+.svc-card:hover .svc-title { color: var(--red); }
 
 .svc-tagline {
   margin: 0 0 14px;
@@ -504,21 +549,32 @@ a { color: inherit; text-decoration: none; }
 
 .svc-dot { color: var(--red); padding: 0 7px; font-weight: 700; }
 
+/* margin-top: auto so the link sits on the floor of every card, however much
+   the lists above it differ in length */
 .svc-go {
-  display: inline-block;
-  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 20px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--red-deep);
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  color: var(--ink-30);
+  transition: color 0.3s var(--ease);
 }
 
-.svc-card:hover .svc-go { opacity: 1; transform: none; }
+.svc-card:hover .svc-go { color: var(--red-deep); }
 
-/* touch devices never hover, so never hide the affordance there */
-@media (hover: none) { .svc-go { opacity: 1; transform: none; } }
+.svc-arrow { transition: transform 0.3s var(--ease); }
+
+.svc-card:hover .svc-arrow { transform: translateX(5px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-card, .svc-card::before, .svc-arrow { transition: none; }
+  .svc-card:hover { transform: none; }
+  .svc-card:hover .svc-arrow { transform: none; }
+}
 
 .svc-more {
   margin: 24px 0 0;
@@ -535,7 +591,10 @@ a { color: inherit; text-decoration: none; }
 
 .svc-more a:hover { color: var(--red); }
 
+/* two up, then three — separate cards at two across leave the dot lists
+   stranded in a lot of empty paper on a wide screen */
 @media (min-width: 760px) { .svc-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1080px) { .svc-grid { grid-template-columns: repeat(3, 1fr); } }
 
 /* ============================================================ principles == */
 .p-row {
@@ -838,7 +897,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ============================================================= page head == */
 .page-head {
-  padding: clamp(44px, 7vw, 84px) 0 clamp(26px, 4vw, 40px);
+  padding: clamp(26px, 4vw, 48px) 0 clamp(26px, 4vw, 40px);
   max-width: 760px;
 }
 
@@ -870,85 +929,33 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink-50);
 }
 
-/* ========================================================= service pages == */
-.service-body {
-  display: grid;
-  gap: clamp(28px, 5vw, 56px);
-  padding: clamp(30px, 4vw, 48px) 0 var(--section);
-  border-top: 1px solid var(--line);
-}
-
-.service-intro {
-  margin: 0;
-  max-width: 62ch;
+/* a second paragraph under the lede, for heads that carry the whole lead-in */
+.page-intro {
+  margin: 22px 0 0;
+  max-width: 64ch;
   font-size: 16.5px;
-  line-height: 1.7;
+  line-height: 1.72;
   color: var(--ink-70);
 }
 
-.service-h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.02rem;
-  letter-spacing: 0.02em;
-  margin: 36px 0 12px;
+/* ========================================================= service pages == */
+/* the service head is the only copy before the cards, so it gets more room
+   and more air than a plain page head */
+.page-head.is-service {
+  max-width: 820px;
+  padding-bottom: clamp(34px, 5vw, 56px);
 }
 
-.outcome-list { margin: 0; padding: 0; list-style: none; }
-
-.outcome-list li {
-  position: relative;
-  padding: 12px 0 12px 28px;
+.detail-cta {
+  margin: clamp(28px, 4vw, 40px) 0 0;
+  padding-top: clamp(24px, 3.5vw, 34px);
   border-top: 1px solid var(--line);
-  font-size: 15.5px;
-  line-height: 1.6;
-  color: var(--ink-50);
+  text-align: center;
 }
-
-.outcome-list li::before {
-  content: "";
-  position: absolute;
-  left: 3px;
-  top: 20px;
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-  background: var(--grad-a);
-}
-
-.service-aside {
-  align-self: start;
-  padding: 26px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: var(--white);
-  box-shadow: var(--shadow-soft);
-}
-
-.aside-head {
-  margin: 0 0 14px;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-30);
-}
-
-.include-list { margin: 0; padding: 0; list-style: none; }
-
-.include-list li {
-  padding: 9px 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 14.5px;
-  color: var(--ink-70);
-}
-
-.include-list li:last-child { border-bottom: 0; }
 
 .aside-cta {
-  display: block;
-  margin-top: 20px;
-  padding: 14px;
+  display: inline-block;
+  padding: 14px 34px;
   border-radius: 999px;
   text-align: center;
   background: var(--grad-a);
@@ -962,44 +969,136 @@ a { color: inherit; text-decoration: none; }
 
 .aside-cta:hover { transform: translateY(-2px); }
 
-.aside-note { margin: 14px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-30); }
+.aside-note {
+  margin: 14px auto 0;
+  max-width: 46ch;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-30);
+}
 
-.service-next { padding: clamp(36px, 5vw, 56px) 0 0; border-top: 1px solid var(--line); }
+/* one card per thing we do under this solution */
+.service-detail {
+  padding: clamp(36px, 5vw, 56px) 0 clamp(34px, 4.5vw, 58px);
+  border-top: 1px solid var(--line);
+}
 
-.next-grid {
-  display: grid;
-  gap: 1px;
-  background: var(--line);
+/* discrete cards, not the hairline sheet: an item count that doesn't fill the
+   last row would leave a grey hole in a sheet, and these run four to eight.
+   the gap has to clear the trace each card draws outside itself. */
+/* flex rather than grid: five and seven items leave a short last row, and a
+   grid would strand it on the left. Flex centres whatever is left over. */
+.item-grid {
+  --item-gap: 44px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--item-gap);
+  margin-top: 30px;
+}
+
+/* soft-cornered sheets that float on the ground rather than sit in a frame:
+   a wide radius, a hairline that barely shows, and the weight carried by a
+   long diffuse shadow. The rule up top stands where the step number used to. */
+.item-card {
+  position: relative;
+  flex: 0 1 100%;
+  padding: 26px 24px 28px;
   border: 1px solid var(--line);
-  border-radius: 16px;
-  overflow: hidden;
-  margin-top: 14px;
+  border-radius: 24px;
+  background: var(--white);
+  box-shadow: 0 1px 2px rgba(120, 60, 30, 0.04),
+              0 26px 50px -34px rgba(120, 60, 30, 0.4);
+  /* the card lights up under the cursor, so it should feel like a thing you
+     are pointing at rather than a paragraph you are about to select */
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
-.next-card {
-  background: var(--card);
-  padding: 17px 19px;
-  transition: background 0.25s var(--ease);
+/* the trace: a second outline just outside the card, solid along the top and
+   right and dotted along the bottom and left. Two pseudo-elements rather than
+   one, because a single border cannot change style mid-path. */
+.item-card::before,
+.item-card::after {
+  content: "";
+  position: absolute;
+  inset: -11px;
+  border-radius: 34px;
+  pointer-events: none;
+  transition: border-color 0.3s var(--ease);
 }
 
-.next-card:hover { background: var(--card-hover); }
+.item-card::before {
+  border: 2px solid var(--line-strong);
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
 
-.next-title {
+.item-card::after {
+  border: 2px dotted var(--line-strong);
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+
+.item-rule {
   display: block;
+  width: 34px;
+  height: 3px;
+  margin: 0 auto 16px;
+  border-radius: 999px;
+  background: var(--line-strong);
+  transition: background 0.3s var(--ease);
+}
+
+/* hover lights the whole trace, the rule and the label red — the active card
+   in the reference */
+.item-card:hover {
+  border-color: rgba(var(--red-rgb), 0.3);
+  box-shadow: 0 1px 2px rgba(var(--red-rgb), 0.06),
+              0 28px 52px -32px rgba(var(--red-rgb), 0.45);
+}
+
+.item-card:hover::before {
+  border-top-color: var(--red);
+  border-right-color: var(--red);
+}
+
+.item-card:hover::after {
+  border-bottom-color: var(--red);
+  border-left-color: var(--red);
+}
+
+.item-card:hover .item-rule { background: var(--red); }
+
+.item-name {
+  margin: 0 0 12px;
+  text-align: center;
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1.38;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.3s var(--ease);
+}
+
+.item-card:hover .item-name { color: var(--red); }
+
+.item-text {
+  margin: 0;
   font-size: 14.5px;
+  line-height: 1.68;
+  color: var(--ink-50);
 }
 
-.next-tag { display: block; margin-top: 3px; font-size: 12.5px; color: var(--ink-30); }
-
-@media (min-width: 900px) {
-  .service-body { grid-template-columns: minmax(0, 1fr) 320px; }
-  .next-grid { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+/* two up, then three — the basis has to account for the gaps itself, since
+   flex items don't share a track the way grid columns do */
+@media (min-width: 640px) {
+  .item-card { flex-basis: calc((100% - var(--item-gap)) / 2); }
 }
 
-@media (min-width: 600px) and (max-width: 899px) {
-  .next-grid { grid-template-columns: 1fr 1fr; }
+@media (min-width: 1040px) {
+  .item-card { flex-basis: calc((100% - 2 * var(--item-gap)) / 3); }
 }
 
 /* ================================================================= legal == */
@@ -1142,29 +1241,100 @@ a { color: inherit; text-decoration: none; }
 
 .cf-field textarea { resize: vertical; min-height: 110px; line-height: 1.55; }
 
-.cf-field select {
-  appearance: none;
-  padding-right: 40px;
-  cursor: pointer;
-  background-image: linear-gradient(45deg, transparent 50%, var(--ink-50) 50%),
-                    linear-gradient(135deg, var(--ink-50) 50%, transparent 50%);
-  background-position: calc(100% - 20px) 52%, calc(100% - 15px) 52%;
-  background-size: 5px 5px;
-  background-repeat: no-repeat;
-}
-
-.cf-field select:invalid { color: var(--ink-30); }
-
 .cf-field input::placeholder,
 .cf-field textarea::placeholder { color: var(--ink-30); }
 
 .cf-field input:focus,
-.cf-field select:focus,
 .cf-field textarea:focus {
   outline: none;
   border-color: var(--red);
   background: var(--white);
   box-shadow: 0 0 0 4px rgba(var(--red-rgb), 0.1);
+}
+
+/* ------------------------------------------------------------- select -- */
+/* The shadcn/Radix dropdown (components/Select.tsx). The trigger copies the
+   input above it to the pixel; the panel is ours to draw, so the choices get
+   full-strength ink instead of whatever wash the OS picked. */
+.ui-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--peach);
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.ui-select-trigger[data-placeholder] { color: var(--ink-30); }
+
+.ui-select-trigger:hover { border-color: var(--line-strong); background: var(--peach-2); }
+
+.ui-select-trigger:focus-visible,
+.ui-select-trigger[data-state="open"] {
+  outline: none;
+  border-color: var(--red);
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(var(--red-rgb), 0.1);
+}
+
+.ui-select-chevron {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--ink-50);
+  transition: transform 0.2s var(--ease);
+}
+
+.ui-select-trigger[data-state="open"] .ui-select-chevron { transform: rotate(180deg); }
+
+.ui-select-content {
+  z-index: 60;
+  min-width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
+  overflow: hidden auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 24px 60px -24px rgba(90, 45, 20, 0.4);
+  animation: dd-in 0.16s var(--ease) both;
+}
+
+.ui-select-viewport { padding: 6px; }
+
+.ui-select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 13px;
+  border-radius: 8px;
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--ink);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.ui-select-item[data-highlighted] { background: var(--peach-2); }
+
+.ui-select-item[data-state="checked"] { font-weight: 600; color: var(--red-deep); }
+
+.ui-select-check { display: flex; flex: none; color: var(--red); }
+.ui-select-check svg { width: 16px; height: 16px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-select-content { animation: none; }
+  .ui-select-chevron { transition: none; }
 }
 
 .cf-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 4px; }
@@ -1297,64 +1467,147 @@ a { color: inherit; text-decoration: none; }
 
 .ab-story-text p:last-child { margin-bottom: 0; }
 
-/* the founder's note: one wide band-like card. The label and who it is
-   from sit in a narrow column on the left, the note itself fills the rest;
-   on phones the two stack. */
-.ab-note {
+/* The founder's note, as a letter left on the desk. It is the only place on
+   the site where one person is talking, so it drops the house type for a
+   hand and sits on paper instead of in a card: a dot grid for the desk, two
+   sheets showing under the one you read, and a sticky note on the corner.
+   Nothing here is an image — the paper is gradients, the stack is transforms. */
+.ab-note-band {
+  position: relative;
+  isolation: isolate;
+}
+
+/* the desk the letter lies on, faded out towards the edges so the band
+   doesn't end on a hard crop */
+.ab-note-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(var(--line-strong) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(120% 80% at 50% 50%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(120% 80% at 50% 50%, #000 35%, transparent 100%);
+}
+
+/* the two sheets of the letter. They sit side by side and stagger — the
+   second drops a little, so the pair reads as two pages put down one after
+   the other rather than as a two-column layout. */
+.ab-notes {
   display: grid;
-  gap: 24px;
-  padding: clamp(32px, 5vw, 56px) clamp(24px, 5vw, 64px);
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  background: var(--white);
-  box-shadow: var(--shadow-soft);
+  gap: 34px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-.ab-note-side { position: relative; }
+.ab-paper-stack { position: relative; }
 
-.ab-note-mark {
-  display: block;
-  height: 0.55em;
-  font-family: var(--font-display);
-  font-size: clamp(80px, 10vw, 120px);
-  font-weight: 700;
-  line-height: 1;
-  color: rgba(var(--red-rgb), 0.18);
+.ab-stack-1 { transform: rotate(-0.9deg); }
+.ab-stack-2 { transform: rotate(0.8deg); }
+
+/* the spare sheet under each. It only ever shows as an edge, so it carries
+   no content — hence the bare span. */
+.ab-sheet {
+  position: absolute;
+  inset: 0;
+  border-radius: 2px;
+  background: #fffaf4;
+  box-shadow: 0 12px 28px -20px rgba(120, 60, 30, 0.55);
 }
 
-.ab-note-label {
+.ab-stack-1 .ab-sheet { transform: rotate(-1.6deg) translate(-7px, 5px); }
+.ab-stack-2 .ab-sheet { transform: rotate(1.5deg) translate(8px, 6px); }
+
+.ab-paper {
+  position: relative;
+  height: 100%;
+  padding: clamp(36px, 5vw, 52px) clamp(24px, 3.5vw, 44px) clamp(30px, 4vw, 40px);
+  border-radius: 2px;
+  /* the two soft washes are the fold: light down one edge, shade up the
+     other, so the sheet does not read as a flat rectangle */
+  background:
+    linear-gradient(104deg, rgba(120, 60, 30, 0.055) 0%, transparent 16%),
+    linear-gradient(254deg, rgba(120, 60, 30, 0.045) 0%, transparent 20%),
+    #fffdfa;
+  box-shadow:
+    0 2px 4px rgba(120, 60, 30, 0.06),
+    0 30px 60px -34px rgba(120, 60, 30, 0.55);
+}
+
+.ab-sticky {
+  position: absolute;
+  top: clamp(-24px, -2vw, -16px);
+  left: clamp(14px, 3vw, 36px);
+  max-width: 210px;
   margin: 0;
+  padding: 13px 16px 15px;
+  background: var(--peach-3);
+  box-shadow: 0 8px 18px -12px rgba(120, 60, 30, 0.6);
+  transform: rotate(-3.2deg);
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
+  line-height: 1.5;
   text-transform: uppercase;
   color: var(--red);
 }
 
-.ab-note-sign { display: grid; gap: 2px; margin: 14px 0 0; }
-.ab-note-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--ink); }
-.ab-note-role { font-size: 13.5px; color: var(--ink-50); }
-
 .ab-note-body p {
-  margin: 0 0 16px;
-  font-size: clamp(16px, 1.6vw, 17.5px);
-  line-height: 1.75;
+  margin: 0 0 12px;
+  font-family: var(--font-hand);
+  font-size: clamp(19px, 1.9vw, 23px);
+  line-height: 1.5;
   color: var(--ink-70);
 }
 
+.ab-note-body p:last-child { margin-bottom: 0; }
+
 .ab-note-body .ab-note-close {
-  margin: 22px 0 0;
-  font-family: var(--font-display);
-  font-size: clamp(18px, 2vw, 22px);
+  margin: 20px 0 0;
   font-weight: 600;
   color: var(--ink);
 }
 
-@media (min-width: 900px) {
-  .ab-note { grid-template-columns: 260px minmax(0, 1fr); gap: 64px; align-items: start; }
-  .ab-note-side { position: sticky; top: calc(var(--header-h) + 24px); }
-  .ab-note-body { columns: 2; column-gap: 48px; }
-  .ab-note-body p { break-inside: avoid; }
+.ab-sign {
+  display: grid;
+  gap: 4px;
+  margin: 26px 0 0;
+}
+
+.ab-sign-name {
+  justify-self: start;
+  font-family: var(--font-hand);
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+  transform: rotate(-2.4deg);
+  transform-origin: left center;
+}
+
+.ab-sign-role {
+  font-size: 13px;
+  color: var(--ink-50);
+}
+
+@media (min-width: 880px) {
+  .ab-notes {
+    grid-template-columns: 1fr 1fr;
+    gap: 42px;
+    align-items: start;
+  }
+  /* the second page put down a moment after the first */
+  .ab-stack-2 { margin-top: 36px; }
+}
+
+/* the tilt costs real width on a phone, so the sheets straighten out */
+@media (max-width: 560px) {
+  .ab-stack-1,
+  .ab-stack-2 { transform: none; }
+  .ab-stack-1 .ab-sheet { transform: rotate(-1.2deg); }
+  .ab-stack-2 .ab-sheet { transform: rotate(1.1deg); }
 }
 
 /* What we believe: five small cards in a row. The top box is an SVG shape
@@ -1713,8 +1966,10 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (min-width: 760px) {
-  /* contact takes the width of its longest line, so the email stays whole */
-  .footer-cols { grid-template-columns: 1.4fr 1fr 1fr max-content; }
+  /* solutions gets the roomy track, since the service names are the longest
+     labels down here; contact takes the width of its longest line, so the
+     email stays whole */
+  .footer-cols { grid-template-columns: 1fr 1.4fr 1fr max-content; }
 }
 
 @media (min-width: 1024px) {
@@ -1974,17 +2229,31 @@ a { color: inherit; text-decoration: none; }
   color: var(--red);
 }
 
+/* the "round again" labels and the 404 hint are the same thought in three
+   places, so they wear the same type: display face, caps, wide tracking. */
 .hw-again {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin: 28px 0 0;
-  padding: 8px 16px;
+  padding: 9px 18px;
   border: 1px solid var(--red);
   border-radius: 999px;
   background: var(--card);
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   color: var(--red);
+}
+
+/* the rotate arrow that marks the loop, sized off the line it sits on */
+.loop-ico {
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+  stroke-width: 2.4;
 }
 
 .hw-runner { display: none; }
@@ -2045,14 +2314,19 @@ a { color: inherit; text-decoration: none; }
   .hw-bubble {
     position: absolute;
     z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
     left: calc(var(--dot) + 100px);
     top: 4px;
-    padding: 6px 12px;
+    padding: 7px 14px;
     border-radius: 999px;
     background: var(--red);
     font-family: var(--font-display);
-    font-size: 12.5px;
+    font-size: 10.5px;
     font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
     color: #fff;
     white-space: nowrap;
     opacity: 0;
@@ -2485,6 +2759,7 @@ a { color: inherit; text-decoration: none; }
    past it instead of being clipped. svh keeps mobile browsers from jumping
    when the address bar hides. */
 .hero-band {
+  position: relative; /* the stamp hangs off this, not off the centred copy */
   min-height: calc(100vh - var(--header-h));
   min-height: calc(100svh - var(--header-h));
   display: grid;
@@ -2721,4 +2996,561 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .page-head::before,
   .legal::before { animation: none; }
+}
+
+/* ================================================================== 404 == */
+/* Words on the left, our guy standing in a hollow 404 on the right. He is a
+   button: every click swaps the pose, so all five are stacked in the same
+   box and only one is lit — nothing shifts when he changes. */
+.nf-head {
+  display: grid;
+  gap: clamp(16px, 4vw, 40px);
+  align-items: center;
+  max-width: none;
+  padding-bottom: clamp(40px, 6vw, 72px);
+}
+
+.nf-red { color: var(--red); }
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(24px, 3.5vw, 34px);
+  animation: head-in 0.7s var(--ease) 0.2s both;
+}
+
+.nf-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  animation: head-in-r 0.7s var(--ease) 0.26s both;
+}
+
+/* the hollow numerals, same outlined treatment as the step numbers */
+.nf-ghost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  transform: translate(-50%, -54%);
+  font-family: var(--font-display);
+  font-size: clamp(170px, 30vw, 330px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--line-strong);
+  pointer-events: none;
+  user-select: none;
+}
+
+.nf-guy {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: clamp(170px, 26vw, 260px);
+  height: clamp(230px, 34vw, 360px);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  animation: ab-bob 3.2s ease-in-out infinite;
+}
+
+.nf-guy:active { animation: none; transform: translateY(2px); }
+
+.nf-guy img {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.26s var(--ease);
+}
+
+.nf-guy img.is-shown { opacity: 1; }
+
+/* what he says about the page, hanging over his head */
+.nf-bubble {
+  position: absolute;
+  bottom: calc(100% - 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-display);
+  font-size: clamp(11px, 1.6vw, 13px);
+  font-weight: 600;
+  color: var(--ink-70);
+}
+
+.nf-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-30);
+}
+
+.nf-guy:hover + .nf-hint { color: var(--red); }
+
+@media (min-width: 880px) {
+  .nf-head { grid-template-columns: minmax(0, 1fr) auto; gap: 56px; }
+  .nf-copy { max-width: 620px; }
+  .nf-stage { justify-self: end; margin-right: clamp(0px, 3vw, 48px); }
+}
+
+/* the way out: four rows, hairline between, red on hover */
+.nf-links {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.nf-links li { border-bottom: 1px solid var(--line); }
+
+.nf-links a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 4px 20px;
+  padding: 20px 4px;
+  transition: padding 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.nf-link-label {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.nf-link-text {
+  grid-column: 1;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-50);
+}
+
+.nf-link-arrow {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  font-size: 20px;
+  color: var(--ink-30);
+  transition: transform 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.nf-links a:hover { padding-left: 14px; color: var(--red); }
+.nf-links a:hover .nf-link-text { color: var(--ink-70); }
+.nf-links a:hover .nf-link-arrow { transform: translateX(6px); color: var(--red); }
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-actions,
+  .nf-stage { animation: none; }
+  .nf-guy { animation: none; }
+}
+
+/* ======================================================= service prompt == */
+/* The ask that arrives five seconds in. It opens out from the middle of the
+   screen like a sheet being unfolded — square corners, a crease down the
+   middle, and the veil behind it only fading, so the movement stays on the
+   paper rather than on the whole screen. */
+.np-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(30, 20, 17, 0.44);
+  backdrop-filter: blur(3px);
+  animation: np-veil-in 0.45s var(--ease) both;
+}
+
+@keyframes np-veil-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* both halves need a closed rule of their own: Radix only waits for an exit
+   animation if the animation name actually changes on the way out */
+.np-veil[data-state="closed"] { animation: np-veil-out 0.2s var(--ease) both; }
+
+@keyframes np-veil-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+.np-paper {
+  position: fixed;
+  z-index: 91;
+  top: 50%;
+  left: 50%;
+  width: min(560px, calc(100vw - 2 * var(--gutter)));
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  padding: clamp(26px, 4vw, 38px) clamp(22px, 4vw, 40px) clamp(22px, 3vw, 30px);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px; /* paper has corners, not pills */
+  background: var(--white);
+  box-shadow: 0 2px 4px rgba(120, 60, 30, 0.08),
+              0 50px 90px -40px rgba(120, 60, 30, 0.55);
+  transform-origin: center;
+  animation: np-open 0.42s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+/* opens out from the middle, the way a folded sheet does: short in the
+   height and slightly narrow, out to full size. No turning — the spin read
+   as a gimmick once you had seen it twice. */
+@keyframes np-open {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(0.94) scaleY(0.55);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.np-paper[data-state="closed"] { animation: np-gone 0.2s var(--ease) both; }
+
+@keyframes np-gone {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to   { opacity: 0; transform: translate(-50%, -50%) scale(0.94); }
+}
+
+/* the crease down the middle, from when it was folded */
+.np-fold {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(120, 60, 30, 0.07) 12%,
+    rgba(120, 60, 30, 0.07) 88%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* the masthead strip, set between two rules like a paper's nameplate */
+.np-dateline {
+  margin: 0 0 14px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink);
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--ink-50);
+}
+
+.np-dateline span { margin: 0 8px; color: var(--line-strong); }
+
+.np-head {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4.6vw, 38px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.np-sub {
+  margin: 0 auto clamp(20px, 3vw, 26px);
+  max-width: 42ch;
+  font-size: 14.5px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--ink-50);
+}
+
+/* the choices, in two columns like newsprint */
+.np-picks {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.np-picks a {
+  display: block;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--peach);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease),
+    color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.np-picks a:hover {
+  border-color: var(--red);
+  background: var(--white);
+  color: var(--red);
+  transform: translateY(-1px);
+}
+
+.np-unsure { grid-column: 1 / -1; }
+
+.np-unsure a {
+  border-style: dashed;
+  border-color: var(--line-strong);
+  background: none;
+  text-align: center;
+  color: var(--ink-50);
+}
+
+.np-later {
+  display: block;
+  margin: 0 auto;
+  padding: 6px 10px;
+  border: 0;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink-30);
+  cursor: pointer;
+  transition: color 0.2s var(--ease);
+}
+
+.np-later:hover { color: var(--ink-70); }
+
+.np-x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--ink-30);
+  cursor: pointer;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.np-x svg { width: 17px; height: 17px; }
+.np-x:hover { background: var(--peach-2); color: var(--red); }
+
+@media (min-width: 560px) {
+  .np-picks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* no unfolding either — it arrives already open */
+@media (prefers-reduced-motion: reduce) {
+  .np-paper { animation: np-veil-in 0.3s var(--ease) both; transform: translate(-50%, -50%); }
+  .np-paper[data-state="closed"] { animation: none; }
+}
+
+/* ========================================================== brand stamp == */
+/* The name set round a circle, low on the left of the banner. It sits below
+   the copy rather than beside it: the headline is centred and grows with the
+   viewport, so anything level with it is one long word away from a collision.
+   Off entirely on narrow screens, where there is no spare margin to stand in. */
+.stamp {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  left: clamp(16px, 4vw, 76px);
+  bottom: clamp(104px, 15vh, 196px);
+  width: clamp(132px, 12vw, 168px);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 2px dashed rgba(var(--red-rgb), 0.35);
+  border-radius: 50%;
+  color: var(--ink-50);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+@media (min-width: 1100px) {
+  .stamp { display: grid; }
+}
+
+.stamp:hover { border-color: var(--red); color: var(--red); }
+
+/* only the ring turns — the mark in the middle is a separate element, so it
+   stays upright while the words go round it */
+.stamp-ring {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  animation: stamp-turn 24s linear infinite;
+}
+
+.stamp-ring text {
+  fill: currentColor;
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+@keyframes stamp-turn {
+  to { transform: rotate(360deg); }
+}
+
+.stamp-core {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  width: 54%;
+  height: 54%;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--red);
+  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+/* he fills the disc and is pulled up a little: the face sits high in the
+   source frame, so centring the image leaves him looking sunk */
+.stamp-core img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+
+.stamp:hover .stamp-core { background: var(--red-deep); transform: scale(1.06); }
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-ring { animation: none; }
+}
+
+/* ============================================================ chat ====== */
+/* Clicky on the web chat's launcher. The vendor's own button is hidden and
+   these forward the clicks to it, so everything here is only the face. */
+/* the label sits above him, both pinned to the right edge */
+.cc {
+  position: fixed;
+  z-index: 60;
+  right: clamp(14px, 3vw, 24px);
+  bottom: clamp(14px, 3vw, 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* the dashed ring turns around him, the way the brand stamp does. It lives on
+   its own element so only the ring moves and his face stays upright. */
+.cc-dock {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+}
+
+.cc-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed var(--line-strong);
+  border-radius: 50%;
+  animation: cc-turn 16s linear infinite;
+  transition: border-color 0.3s var(--ease);
+}
+
+.cc:hover .cc-ring,
+.cc.is-open .cc-ring { border-color: rgba(var(--red-rgb), 0.45); }
+
+@keyframes cc-turn {
+  to { transform: rotate(360deg); }
+}
+
+.cc-launcher {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--red);
+  cursor: pointer;
+  box-shadow: 0 12px 28px -12px rgba(var(--red-rgb), 0.75);
+  transition: transform 0.25s var(--ease), background 0.25s var(--ease);
+}
+
+.cc-launcher:hover { transform: scale(1.06); }
+.cc-launcher:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+
+/* same crop as the brand stamp — he sits high in the source frame */
+.cc-launcher img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+
+/* the label. It stands whenever the panel is shut, so it is the whole button
+   rather than a dismissible bubble with its own controls. */
+.cc-bubble {
+  margin-right: 6px;
+  padding: 11px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--white);
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 16px 36px -20px rgba(90, 45, 20, 0.55);
+  animation: cc-in 0.35s var(--ease) both;
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+
+.cc-bubble:hover { color: var(--red); border-color: var(--red); }
+.cc-bubble:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+@keyframes cc-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* the vendor's panel opens bottom-right too, so on a phone the greeting would
+   sit on top of it — the face alone is enough there */
+@media (max-width: 480px) {
+  .cc-bubble { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-bubble { animation: none; }
+  .cc-ring { animation: none; }
+  .cc-launcher:hover { transform: none; }
 }

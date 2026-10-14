@@ -10,7 +10,21 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-export default function Contact() {
+/**
+ * ?service=<slug> preselects the enquiry's service. It is resolved here
+ * rather than in the form so the value is settled before anything renders —
+ * on the server for a fresh load, and from the router's own state for a click
+ * from inside the site.
+ */
+export default async function Contact({
+  searchParams,
+}: {
+  searchParams: Promise<{ service?: string | string[] }>;
+}) {
+  const { service } = await searchParams;
+  const slug = Array.isArray(service) ? service[0] : service;
+  const picked = site.services.find((s) => s.slug === slug)?.title ?? "";
+
   // site.phone is typed as the literal "" while it is unset, so widen it.
   const phone: string = site.phone;
   const { address } = site.legal;
@@ -29,7 +43,9 @@ export default function Contact() {
 
       <div className="cp-grid">
         <section className="cp-form" aria-label="Enquiry form">
-          <ContactForm />
+          {/* keyed on the service so arriving with a different one starts the
+              form over on that choice, rather than keeping the first */}
+          <ContactForm key={picked} initialService={picked} />
         </section>
 
         <aside className="cp-info" aria-label="Contact details">

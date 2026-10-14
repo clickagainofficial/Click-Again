@@ -8,7 +8,7 @@ import { site } from "@/site.config";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `${site.name} is a marketing company in Madurai, started in 2026 to get customers for businesses — and keep them coming back.`,
+  description: `${site.name} is a marketing company in Madurai, started in ${site.founded} to get customers for businesses — and keep them coming back.`,
   alternates: { canonical: "/about" },
 };
 
@@ -27,7 +27,7 @@ export default function About() {
             </h1>
             <p className="page-lede">
               {site.name} is a marketing company from {city}, {state}. We
-              started in 2026.
+              started in {site.founded}.
             </p>
           </div>
           <Image
@@ -51,7 +51,7 @@ export default function About() {
             </p>
             <div className="ab-story-text">
               <p>
-                We started {site.name} in {city} in 2026 after seeing how many
+                We started {site.name} in {city} in {site.founded} after seeing how many
                 good businesses were hard to find, hard to trust or hard to
                 reach — not because the business was weak, but because of how
                 it showed up to the people looking for it.
@@ -69,50 +69,71 @@ export default function About() {
                 business.
               </p>
               <p>
-                We are a team across marketing, design, technology and business.
-                We take the time to understand how your business actually
-                works, and we show you plainly what our work brought back.
+                We are a team across {site.disciplines.slice(0, -1).join(", ")}{" "}
+                and {site.disciplines.at(-1)}. We take the time to understand
+                how your business actually works, and we show you plainly what
+                our work brought back.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="band band-a">
+      <section className="band band-a ab-note-band">
         <div className="shell">
-          <article className="ab-note">
-            <header className="ab-note-side">
-              <span className="ab-note-mark" aria-hidden="true">
-                &ldquo;
-              </span>
-              <h2 className="ab-note-label">A note from the founder</h2>
-              <p className="ab-note-sign">
-                <span className="ab-note-name">Kansha M</span>
-                <span className="ab-note-role">Founder &amp; CEO, {site.name}</span>
-              </p>
-            </header>
-            <div className="ab-note-body">
-              <p>
-                When we started {site.name}, we noticed that many good
-                businesses weren&apos;t getting the attention they deserved—not
-                because they lacked quality, but because the right people
-                weren&apos;t finding them.
-              </p>
-              <p>
-                We believe every business deserves to be seen, trusted, and
-                chosen. That&apos;s why we take the time to understand your
-                business before finding the right ways to help it grow.
-              </p>
-              <p>
-                By bringing together the right ideas, technology, and strategy,
-                we aim to help businesses reach the right people and build
-                lasting relationships with their customers.
-              </p>
-              <p>
-                We don&apos;t believe in one solution for everyone. We believe in
-                finding what works for your business.
-              </p>
-              <p className="ab-note-close">I&apos;d love to hear your story.</p>
+          {/* A letter left on the desk — two sheets of it, side by side, each
+              with a spare sheet showing under it and a tilt of its own. The
+              sticky note sits on the first; the signature closes the second. */}
+          <article className="ab-notes">
+            <div className="ab-paper-stack ab-stack-1">
+              <span className="ab-sheet" aria-hidden="true" />
+              <div className="ab-paper">
+                <h2 className="ab-sticky">A note from the founder</h2>
+                <div className="ab-note-body">
+                  <p>Hello —</p>
+                  <p>
+                    I&apos;m {site.founder.first}, {site.founder.role} at{" "}
+                    {site.name}.
+                  </p>
+                  <p>
+                    When we started {site.name}, we noticed that many good
+                    businesses weren&apos;t getting the attention they
+                    deserved—not because they lacked quality, but because the
+                    right people weren&apos;t finding them.
+                  </p>
+                  <p>
+                    We believe every business deserves to be seen, trusted, and
+                    chosen. That&apos;s why we take the time to understand your
+                    business before finding the right ways to help it grow.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="ab-paper-stack ab-stack-2">
+              <span className="ab-sheet" aria-hidden="true" />
+              <div className="ab-paper">
+                <div className="ab-note-body">
+                  <p>
+                    By bringing together the right ideas, technology, and
+                    strategy, we aim to help businesses reach the right people
+                    and build lasting relationships with their customers.
+                  </p>
+                  <p>
+                    We don&apos;t believe in one solution for everyone. We
+                    believe in finding what works for your business.
+                  </p>
+                  <p className="ab-note-close">
+                    I&apos;d love to hear your story.
+                  </p>
+                </div>
+                <footer className="ab-sign">
+                  <span className="ab-sign-name">{site.founder.name}</span>
+                  <span className="ab-sign-role">
+                    {site.founder.role}, {site.name}
+                  </span>
+                </footer>
+              </div>
             </div>
           </article>
         </div>

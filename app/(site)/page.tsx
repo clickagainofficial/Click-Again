@@ -1,9 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
+import BrandStamp from "@/components/BrandStamp";
 import HowWeWork from "@/components/HowWeWork";
 import Manifesto from "@/components/Manifesto";
 import Marquee from "@/components/Marquee";
 import WhatWeDo from "@/components/WhatWeDo";
+
+/** Title and description come from the root layout; this is here for the
+ *  canonical, which the most-linked URL on the site should not go without. */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 /**
  * Sections alternate between two full-bleed bands. Each band owns the colour
@@ -14,10 +22,12 @@ export default function Home() {
   return (
     <>
       <section className="band band-a hero-band">
+        <BrandStamp />
+
         <div className="shell hero">
           <h1 className="hero-title">
-            <span className="slide-l">We get you customers.</span>
-            <span className="accent slide-r d1">And keep them coming back.</span>
+            <span className="slide-l">WE GET YOU CUSTOMERS.</span>
+            <span className="accent slide-r d1">AND KEEP THEM COMING BACK.</span>
           </h1>
 
           <p className="hero-sub slide-l d2">

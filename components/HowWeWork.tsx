@@ -1,5 +1,6 @@
 "use client";
 
+import { RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { site } from "@/site.config";
@@ -108,7 +109,10 @@ export default function HowWeWork() {
         }
       >
         <div className={`hw-runner${back ? " is-back" : ""}`} aria-hidden="true">
-          <span className="hw-bubble">↺ round again</span>
+          <span className="hw-bubble">
+            <RotateCcw className="loop-ico" />
+            Round again
+          </span>
           {[...steps.map((s) => s.pose), WALKER].map((src) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -153,7 +157,8 @@ export default function HowWeWork() {
         </ol>
 
         <p className="hw-again" aria-hidden="true">
-          ↺ then round again
+          <RotateCcw className="loop-ico" />
+          Then round again
         </p>
       </div>
     </div>
