@@ -8,7 +8,16 @@ export const site = {
 
 
   email: "hello@clickagain.in",
-  phone: "",
+  phone: "+91 95664 02201",
+
+  /** Office hours, the same as on the Google Business Profile. Days are
+   *  schema.org day names; times are 24-hour, India time. */
+  hours: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:30",
+    closes: "19:30",
+    label: "Monday to Friday, 9:30 am – 7:30 pm",
+  },
 
   /**
    * When the public pages last changed, as an ISO date. It becomes <lastmod>

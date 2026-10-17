@@ -89,8 +89,9 @@ These are done in this repo.
   - [x] `alternateName`: "ClickAgain", "Click Again Agency",
         "Click Again Digital Marketing Agency" (17 Oct 2026)
   - [x] `founder` (Kansha M) and `foundingDate` (2026) (17 Oct 2026)
-  - [ ] `telephone` (waiting on phone number, B0)
-  - [ ] `openingHoursSpecification` (waiting on hours, B0)
+  - [x] `telephone`: +91 95664 02201 (17 Oct 2026)
+  - [x] `openingHoursSpecification`: Mon–Fri 09:30–19:30, from
+        `site.hours` in `site.config.ts` (17 Oct 2026)
   - [ ] `geo` co-ordinates for the office
   - [ ] Add each new profile to `sameAs` as it's created (B5, B6)
 - [ ] **A5. IndexNow.** Add a key file and ping Bing and Yandex when pages
@@ -123,8 +124,9 @@ These are done in this repo.
     `CNAME www`; those point the site at Vercel.
   - Site updated: `site.email` and `legal.grievanceEmail` are now
     `hello@clickagain.in`, and `legal.updated` was bumped to 17 October 2026.
-  - [ ] Confirm DKIM shows "Authenticating" in Admin console → Gmail →
-        Authenticate email
+  - [x] DKIM status "Authenticating email with DKIM" confirmed in the Admin
+        console (17 Oct 2026)
+  - [x] Test mail to `hello@` received (17 Oct 2026)
   - [ ] Change the email on the Instagram and Facebook bios
   - [ ] Optional: the contact form's SMTP (admin → SMTP settings) still
         sends through Gmail. It can move to Workspace later.
@@ -132,28 +134,70 @@ These are done in this repo.
 - [ ] Is the Madurai address a public office or a home? If it's a home, set
       the Business Profile up as a service-area business with the address
       hidden.
-- [ ] Office hours
+- [x] Office hours: Monday to Friday, 9:30 am – 7:30 pm (17 Oct 2026)
+- [x] Address is an **office customers can visit** (17 Oct 2026), so the
+      Business Profile shows the address with a Maps pin. It isn't set up
+      as a service-area business.
+- [x] Phone: company number **+91 95664 02201**, set in `site.phone`
+      (17 Oct 2026). It now shows in the footer, on /contact, in the schema
+      `telephone` and in llms.txt.
+- [ ] Address will change in future (said 17 Oct 2026). Use the current
+      Madurai address for now. When it moves, update it everywhere in one
+      go: `site.config.ts` + `lib/schema.ts` postal address, Business
+      Profile, every directory.
 - [ ] Where the domain is registered (needed to add DNS records)
 - [ ] Which Google account owns everything. Use one business account, not a
       personal one.
 
 ### B1. Google Search Console (week 1, do this first)
 
-- [ ] Add a **Domain** property for `clickagain.in`
-- [ ] Verify with the DNS TXT record at the domain registrar
-- [ ] Submit `https://clickagain.in/sitemap.xml`
-- [ ] Run URL Inspection on the home page, then **Request indexing**. Do the
-      same for /about, /solutions and /contact.
+- [x] Add a **Domain** property for `clickagain.in` (17 Oct 2026)
+- [x] Verified with a DNS TXT record (17 Oct 2026). It was verified from
+      the **`clickagainofficial@gmail.com`** account, so the token
+      `google-site-verification=Cuw-VlGem…` belongs to that account. Don't
+      delete it, or that account loses ownership. Workspace's token
+      (`cnFgXat…`) is separate; both stay as `TXT @` at Hostinger.
+- [ ] **Decision (17 Oct 2026): move ownership to `kansha@clickagain.in`
+      and remove the Gmail account.** Order matters:
+  - [x] 1. Added the property from `kansha@` (17 Oct 2026). It was **auto
+        verified** through the Workspace token `cnFgXat…`, so that record
+        now keeps both Workspace and Search Console verified. Never delete it.
+  - [x] 2. Deleted the Gmail token `Cuw-VlGem…` at Hostinger (17 Oct 2026).
+        Checked afterwards: `cnFgXat…`, SPF, DKIM, MX and the A record are
+        all intact.
+  - [x] 3. Removed `clickagainofficial@gmail.com` in `kansha@` → Users and
+        permissions (17 Oct 2026). `kansha@clickagain.in` is now the only owner.
+- [x] Submitted `https://clickagain.in/sitemap.xml` (17 Oct 2026): status
+      Success, 13 pages found. A Domain property needs the full URL, not
+      just `sitemap.xml`.
+- [x] Requested indexing for `/`, `/about`, `/solutions` and `/contact`
+      (17 Oct 2026). Live test for `/`: "URL is available to Google".
+      Expect them indexed in 2–7 days. Check by searching `site:clickagain.in`
+      or with URL Inspection → Google Index.
 - [ ] After a week, check the Pages report for anything excluded
 
 ### B2. Bing Webmaster Tools (week 1)
 
-- [ ] Sign in and import the site from Search Console
-- [ ] Confirm the sitemap is there
+- [x] Signed in and imported the site from Search Console (17 Oct 2026,
+      `kansha@clickagain.in`)
+- [x] Sitemap imported (17 Oct 2026, status "Processing" at first; it
+      clears within about 48 hours)
+- [x] Submitted 11 URLs (17 Oct 2026): home, about, solutions, contact,
+      insights, and the 6 solution pages. Privacy and Terms were left to the
+      sitemap. Bing allows 100 URLs a day.
+- [ ] Optional, 18 Oct 2026: in Google Search Console, request indexing for
+      `/insights` and the 6 solution pages (Google allows about 10 a day).
+      The sitemap covers them anyway.
 - [ ] Bing's index feeds Copilot and ChatGPT search, so this matters for AI
       answers too
 
 ### B3. Google Business Profile (week 1, biggest single win for brand searches)
+
+> **Deferred (17 Oct 2026).** The office has no outside name board yet, so
+> video verification would likely fail. The address may also change. Pick
+> it back up once there's a board (or the new office is ready), or set it
+> up as a service-area business with the address hidden. Until then, brand
+> searches lean on the site, schema, Search Console and social profiles.
 
 - [ ] Name: **Click Again** (exactly)
 - [ ] Primary category: **Marketing agency**. Possible extra categories:
@@ -259,12 +303,36 @@ Fill this in once, then copy it everywhere.
 Name:     Click Again
 Address:  3/508, Bharathi Street, Muneswaran Nagar, Iyer Bungalow,
           Madurai, Tamil Nadu 625014, India
-Phone:    (pending)
+Phone:    +91 95664 02201
 Website:  https://clickagain.in
 Email:    hello@clickagain.in
-Hours:    (pending)
+Hours:    Monday to Friday, 9:30 am – 7:30 pm
 Category: Marketing agency
 ```
+
+### Where NAP is listed
+
+When the address, phone or email changes, update **every** row here on the
+same day. Add a row whenever a new listing is created.
+
+| Place | Name | Address | Phone | Email | Listed on |
+| --- | --- | --- | --- | --- | --- |
+| Website (`site.config.ts`, one place in code; footer, contact, schema, llms.txt, legal pages follow it) | ✓ | ✓ | ✓ | ✓ | 17 Oct 2026 |
+| Google Business Profile | | | | | |
+| Bing Places | | | | | |
+| Apple Business Connect | | | | | |
+| Instagram bio | | | | | |
+| Facebook page | | | | | |
+| LinkedIn company page | | | | | |
+| YouTube "About" | | | | | |
+| X profile | | | | | |
+| WhatsApp Business profile | | | | | |
+| Justdial | | | | | |
+| Sulekha | | | | | |
+| Clutch | | | | | |
+| GoodFirms | | | | | |
+| DesignRush | | | | | |
+| Crunchbase | | | | | |
 
 ---
 
@@ -272,6 +340,12 @@ Category: Marketing agency
 
 Newest first. One line per change to the plan or step done.
 
+- **17 Oct 2026**: Phone +91 95664 02201 and office hours (Mon–Fri
+  9:30–7:30) added to the site and schema. Bing Webmaster set up with 11
+  URLs submitted. Business Profile deferred until there's an outside board.
+- **17 Oct 2026**: Search Console done. Domain property owned only by
+  `kansha@clickagain.in`, sitemap Success (13 pages), indexing requested
+  for 4 key pages.
 - **17 Oct 2026**: Domain email done. Google Workspace, `hello@clickagain.in`
   alias, MX/SPF/DKIM/DMARC live. Site email switched to `hello@`.
 - **17 Oct 2026**: A3 done. A4 partly done (alternateName, founder,

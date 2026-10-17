@@ -60,6 +60,12 @@ export function organizationSchema() {
     },
     email: site.email,
     ...(phone ? { telephone: phone } : {}),
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: site.hours.days,
+      opens: site.hours.opens,
+      closes: site.hours.closes,
+    },
     logo: abs("/logo/clickagain-logo.png"),
     image: abs("/opengraph-image"),
     description: `${site.name} is a digital marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.`,
