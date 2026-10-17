@@ -10,6 +10,14 @@ export const site = {
   email: "clickagainofficial@gmail.com",
   phone: "",
 
+  /**
+   * When the public pages last changed, as an ISO date. It becomes <lastmod>
+   * in the sitemap, which is how crawlers and AI agents decide what to
+   * re-read — so bump it when page copy changes, and leave it alone for
+   * style-only tweaks. The legal pages use legal.updated instead.
+   */
+  updated: "2026-10-17",
+
   /** The year the company started, and who runs it. Used on the About page
    *  and in /llms.txt, so both say the same thing. */
   founded: "2026",
@@ -159,6 +167,46 @@ export const site = {
   ],
 
 
+
+  /**
+   * Questions on /contact, also published as FAQPage structured data. Every
+   * answer restates something the site already says — no new promises, no
+   * comparisons, nothing a first call couldn't stand behind.
+   */
+  faqs: [
+    {
+      q: "What does Click Again do?",
+      a: "Click Again is a marketing company based in Madurai, Tamil Nadu. We help businesses get found, earn trust and win customers — and then give those customers a reason to come back. Our work covers marketing strategy, content and creative, websites and digital presence, social media management, performance marketing and analytics, and retention and automation.",
+    },
+    {
+      q: "What does the name “Click Again” mean?",
+      a: "It comes from a simple belief: one click is a sale, but click again is a business. Getting noticed is only the start. What builds a business is the customer who returns, and then recommends you to others. That second click is what we work towards.",
+    },
+    {
+      q: "How do you begin working with a new business?",
+      a: "We start with your business, not your marketing. Before we suggest anything, we take time to understand what you sell, who buys it, what a customer is worth to you and why they would choose you. From there we build a clear plan: who to reach, what to say, where to show up and in what order.",
+    },
+    {
+      q: "What happens after I send an enquiry?",
+      a: "A member of our team will call you within one working day. On that first conversation we'll learn about your business, your customers and what you want more of. Then we'll tell you honestly where we think we can help.",
+    },
+    {
+      q: "What kinds of businesses do you work with?",
+      a: "We work with businesses of every size, from a single store to a brand selling across India. That includes retail and showrooms, D2C and ecommerce brands, SaaS and software companies, and more. Every business gets the same care and attention. Only the work changes, depending on what the business needs.",
+    },
+    {
+      q: "Can I work with you on just one service?",
+      a: "Yes. Some businesses need a complete approach, from strategy through to retention. Others need one specific thing done well, such as a website, social media or advertising. We'll recommend what fits your goals, and you choose what to begin with.",
+    },
+    {
+      q: "Do you create content in Tamil?",
+      a: "Yes. We write copy and create content in both Tamil and English, so your message reaches customers in the language they're most comfortable with.",
+    },
+    {
+      q: "How will I know the work is delivering results?",
+      a: "We report on what matters to your business: how many customers came in, what each one took to win, and how many came back. You'll get regular updates as the work runs, so you always know where things stand. Then we review what worked, refine what didn't, and plan the next round.",
+    },
+  ],
 
   principles: [
     {

@@ -2664,6 +2664,15 @@ a { color: inherit; text-decoration: none; }
 
 .faq-item.is-open { background: var(--card-hover); }
 
+/* each question is a heading for structure; the button inside sets the type */
+.faq-h { margin: 0; font: inherit; }
+
+/* on /contact, under the form and details */
+.cp-faq {
+  max-width: 860px;
+  padding: clamp(48px, 7vw, 88px) 0 var(--section);
+}
+
 .faq-q {
   display: flex;
   align-items: center;

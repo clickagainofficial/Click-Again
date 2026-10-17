@@ -11,18 +11,30 @@ import { site } from "@/site.config";
 export default function sitemap(): MetadataRoute.Sitemap {
   const url = (path: string) => new URL(path, site.url).toString();
 
+  // Real edit dates only, never the build time: a lastmod that moves on every
+  // deploy teaches crawlers to ignore it.
+  const updated = new Date(site.updated);
+  // "14 October 2026" — read as UTC so it is the same date on any server
+  const legalUpdated = new Date(`${site.legal.updated} UTC`);
+  // the list page changes whenever a post is added
+  const newestPost = insights.reduce(
+    (latest, p) => (new Date(p.date) > latest ? new Date(p.date) : latest),
+    updated
+  );
+
   const pages: MetadataRoute.Sitemap = [
-    { url: url("/"), changeFrequency: "monthly", priority: 1 },
-    { url: url("/solutions"), changeFrequency: "monthly", priority: 0.9 },
-    { url: url("/about"), changeFrequency: "yearly", priority: 0.7 },
-    { url: url("/insights"), changeFrequency: "weekly", priority: 0.7 },
-    { url: url("/contact"), changeFrequency: "yearly", priority: 0.8 },
-    { url: url("/privacy"), changeFrequency: "yearly", priority: 0.2 },
-    { url: url("/terms"), changeFrequency: "yearly", priority: 0.2 },
+    { url: url("/"), lastModified: updated, changeFrequency: "monthly", priority: 1 },
+    { url: url("/solutions"), lastModified: updated, changeFrequency: "monthly", priority: 0.9 },
+    { url: url("/about"), lastModified: updated, changeFrequency: "yearly", priority: 0.7 },
+    { url: url("/insights"), lastModified: newestPost, changeFrequency: "weekly", priority: 0.7 },
+    { url: url("/contact"), lastModified: updated, changeFrequency: "yearly", priority: 0.8 },
+    { url: url("/privacy"), lastModified: legalUpdated, changeFrequency: "yearly", priority: 0.2 },
+    { url: url("/terms"), lastModified: legalUpdated, changeFrequency: "yearly", priority: 0.2 },
   ];
 
   const solutions: MetadataRoute.Sitemap = site.services.map((s) => ({
     url: url(`/solutions/${s.slug}`),
+    lastModified: updated,
     changeFrequency: "monthly",
     priority: 0.8,
   }));

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 import ContactForm from "@/components/ContactForm";
+import FaqList from "@/components/FaqList";
+import JsonLd from "@/components/JsonLd";
+import { faqSchema } from "@/lib/schema";
 import { site } from "@/site.config";
 
 export const metadata: Metadata = {
@@ -96,6 +99,15 @@ export default async function Contact({
           </div>
         </aside>
       </div>
+
+      <section className="cp-faq" aria-labelledby="faq-title">
+        <h2 className="sec-title" id="faq-title">
+          Questions
+        </h2>
+        <FaqList items={site.faqs} />
+      </section>
+
+      <JsonLd data={faqSchema(site.faqs)} />
     </div>
   );
 }
