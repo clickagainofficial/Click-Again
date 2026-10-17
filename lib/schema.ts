@@ -44,13 +44,25 @@ export function organizationSchema() {
     // identifier they can quote is the same disclosure by another route.
     // Both stay where they are actually required, on /privacy and /terms.
     name: site.name,
-    alternateName: "ClickAgain",
+    // The ways people actually type the brand into a search box, so each
+    // one resolves to this entity rather than to the everyday phrase.
+    alternateName: [
+      "ClickAgain",
+      "Click Again Agency",
+      "Click Again Digital Marketing Agency",
+    ],
     url: site.url,
+    foundingDate: site.founded,
+    founder: {
+      "@type": "Person",
+      name: site.founder.name,
+      jobTitle: site.founder.role,
+    },
     email: site.email,
     ...(phone ? { telephone: phone } : {}),
     logo: abs("/logo/clickagain-logo.png"),
     image: abs("/opengraph-image"),
-    description: `${site.name} is a marketing company in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.`,
+    description: `${site.name} is a digital marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.`,
     address: postalAddress,
     areaServed: [
       { "@type": "City", name: site.legal.city },
@@ -82,7 +94,9 @@ export function websiteSchema() {
     "@type": "WebSite",
     "@id": abs("/#website"),
     url: site.url,
+    // Google takes the site name shown above each result from here.
     name: site.name,
+    alternateName: ["ClickAgain", site.domain],
     inLanguage: "en-IN",
     publisher: { "@id": abs("/#organization") },
   };

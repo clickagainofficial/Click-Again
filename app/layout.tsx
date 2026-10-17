@@ -27,14 +27,18 @@ const caveat = Caveat({
   display: "swap",
 });
 
+/** The name first, then what it is — "Click Again" plus "agency" is the
+ *  search we most need to win, and a title is read left to right. */
+const homeTitle = `${site.name} — Digital Marketing Agency in Madurai`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Marketing that makes them come back`,
+    default: homeTitle,
     template: `%s | ${site.name}`,
   },
   description:
-    "A marketing company in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.",
+    "Click Again is a digital marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.",
   keywords: [
     "marketing agency",
     "digital marketing",
@@ -43,9 +47,9 @@ export const metadata: Metadata = {
     "clickagain.in",
   ],
   openGraph: {
-    title: `${site.name} — Marketing that makes them come back`,
+    title: homeTitle,
     description:
-      "A marketing company in Madurai — strategy, creative, websites, social, ads and retention. We find what your business actually needs.",
+      "Click Again is a digital marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We find what your business actually needs.",
     url: site.url,
     siteName: site.name,
     locale: "en_IN",
@@ -53,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Marketing that makes them come back`,
+    title: homeTitle,
     description: "One click is a sale. Click again is a business.",
   },
   robots: { index: true, follow: true },

@@ -13,7 +13,7 @@ import { site } from "@/site.config";
  * Drawn rather than shipped as a flat file so the wording follows the config.
  */
 
-export const alt = `${site.name} — Marketing that makes them come back`;
+export const alt = `${site.name} — Digital Marketing Agency in Madurai`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

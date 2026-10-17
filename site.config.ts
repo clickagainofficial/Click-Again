@@ -7,7 +7,7 @@ export const site = {
   url: "https://clickagain.in",
 
 
-  email: "clickagainofficial@gmail.com",
+  email: "hello@clickagain.in",
   phone: "",
 
   /**
@@ -35,9 +35,9 @@ export const site = {
     address: "3/508, Bharathi Street, Muneswaran Nagar, Iyer Bungalow, Madurai, Tamil Nadu 625014",
     city: "Madurai",
     state: "Tamil Nadu",
-    grievanceEmail: "clickagainofficial@gmail.com",
+    grievanceEmail: "hello@clickagain.in",
     // Shown as "Last updated" on both pages. Bump it whenever the text changes.
-    updated: "14 October 2026",
+    updated: "17 October 2026",
   },
 
   socials: [
