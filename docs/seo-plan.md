@@ -44,6 +44,36 @@ Clickr and Klick. Google hasn't learned the brand yet.
 
 ---
 
+## 1b. Second goal: "best digital marketing company in madurai" (added 21 Oct 2026)
+
+This is a **category** search, not a brand search, so it's much harder
+than "click again agency". The people searching it don't know us yet.
+For a search like this Google usually shows, top to bottom:
+
+1. The **map pack**: three local businesses from Google Business Profiles,
+   ranked by distance, relevance and **reviews**
+2. **"Top 10 agencies in Madurai" list articles** on directory and blog sites
+3. Agency websites with a page clearly about digital marketing in Madurai
+
+**What gets us there**
+
+| # | Work | Why |
+| --- | --- | --- |
+| 1 | **Google Business Profile** (B3), then real reviews (B9) | The map pack is the top of this search. Without a Business Profile we can't be in it at all, so B3 stops being "deferred until convenient" and becomes the top blocker for this goal |
+| 2 | A dedicated **"Digital Marketing Agency in Madurai" page** (`/madurai` or similar) | A page whose whole subject is the search: services, who we work with in Madurai, how to reach us, FAQ. The home page has to serve too many purposes to rank for this alone |
+| 3 | **Blog posts** (B8), starting with "How to choose a digital marketing agency in Madurai" | Topical authority, and it answers exactly what people searching "best…" are trying to decide |
+| 4 | **Get into the "Top agencies in Madurai" lists** | Ask the sites that publish them to review and include us. Each listing is a backlink and a mention |
+| 5 | **Local backlinks and citations** (B6, B7) | Madurai business associations, local press, directories, all with the same NAP |
+| 6 | **Time** | A new domain realistically needs 6–12 months of steady work for a competitive local search like this. There's no shortcut, and nothing is guaranteed |
+
+**Don't:** put "best digital marketing company" on our own pages as a
+claim. We have no proof yet (see section 2, no made-up proof), and Google
+doesn't rank a page higher for calling itself the best. Use "digital
+marketing agency in Madurai" in our own copy; "best" is something reviews
+and lists earn for us.
+
+---
+
 ## 2. Rules we don't break
 
 - **No made-up proof.** No invented stats, reviews, client logos or case
@@ -94,8 +124,11 @@ These are done in this repo.
         `site.hours` in `site.config.ts` (17 Oct 2026)
   - [ ] `geo` co-ordinates for the office
   - [ ] Add each new profile to `sameAs` as it's created (B5, B6)
-- [ ] **A5. IndexNow.** Add a key file and ping Bing and Yandex when pages
-      change, so Bing, Copilot and ChatGPT search pick up changes quickly.
+- [x] **A5. IndexNow.** (21 Oct 2026) Key file
+      `public/ca0796395e472e1bc053c71223ead237.txt`, script
+      `scripts/indexnow.mjs`. **After every deploy that changes page copy,
+      run `npm run indexnow`** (all sitemap URLs) or
+      `npm run indexnow -- /insights/new-post` (just the changed paths).
 - [ ] **A6. NAP in the footer and on About**, matching the Business Profile
       word for word.
 - [~] **A7. Logo for schema.** Checked 17 Oct 2026: `logo/clickagain-logo.png`
@@ -103,8 +136,17 @@ These are done in this repo.
       square or round space (Knowledge Panel, the icon beside results), so a
       wide image gets shrunk or cropped. **Needed:** a square PNG of the mark,
       at least 512×512, on a white or solid background. Then point `logo` at it.
-- [ ] **A8. Validate** every page type with Google's Rich Results Test and
-      the Schema.org validator after the changes go live.
+- [x] **A8. Validate.** (21 Oct 2026) The live JSON-LD on 7 page types
+      parses with no errors: Organization + WebSite everywhere, FAQPage on
+      /contact, Service + BreadcrumbList on solution pages. Logo and image
+      URLs return 200. Re-check with Google's Rich Results Test after big
+      schema changes.
+- [x] **A9. Descriptive titles.** (21 Oct 2026) Google rewrote the bare
+      "About" / "Contact" / "Solutions" titles, so they now say what the
+      page is: "About Click Again — Marketing Agency in Madurai", "Contact
+      Click Again — Call, Email or Visit Us in Madurai", "Marketing
+      Solutions: Strategy, Creative, Ads | Click Again". Also added the
+      missing canonical on /solutions.
 
 ---
 
@@ -258,6 +300,25 @@ The same NAP everywhere, copied from section 7.
 - [ ] Each post answers a real question a business owner in Tamil Nadu asks
 - [ ] Each post links to the matching solution page
 - [ ] Bump `site.updated` in `site.config.ts` when page copy changes
+- [ ] After publishing: `npm run indexnow -- /insights/<slug>`, and
+      Request indexing in Search Console
+
+Decision (21 Oct 2026): `/insights` is indexed while it says "No posts
+yet". We're writing posts rather than noindexing it.
+
+**Blog topics, in order.** Every post is honest how-to advice: no invented
+stats or results, no comparisons with other agencies.
+
+| # | Topic | Who searches it | Links to |
+| --- | --- | --- | --- |
+| 1 | How to choose a digital marketing agency in Madurai: the questions to ask before you sign | Owners comparing agencies (our money search) | /contact, /solutions |
+| 2 | "Our ROAS is 4x" — is that profitable? How to work out your break-even ROAS | Owners already running ads | performance-marketing |
+| 3 | Google Business Profile for local businesses in Tamil Nadu: a step-by-step setup | Shops, clinics, restaurants | website-digital-presence |
+| 4 | Why customers don't come back, and what brings them back | Every owner; the brand idea | retention-automation |
+| 5 | Tamil or English: which language should your ads speak? | Local brands | content-creative |
+| 6 | Getting named in ChatGPT and Google's AI answers (AEO/GEO) for local businesses | Curious owners | website-digital-presence |
+| 7 | Leads that don't pick up the phone: fixing lead quality on Meta and Google | Lead-gen businesses | performance-marketing |
+| 8 | A marketing plan for a new shop or branch: what to do in the first 90 days | New businesses | marketing-strategy |
 
 ### B9. Reviews (once there are clients)
 
@@ -289,6 +350,7 @@ Check these once a month, in a private/incognito window and in Search Console:
 | clickagain | #1 | — | — |
 | click again | #1 | not ranking | 17 Oct 2026 |
 | digital marketing agency madurai | top 10 | — | — |
+| best digital marketing company in madurai | #1 (6–12 months) | not ranking | 21 Oct 2026 |
 
 Also check whether a Knowledge Panel shows up for "Click Again", and whether
 ChatGPT, Gemini and Perplexity know who Click Again is.
@@ -340,6 +402,15 @@ same day. Add a row whenever a new listing is created.
 
 Newest first. One line per change to the plan or step done.
 
+- **21 Oct 2026**: Titles for About, Contact and Solutions made descriptive
+  (A9). IndexNow added (A5). Live schema validated (A8). New goal "best
+  digital marketing company in madurai" (section 1b) and a blog topic list
+  (B8) added.
+- **21 Oct 2026**: **Indexed on Google.** `site:clickagain.in` shows 8+
+  pages, and home shows the new title. Seen: the site name still shows as
+  "clickagain.in" (the WebSite schema name takes weeks to be picked up).
+  Google rewrote the short About/Contact/Solutions titles. /insights is
+  indexed with "No posts yet".
 - **21 Oct 2026**: Facebook username set to `clickagainofficial`. The site's
   Facebook link (footer, schema `sameAs`) now uses it instead of the
   `profile.php?id=` link.

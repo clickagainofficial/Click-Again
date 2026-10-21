@@ -3,9 +3,10 @@ import Link from "next/link";
 import { site } from "@/site.config";
 
 export const metadata: Metadata = {
-  title: "Solutions",
+  title: "Marketing Solutions: Strategy, Creative, Ads",
   description:
     "Strategy, creative, website, social, performance and retention — picked for what your business actually needs.",
+  alternates: { canonical: "/solutions" },
 };
 
 export default function SolutionsIndex() {

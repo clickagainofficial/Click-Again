@@ -8,7 +8,9 @@ import { faqSchema } from "@/lib/schema";
 import { site } from "@/site.config";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: {
+    absolute: `Contact ${site.name} — Call, Email or Visit Us in Madurai`,
+  },
   description: `Tell ${site.name} about your business. Leave your number and we'll call you back within a working day.`,
   alternates: { canonical: "/contact" },
 };

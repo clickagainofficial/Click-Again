@@ -7,7 +7,9 @@ import AboutBeliefs from "@/components/AboutBeliefs";
 import { site } from "@/site.config";
 
 export const metadata: Metadata = {
-  title: "About",
+  // A bare "About" is generic enough that Google writes its own title
+  // instead, so the name and what we are go in the title itself.
+  title: { absolute: `About ${site.name} — Marketing Agency in Madurai` },
   description: `${site.name} is a marketing company in Madurai, started in ${site.founded} to get customers for businesses — and keep them coming back.`,
   alternates: { canonical: "/about" },
 };
