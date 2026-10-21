@@ -321,8 +321,8 @@ same day. Add a row whenever a new listing is created.
 | Google Business Profile | | | | | |
 | Bing Places | | | | | |
 | Apple Business Connect | | | | | |
-| Instagram bio | | | | | |
-| Facebook page | | | | | |
+| Instagram bio (name "Click Again · Marketing Agency", bio option A, category Marketing Agency, link clickagain.in) | ✓ | ✓ | ✓ | ✓ | 21 Oct 2026 |
+| Facebook page (username `facebook.com/clickagainofficial`, set 21 Oct 2026; site footer + schema `sameAs` updated) | | | | | |
 | LinkedIn company page | | | | | |
 | YouTube "About" | | | | | |
 | X profile | | | | | |
@@ -340,6 +340,13 @@ same day. Add a row whenever a new listing is created.
 
 Newest first. One line per change to the plan or step done.
 
+- **21 Oct 2026**: Facebook username set to `clickagainofficial`. The site's
+  Facebook link (footer, schema `sameAs`) now uses it instead of the
+  `profile.php?id=` link.
+- **21 Oct 2026**: Instagram profile updated. Name "Click Again · Marketing
+  Agency", new bio, phone, email and website. Decision: social bios say
+  "marketing agency" (broad, fits future services); only the site title
+  carries "digital marketing" for search.
 - **17 Oct 2026**: Phone +91 95664 02201 and office hours (Mon–Fri
   9:30–7:30) added to the site and schema. Bing Webmaster set up with 11
   URLs submitted. Business Profile deferred until there's an outside board.

@@ -51,10 +51,7 @@ export const site = {
 
   socials: [
     { label: "Instagram", href: "https://www.instagram.com/clickagainofficial/" },
-    {
-      label: "Facebook",
-      href: "https://www.facebook.com/profile.php?id=61594184312265",
-    },
+    { label: "Facebook", href: "https://www.facebook.com/clickagainofficial" },
   ],
 
   journey: ["Connect", "Click", "Trust", "Return", "Refer"],
