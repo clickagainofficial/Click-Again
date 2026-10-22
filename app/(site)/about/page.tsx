@@ -4,15 +4,19 @@ import Link from "next/link";
 
 import AboutBeliefs from "@/components/AboutBeliefs";
 
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
-export const metadata: Metadata = {
-  // A bare "About" is generic enough that Google writes its own title
-  // instead, so the name and what we are go in the title itself.
-  title: { absolute: `About ${site.name} — Marketing Agency in Madurai` },
+// A bare "About" is generic enough that Google writes its own title
+// instead, so the name and what we are go in the title itself.
+const title = `About ${site.name} — Marketing Agency in Madurai`;
+
+export const metadata: Metadata = pageMetadata({
+  title: { absolute: title },
+  shareTitle: title,
   description: `${site.name} is a marketing company in Madurai, started in ${site.founded} to get customers for businesses — and keep them coming back.`,
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 export default function About() {
   const { city, state } = site.legal;

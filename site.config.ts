@@ -25,7 +25,7 @@ export const site = {
    * re-read — so bump it when page copy changes, and leave it alone for
    * style-only tweaks. The legal pages use legal.updated instead.
    */
-  updated: "2026-10-17",
+  updated: "2026-10-22",
 
   /** The year the company started, and who runs it. Used on the About page
    *  and in /llms.txt, so both say the same thing. */

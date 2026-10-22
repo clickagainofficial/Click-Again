@@ -32,6 +32,7 @@ export default function FooterLogo() {
         alt={`${site.name} — One click is a sale. Click again is a business.`}
         width={1826}
         height={446}
+        sizes="320px"
       />
     </Link>
   );

@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LegalPage, { Clause, CompanyFacts } from "@/components/LegalPage";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Terms & Conditions",
-  description: `The terms that apply when you use ${site.domain}.`,
-  robots: { index: true, follow: true },
-};
+  shareTitle: `Terms & Conditions — ${site.name}`,
+  description: `The terms that apply when you use ${site.domain}, the website of ${site.name}, a marketing agency in Madurai — and send us an enquiry.`,
+  path: "/terms",
+});
 
 export default function Terms() {
   const { city, state } = site.legal;

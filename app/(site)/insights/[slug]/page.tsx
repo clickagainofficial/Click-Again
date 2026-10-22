@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { insights } from "@/content/insights";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -18,17 +19,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const post = insights.find((p) => p.slug === slug);
   if (!post) return {};
 
-  return {
+  return pageMetadata({
     title: post.title,
+    shareTitle: post.title,
     description: post.summary,
-    alternates: { canonical: `/insights/${post.slug}` },
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.summary,
-      publishedTime: post.date,
-    },
-  };
+    path: `/insights/${post.slug}`,
+    type: "article",
+    publishedTime: post.date,
+  });
 }
 
 function formatDate(iso: string) {

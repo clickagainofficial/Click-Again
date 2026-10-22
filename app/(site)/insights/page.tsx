@@ -3,13 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { insights } from "@/content/insights";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Insights",
+  shareTitle: `Insights — ${site.name}`,
   description: `Practical notes from ${site.name} on getting customers for your business, and keeping them coming back.`,
-  alternates: { canonical: "/insights" },
-};
+  path: "/insights",
+});
 
 function formatDate(iso: string) {
   const t = Date.parse(iso);

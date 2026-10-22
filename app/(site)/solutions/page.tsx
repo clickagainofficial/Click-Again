@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Marketing Solutions: Strategy, Creative, Ads",
-  description:
-    "Strategy, creative, website, social, performance and retention — picked for what your business actually needs.",
-  alternates: { canonical: "/solutions" },
-};
+  shareTitle: `Marketing Solutions — ${site.name}`,
+  description: `What ${site.name} does: strategy, creative, websites, social media, performance marketing and retention — picked for what your business actually needs.`,
+  path: "/solutions",
+});
 
 export default function SolutionsIndex() {
   return (

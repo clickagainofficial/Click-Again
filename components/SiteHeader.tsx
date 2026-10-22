@@ -200,6 +200,9 @@ export default function SiteHeader() {
               alt={site.name}
               width={1826}
               height={338}
+              // drawn at 150px at most; without this the browser was sent
+              // the 1920/3840px versions on every page
+              sizes="150px"
               priority
             />
           </Link>

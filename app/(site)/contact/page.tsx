@@ -5,15 +5,17 @@ import ContactForm from "@/components/ContactForm";
 import FaqList from "@/components/FaqList";
 import JsonLd from "@/components/JsonLd";
 import { faqSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: `Contact ${site.name} — Call, Email or Visit Us in Madurai`,
-  },
+const title = `Contact ${site.name} — Call, Email or Visit Us in Madurai`;
+
+export const metadata: Metadata = pageMetadata({
+  title: { absolute: title },
+  shareTitle: title,
   description: `Tell ${site.name} about your business. Leave your number and we'll call you back within a working day.`,
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 /**
  * ?service=<slug> preselects the enquiry's service. It is resolved here

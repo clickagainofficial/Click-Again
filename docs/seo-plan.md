@@ -171,6 +171,37 @@ These are done in this repo.
       `scripts/indexnow.mjs`. **After every deploy that changes page copy,
       run `npm run indexnow`** (all sitemap URLs) or
       `npm run indexnow -- /insights/new-post` (just the changed paths).
+- [x] **A10. Technical audit** (22 Oct 2026, all 13 pages + Lighthouse
+      mobile). Lighthouse mobile scores: Performance 92, Accessibility 96,
+      Best Practices 100, SEO 100. Every page returns 200 with one H1, a
+      canonical, no broken internal links, no orphans and no duplicate
+      titles or descriptions. Brotli, HSTS and the security headers are
+      on, and http/www redirect to https://clickagain.in with a 308.
+      **Fixed:**
+  - [x] Share cards: every page except home inherited home's og:title and
+        og:url, so pasting /contact into WhatsApp showed the home card.
+        Solution pages had no og:image at all. All pages now go through
+        `pageMetadata()` in `lib/seo.ts` (own og/twitter title,
+        description, url, image).
+  - [x] Solution page descriptions were the 22–48 char taglines; now the
+        intro clipped to ~158 chars. Terms description lengthened.
+  - [x] Missing canonical on /privacy and /terms.
+  - [x] Header logo was downloaded at 1920/3840px to draw at 150px on every
+        page (no `sizes`); added `sizes`. Same for the footer logo.
+  - [x] Added `app/apple-icon.tsx` (180px PNG of the favicon mark).
+  - **Left as is / later:**
+  - [ ] Mobile LCP 3.3s (target < 2.5s). Re-measure after the logo fix
+  - [ ] A few decorative images slightly oversized (how-we-work avatars,
+        manifesto art, service icons): small savings
+  - [ ] Lighthouse colour-contrast flag on the manifesto words: likely the
+        fade-in animation caught mid-way. Check by eye
+  - [ ] `http://www.` takes two 308 hops (→ https://www → apex). Minor;
+        could be one hop via Vercel domain settings
+  - [ ] Home H1 has no brand/Madurai words (A2); the hero sub-line covers
+        Madurai. Needs your design approval
+  - [ ] /insights is thin (115 words) until posts exist (B8)
+  - [ ] No /favicon.ico (the SVG icon is linked and Google accepts it) and
+        no web manifest. Both optional
 - [ ] **A6. NAP in the footer and on About**, matching the Business Profile
       word for word.
 - [~] **A7. Logo for schema.** Checked 17 Oct 2026: `logo/clickagain-logo.png`
@@ -471,6 +502,21 @@ same day. Add a row whenever a new listing is created.
 
 Newest first. One line per change to the plan or step done.
 
+- **22 Oct 2026**: Full technical audit (A10). Fixed share cards on every
+  page, solution meta descriptions, missing canonicals, header-logo weight,
+  and added an apple-icon. Lighthouse mobile: 92 / 96 / 100 / 100.
+- **22 Oct 2026**: `site:clickagain.in` shows 9 pages. Home still has the
+  old "Digital Marketing" title; About, Contact and Solutions show the old
+  or Google-rewritten titles. **Not indexed:** marketing-strategy,
+  performance-marketing, retention-automation, privacy. Request indexing
+  for 7: `/`, `/about`, `/contact`, `/solutions` and the 3 missing solution
+  pages. **Done: all 7 requested on 22 Oct.** Re-check `site:` around 29 Oct.
+- **22 Oct 2026**: Request-indexing list after the title changes: `/`,
+  `/about`, `/contact`, `/solutions` (titles changed after Google's last
+  crawl). Also marketing-strategy, performance-marketing and
+  retention-automation, but only if URL Inspection says "not on Google"
+  (they didn't show in the 21 Oct `site:` check). Everything else is
+  unchanged and left to the sitemap.
 - **22 Oct 2026**: Positioning decided (section 1a). "Digital marketing"
   removed from the site everywhere; it's now "Marketing Agency in Madurai".
   "& Branding" will be added when the branding service launches. The

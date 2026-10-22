@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
+import { clip, pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -18,15 +19,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const service = site.services.find((s) => s.slug === slug);
   if (!service) return {};
 
-  return {
+  // The tagline alone ("Where the click lands.") is too short to tell a
+  // searcher what the page is; the intro paragraph does.
+  return pageMetadata({
     title: service.title,
-    description: service.tagline,
-    alternates: { canonical: `/solutions/${service.slug}` },
-    openGraph: {
-      title: `${service.title} — ${site.name}`,
-      description: service.tagline,
-    },
-  };
+    shareTitle: `${service.title} — ${site.name}`,
+    description: clip(service.intro),
+    path: `/solutions/${service.slug}`,
+  });
 }
 
 export default async function ServicePage({ params }: Params) {

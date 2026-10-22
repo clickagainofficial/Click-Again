@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import LegalPage, { Clause, CompanyFacts } from "@/components/LegalPage";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
+  shareTitle: `Privacy Policy — ${site.name}`,
   description: `How ${site.name} collects, uses and protects the personal data you share on ${site.domain}.`,
-  robots: { index: true, follow: true },
-};
+  path: "/privacy",
+});
 
 export default function Privacy() {
   const { grievanceEmail, city, state } = site.legal;
