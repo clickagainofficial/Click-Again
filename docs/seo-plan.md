@@ -44,7 +44,44 @@ Clickr and Klick. Google hasn't learned the brand yet.
 
 ---
 
-## 1b. Second goal: "best digital marketing company in madurai" (added 21 Oct 2026)
+## 1a. Positioning (decided 22 Oct 2026)
+
+We never call ourselves "digital marketing" anywhere: not in titles,
+schema, social bios or listings. The plan is to be full-service, and
+"digital" would box that in.
+
+- **Now:** "**Marketing Agency**". Home title is `Click Again — Marketing
+  Agency in Madurai` (22 Oct 2026). Every planned service fits under
+  "marketing", so the name doesn't have to change again.
+- **When Branding launches:** add it to the title as `Click Again —
+  Marketing & Branding Agency in Madurai`, and to the schema
+  `alternateName`, the bios and the listings. It's an addition, not a
+  rename. Branding isn't in the title yet because no branding service is on
+  the site, and a title shouldn't promise what the page doesn't show.
+- "Agency" (not "company") keeps the word that matches our main brand
+  search, "click again agency", and matches the Instagram name and the
+  About title.
+
+**Live now:** Marketing Strategy, Content & Creative, Website & Digital
+Presence, Social Media, Performance Marketing & Analytics, Retention &
+Automation.
+
+**Planned, kept off the site until ready to deliver:** Branding,
+Advertising (ATL), PR & Influencer, Events & Experiences, Retail / Signage
+/ Print. This list was a code comment in `site.config.ts` until commit
+6986adb.
+
+The legal entity "Magizh Digital Marketing Solutions Private Limited"
+stays as is. It only appears on /privacy, /terms and billing.
+
+---
+
+## 1b. Second goal: rank for "best marketing / digital marketing company in madurai" (added 21 Oct 2026)
+
+People will still *type* "digital marketing company madurai", so we track
+it. But per 1a, we don't put that phrase in our own titles. Our copy says
+"marketing agency in Madurai", and the services (websites, social, ads)
+carry the digital side in the body text.
 
 This is a **category** search, not a brand search, so it's much harder
 than "click again agency". The people searching it don't know us yet.
@@ -60,17 +97,16 @@ For a search like this Google usually shows, top to bottom:
 | # | Work | Why |
 | --- | --- | --- |
 | 1 | **Google Business Profile** (B3), then real reviews (B9) | The map pack is the top of this search. Without a Business Profile we can't be in it at all, so B3 stops being "deferred until convenient" and becomes the top blocker for this goal |
-| 2 | A dedicated **"Digital Marketing Agency in Madurai" page** (`/madurai` or similar) | A page whose whole subject is the search: services, who we work with in Madurai, how to reach us, FAQ. The home page has to serve too many purposes to rank for this alone |
-| 3 | **Blog posts** (B8), starting with "How to choose a digital marketing agency in Madurai" | Topical authority, and it answers exactly what people searching "best…" are trying to decide |
+| 2 | **Strengthen the home page for Madurai.** Add a Madurai-specific section (what we do for businesses here) and a short Madurai FAQ | The home title is already "Marketing Agency in Madurai", so the home page *is* the Madurai page. **Revised 21 Oct 2026:** no separate `/madurai` page. It would compete with home for the same search (keyword cannibalization). City pages (`/coimbatore`, `/trichy`…) only make sense once we target other cities |
+| 3 | **Blog posts** (B8), starting with "How to choose a marketing agency in Madurai" | Topical authority, and it answers exactly what people searching "best…" are trying to decide |
 | 4 | **Get into the "Top agencies in Madurai" lists** | Ask the sites that publish them to review and include us. Each listing is a backlink and a mention |
 | 5 | **Local backlinks and citations** (B6, B7) | Madurai business associations, local press, directories, all with the same NAP |
 | 6 | **Time** | A new domain realistically needs 6–12 months of steady work for a competitive local search like this. There's no shortcut, and nothing is guaranteed |
 
-**Don't:** put "best digital marketing company" on our own pages as a
-claim. We have no proof yet (see section 2, no made-up proof), and Google
-doesn't rank a page higher for calling itself the best. Use "digital
-marketing agency in Madurai" in our own copy; "best" is something reviews
-and lists earn for us.
+**Don't:** put "best … company" on our own pages as a claim. We have no
+proof yet (see section 2, no made-up proof), and Google doesn't rank a
+page higher for calling itself the best. Use "marketing agency in Madurai"
+in our own copy; "best" is something reviews and lists earn for us.
 
 ---
 
@@ -102,6 +138,11 @@ These are done in this repo.
       is what we sell today; when services widen, change the descriptor
       after the dash and keep "Click Again" first and "Agency" in it.
       Files: `app/layout.tsx`, `app/opengraph-image.tsx`.
+  - [x] **Changed 22 Oct 2026** to `Click Again — Marketing Agency in
+        Madurai`, dropping "digital" everywhere (see 1a). Schema
+        `alternateName` "Click Again Digital Marketing Agency" became
+        "Click Again Marketing Agency", and llms.txt and the descriptions
+        changed to match.
   - [x] Follow-up (17 Oct 2026): schema description and `/llms.txt` now
         say "digital marketing agency". **Decision:** the About page and
         the FAQ answer keep "marketing company" on purpose. They're written
@@ -109,15 +150,16 @@ These are done in this repo.
         description and schema already carry "agency".
 - [ ] **A2. Brand name in visible text near the top of the home page.**
       The H1 ("WE GET YOU CUSTOMERS…") doesn't say "Click Again". Add a
-      visible line near the hero, such as "Click Again is a digital
-      marketing agency in Madurai", without changing the design.
+      visible line near the hero, such as "Click Again is a marketing
+      agency in Madurai", without changing the design.
 - [x] **A3. Site name in search results.** (17 Oct 2026, alternateName
       "ClickAgain" and "clickagain.in") Add `alternateName` to the
       WebSite schema so Google shows "Click Again" as the site name.
       File: `lib/schema.ts`.
 - [~] **A4. Stronger Organization schema.** File: `lib/schema.ts`.
   - [x] `alternateName`: "ClickAgain", "Click Again Agency",
-        "Click Again Digital Marketing Agency" (17 Oct 2026)
+        "Click Again Marketing Agency" (17 Oct 2026; "Digital" dropped
+        22 Oct 2026)
   - [x] `founder` (Kansha M) and `foundingDate` (2026) (17 Oct 2026)
   - [x] `telephone`: +91 95664 02201 (17 Oct 2026)
   - [x] `openingHoursSpecification`: Mon–Fri 09:30–19:30, from
@@ -311,7 +353,7 @@ stats or results, no comparisons with other agencies.
 
 | # | Topic | Who searches it | Links to |
 | --- | --- | --- | --- |
-| 1 | How to choose a digital marketing agency in Madurai: the questions to ask before you sign | Owners comparing agencies (our money search) | /contact, /solutions |
+| 1 | How to choose a marketing agency in Madurai: the questions to ask before you sign | Owners comparing agencies (our money search) | /contact, /solutions |
 | 2 | "Our ROAS is 4x" — is that profitable? How to work out your break-even ROAS | Owners already running ads | performance-marketing |
 | 3 | Google Business Profile for local businesses in Tamil Nadu: a step-by-step setup | Shops, clinics, restaurants | website-digital-presence |
 | 4 | Why customers don't come back, and what brings them back | Every owner; the brand idea | retention-automation |
@@ -339,6 +381,32 @@ stats or results, no comparisons with other agencies.
 
 ---
 
+## 5b. Checklist for every new page or post
+
+Run through this before publishing anything new.
+
+**Search intent first:** decide whether the page is for *learning* (a blog
+post), *going somewhere* (a brand search) or *hiring/buying* (home,
+solutions, contact). Then build the page for that intent.
+
+| # | Item | Rule |
+| --- | --- | --- |
+| 1 | Title | ~50–60 chars, main keyword first, brand included |
+| 2 | Meta description | ~150–160 chars, says what the page gives the reader |
+| 3 | Canonical | The page's own clean URL (`alternates.canonical`) |
+| 4 | H1 | Exactly one, says what the page is about |
+| 5 | H2 / H3 | One per section, in order |
+| 6 | Content | Answers the search intent. Keyword used naturally, never stuffed |
+| 7 | URL | Short, readable, keyword in it |
+| 8 | Internal links | To the matching solution page and /contact. Link *to* the new page from somewhere relevant |
+| 9 | Image alt text | Describes the image |
+| 10 | Open Graph | Title, description, image (falls back to the site default) |
+| 11 | Schema | Matches the page type: Service + Breadcrumb, FAQPage, BlogPosting + Breadcrumb. Everything in it must also be visible on the page |
+| 12 | Sitemap | New page shows up in `/sitemap.xml` (automatic for solutions and posts) |
+| 13 | After deploy | `npm run indexnow -- /path`, then Search Console → Request indexing |
+
+---
+
 ## 6. How we measure
 
 Check these once a month, in a private/incognito window and in Search Console:
@@ -349,7 +417,8 @@ Check these once a month, in a private/incognito window and in Search Console:
 | click again madurai | #1 | not ranking | 17 Oct 2026 |
 | clickagain | #1 | — | — |
 | click again | #1 | not ranking | 17 Oct 2026 |
-| digital marketing agency madurai | top 10 | — | — |
+| marketing agency madurai | top 10 | — | — |
+| digital marketing agency madurai (tracked, not in our titles) | top 10 | — | — |
 | best digital marketing company in madurai | #1 (6–12 months) | not ranking | 21 Oct 2026 |
 
 Also check whether a Knowledge Panel shows up for "Click Again", and whether
@@ -402,6 +471,16 @@ same day. Add a row whenever a new listing is created.
 
 Newest first. One line per change to the plan or step done.
 
+- **22 Oct 2026**: Positioning decided (section 1a). "Digital marketing"
+  removed from the site everywhere; it's now "Marketing Agency in Madurai".
+  "& Branding" will be added when the branding service launches. The
+  future service list (Branding, ATL, PR & Influencer, Events, Retail /
+  Signage / Print) was recovered from git history and written into the plan.
+
+- **21 Oct 2026**: Revised 1b. No separate `/madurai` page (it would
+  cannibalize the home page, whose title already targets Madurai), so we
+  strengthen the home page instead. Blog posts target "how to" searches
+  and link to home/contact; they don't claim "best".
 - **21 Oct 2026**: Titles for About, Contact and Solutions made descriptive
   (A9). IndexNow added (A5). Live schema validated (A8). New goal "best
   digital marketing company in madurai" (section 1b) and a blog topic list

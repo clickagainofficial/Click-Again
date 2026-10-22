@@ -76,14 +76,14 @@ export function GET() {
 
   const body = `# ${name}
 
-> ${name} is a digital marketing agency in ${legal.city}, ${legal.state}, started in
+> ${name} is a marketing agency in ${legal.city}, ${legal.state}, started in
 > ${founded}. It gets customers for businesses and builds the reason those
 > customers come back — strategy, creative, websites, social, paid media and
 > retention, in English and Tamil.
 
 ## The company in short
 
-- What it is: a digital marketing agency — the whole range from strategy through to
+- What it is: a marketing agency — the whole range from strategy through to
   retention, done in-house rather than brokered out.
 - Founded: ${founded}, in ${legal.city}, ${legal.state}.
 - Founder: ${founder.name}, ${founder.role}.

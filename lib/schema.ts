@@ -49,7 +49,7 @@ export function organizationSchema() {
     alternateName: [
       "ClickAgain",
       "Click Again Agency",
-      "Click Again Digital Marketing Agency",
+      "Click Again Marketing Agency",
     ],
     url: site.url,
     foundingDate: site.founded,
@@ -68,7 +68,7 @@ export function organizationSchema() {
     },
     logo: abs("/logo/clickagain-logo.png"),
     image: abs("/opengraph-image"),
-    description: `${site.name} is a digital marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.`,
+    description: `${site.name} is a marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.`,
     address: postalAddress,
     areaServed: [
       { "@type": "City", name: site.legal.city },

@@ -29,7 +29,7 @@ const caveat = Caveat({
 
 /** The name first, then what it is — "Click Again" plus "agency" is the
  *  search we most need to win, and a title is read left to right. */
-const homeTitle = `${site.name} — Digital Marketing Agency in Madurai`;
+const homeTitle = `${site.name} — Marketing Agency in Madurai`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -38,10 +38,10 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description:
-    "Click Again is a digital marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.",
+    "Click Again is a marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.",
   keywords: [
     "marketing agency",
-    "digital marketing",
+    "marketing agency in Madurai",
     "brand strategy",
     "Click Again",
     "clickagain.in",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: homeTitle,
     description:
-      "Click Again is a digital marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We find what your business actually needs.",
+      "Click Again is a marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We find what your business actually needs.",
     url: site.url,
     siteName: site.name,
     locale: "en_IN",
