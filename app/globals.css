@@ -4241,3 +4241,7 @@ button[data-cc-hidden] { display: none !important; }
   transform: translateY(-2px);
   box-shadow: 0 12px 24px -12px rgba(var(--red-rgb), 0.9);
 }
+
+/* the "Related guide" under a solution page */
+.rg { padding: clamp(10px, 2vw, 24px) 0 var(--section); }
+.rg .sec-title { margin-bottom: 26px; }

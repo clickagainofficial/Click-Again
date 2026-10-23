@@ -23,6 +23,12 @@ export type Insight = {
   tag: string;
   /** Where the advice applies, shown as a chip on the card: "Madurai", "India"… */
   place: string;
+  /**
+   * The solution pages this guide belongs with, by service slug. Each of
+   * those pages shows it as a "Related guide", so readers (and crawlers)
+   * move from what we sell to proof that we know it.
+   */
+  services: string[];
   /** The "In short" box at the top: the answer before the detail. */
   takeaways: string[];
   /** Shown at the end of the post and published as FAQPage data. */
@@ -42,6 +48,7 @@ export const insights: Insight[] = [
     date: "2026-10-16",
     tag: "Performance marketing",
     place: "India",
+    services: ["performance-marketing"],
     takeaways: [
       "Break-even ROAS = revenue the ad platform reports per order ÷ what you keep from that order before ad spend.",
       "Take GST out of revenue, and take product cost, packaging, delivery, payment fees and returns out of what you keep.",
@@ -92,6 +99,7 @@ export const insights: Insight[] = [
     date: "2026-10-09",
     tag: "Hiring an agency",
     place: "Madurai",
+    services: ["marketing-strategy"],
     takeaways: [
       "A good agency asks about your business before it shows you a package.",
       "Ask for a week-by-week plan for the first 90 days, and for the numbers they will report: customers and cost per customer, not just likes and reach.",
@@ -142,6 +150,7 @@ export const insights: Insight[] = [
     date: "2026-10-23",
     tag: "Retention",
     place: "Tamil Nadu",
+    services: ["retention-automation"],
     takeaways: [
       "Ask permission first, at the counter, on the bill or on a form. WhatsApp's own policy requires opt-in before a business messages someone.",
       "Four messages do most of the work: a thank-you, a check-in, a reason to come back, and a win-back.",

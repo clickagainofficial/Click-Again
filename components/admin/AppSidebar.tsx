@@ -8,6 +8,7 @@ import {
   ExternalLink,
   Inbox,
   LayoutDashboard,
+  ListTodo,
   Settings,
   Users,
 } from "lucide-react";
@@ -32,6 +33,7 @@ import {
 const modules = [
   { title: "Overview", href: "/admin", icon: LayoutDashboard },
   { title: "Enquiries", href: "/admin/enquiries", icon: Inbox },
+  { title: "Tasks", href: "/admin/tasks", icon: ListTodo },
   { title: "Email list", href: "/admin/waitlist", icon: Users },
   { title: "Calculator", href: "/admin/calculator", icon: Calculator },
   { title: "Settings", href: "/admin/settings", icon: Settings },
@@ -40,9 +42,12 @@ const modules = [
 export default function AppSidebar({
   waitlistCount,
   enquiryCount,
+  taskCount,
 }: {
   waitlistCount: number;
   enquiryCount: number;
+  /** tasks still to do or in progress */
+  taskCount: number;
 }) {
   const pathname = usePathname();
 
@@ -88,6 +93,9 @@ export default function AppSidebar({
                   ) : null}
                   {item.href === "/admin/enquiries" && enquiryCount > 0 ? (
                     <SidebarMenuBadge>{enquiryCount}</SidebarMenuBadge>
+                  ) : null}
+                  {item.href === "/admin/tasks" && taskCount > 0 ? (
+                    <SidebarMenuBadge>{taskCount}</SidebarMenuBadge>
                   ) : null}
                 </SidebarMenuItem>
               ))}

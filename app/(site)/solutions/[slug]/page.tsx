@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import InsightCards from "@/components/InsightCards";
 import JsonLd from "@/components/JsonLd";
+import { cardData, publishedInsights } from "@/lib/insights";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import { clip, pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
 type Params = { params: Promise<{ slug: string }> };
+
+// re-checked hourly, so a guide published on a schedule shows up here too
+export const revalidate = 3600;
 
 /** Every service page is built at build time — there are six, all known. */
 export function generateStaticParams() {
@@ -35,6 +40,7 @@ export default async function ServicePage({ params }: Params) {
   if (index === -1) notFound();
 
   const service = site.services[index];
+  const guides = publishedInsights().filter((p) => p.services.includes(service.slug));
 
   return (
     <div className="shell">
@@ -84,6 +90,17 @@ export default async function ServicePage({ params }: Params) {
           </p>
         </div>
       </section>
+
+      {/* guides that show this work in practice: a link from what we sell
+          to proof that we know it, and a path for crawlers to the posts */}
+      {guides.length ? (
+        <section className="rg" aria-labelledby="rg-h">
+          <h2 id="rg-h" className="sec-title">
+            {guides.length > 1 ? "Related guides" : "Related guide"}
+          </h2>
+          <InsightCards posts={guides.map(cardData)} tabs={false} />
+        </section>
+      ) : null}
     </div>
   );
 }

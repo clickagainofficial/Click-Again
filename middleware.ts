@@ -36,5 +36,7 @@ export const config = {
     "/admin/:path*",
     "/api/admin/export",
     "/api/admin/settings/:path*",
+    "/api/admin/tasks",
+    "/api/admin/tasks/:path*",
   ],
 };

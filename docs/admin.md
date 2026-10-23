@@ -69,6 +69,13 @@ The sidebar lists the admin modules:
 | -------- | ----------------- | --------------------------------------------------- |
 | Overview | `/admin`          | stat tiles and a 14-day signups chart               |
 | Waitlist | `/admin/waitlist` | searchable table of every signup, plus a CSV export |
+| Tasks    | `/admin/tasks`    | to-do board for pending site and marketing work: add, edit, delete, status, owner, priority, due date |
+
+The Tasks board lives in the `tasks` collection. On its very first load it
+is filled once with the pending list from `docs/seo-plan.md`; a marker in
+the `meta` collection stops that from happening again. API:
+`GET/POST /api/admin/tasks`, `PATCH/DELETE /api/admin/tasks/<id>`, all
+behind the admin session.
 
 To add another, drop a page under `app/admin/(dash)/` and add one entry to
 `modules` in `components/admin/AppSidebar.tsx`. The `(dash)` route group carries
