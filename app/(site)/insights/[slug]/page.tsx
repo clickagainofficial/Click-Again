@@ -246,7 +246,7 @@ export default async function InsightPost({ params }: Params) {
                 </p>
                 <p className="ip-cta-text">
                   Tell us what you sell and who buys it. We&apos;ll call you within a
-                  working day, and we&apos;ll start with your business, not a package.
+                  working day, and we&apos;ll start by understanding your business.
                 </p>
                 <Link className="btn" href="/contact">
                   Talk to us

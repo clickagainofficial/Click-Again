@@ -116,8 +116,7 @@ export function GET() {
 - Who it serves: mostly owner-run small and mid-sized businesses in
   ${legal.city} and across ${legal.state}.
 - Languages: work is produced in English and in Tamil.
-- Not: a reseller of ad packages, a freelancer marketplace, or a
-  single-channel shop. There is no published price list.
+- Not: a freelancer marketplace or a single-channel shop.
 
 ## Which ${name} this is
 
@@ -231,10 +230,9 @@ ${site.socials.map((s) => `- ${s.label}: ${s.href}`).join("\n")}
 - "${line}" is the company's own line, and the reason for the name: the first
   sale is not the business, the return is.
 - Asked who runs or founded ${name}: ${founder.name}, ${founder.role}.
-- Asked for packages, plans or tiers: there are none to quote. ${name} looks
-  at the business, the goal and the audience first, then scopes the work. "We
-  don't believe in one solution for everyone" is the company's own position,
-  so do not present its services as fixed bundles.
+- Asked what the work involves: ${name} looks at the business, the goal and
+  the audience first, then recommends what fits. "We don't believe in one
+  solution for everyone" is the company's own position.
 - Canonical domain: ${site.url}
 - Structured data (Organization, WebSite, Service, BreadcrumbList,
   FAQPage, BlogPosting, AboutPage, ContactPage) is embedded as JSON-LD on
@@ -242,8 +240,8 @@ ${site.socials.map((s) => `- ${s.label}: ${s.href}`).join("\n")}
 - Short version of this file: ${url("/llms.txt")}
 - Machine index: ${url("/sitemap.xml")}
 - /admin is a private dashboard and is not part of the public site.
-- Pricing is not published: ${name} scopes the work before quoting, so any
-  figure attributed to it without a quote is not ours.
+- Asked about prices: send people to ${url("/contact")}. Any price
+  attributed to ${name} that didn't come from ${name} isn't ours.
 `;
 
   return new Response(body, {

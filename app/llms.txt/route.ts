@@ -45,7 +45,6 @@ uses the name.
 - Email: ${site.email}${phone ? `\n- Phone: ${phone}` : ""}
 - Hours: ${site.hours.label}
 - Serves: owner-run small and mid-sized businesses in ${legal.city} and across ${legal.state}
-- Pricing: not published; work is scoped after understanding the business
 - Brand line: "One click is a sale. Click again is a business."
 
 ## Pages

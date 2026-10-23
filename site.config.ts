@@ -65,7 +65,7 @@ export const site = {
     "Just run some ads (let's check the maths first).",
     "We need more reach (you need more customers).",
     "Our ROAS is 4x (is that above your break-even?).",
-    "Send me your packages (let's see what you actually need).",
+    "Just make us a website (let's make it bring in enquiries).",
     "We need more leads (you need leads that close).",
     "Make it go viral (let's make it sell).",
     "The sale is done (the business starts when they come back).",
@@ -175,6 +175,71 @@ export const site = {
 
 
   /**
+   * Questions on the home page, also published as FAQPage data. Same rules
+   * as the /contact list below: every answer restates what the site already
+   * says, and none repeats a /contact question, so the two pages don't
+   * compete for the same answer.
+   */
+  homeFaqs: [
+    {
+      q: "Is Click Again a marketing agency in Madurai?",
+      a: "Yes. Click Again is a marketing agency based in Madurai, Tamil Nadu, working with businesses across Tamil Nadu. Our work covers marketing strategy, content and creative, websites and digital presence, social media management, performance marketing and analytics, and retention and automation.",
+    },
+    {
+      q: "Does Click Again only run ads?",
+      a: "No. Ads are one part of the work. We start with your business — what you sell, who buys it and why they would choose you — and then decide what to do. That can be strategy, creative, a website, social media or ads, and it always includes the part that brings customers back: follow-ups by email and WhatsApp, and automation.",
+    },
+    {
+      q: "Do you work with businesses outside Madurai?",
+      a: "Yes. We're based in Madurai and work with businesses across Tamil Nadu, from a single store to a brand selling across India. We create content in both Tamil and English.",
+    },
+    {
+      q: "How do I get started?",
+      a: "Tell us about your business on our contact page, or give us a call. A member of our team will call you within one working day to understand what you sell and what you want more of, then tell you honestly where we can help.",
+    },
+  ],
+
+  /** Questions on /about, published as FAQPage data. Same rules as homeFaqs. */
+  aboutFaqs: [
+    {
+      q: "Who founded Click Again?",
+      a: "Click Again was founded in Madurai, Tamil Nadu, in 2026 by Kansha M, who leads it as Founder & CEO.",
+    },
+    {
+      q: "Why was Click Again started?",
+      a: "Because many good businesses were hard to find, hard to trust or hard to reach, not because the business was weak, but because of how it showed up to the people looking for it. Click Again exists so that every business can be seen, trusted and chosen.",
+    },
+    {
+      q: "Who works at Click Again?",
+      a: "A team drawn from marketing, design, technology and business, not media buyers alone. The work is produced in English and in Tamil.",
+    },
+    {
+      q: "What does Click Again believe?",
+      a: "That a business should be made strong first and then sent customers; that the business, the goal and the audience come before choosing any work; and that getting noticed is only the start. The journey we work towards is Connect, Click, Trust, Return and Refer.",
+    },
+  ],
+
+  /** Questions on /solutions, published as FAQPage data. Same rules as homeFaqs. */
+  solutionsFaqs: [
+    {
+      q: "What marketing services does Click Again offer?",
+      a: "Six areas of work: Marketing Strategy, Content & Creative, Website & Digital Presence, Social Media Management, Performance Marketing & Analytics, and Retention & Automation. Each has its own page with everything it includes.",
+    },
+    {
+      q: "How do you decide which services my business needs?",
+      a: "We look at your business, your goal and your audience first, then pick the work that moves the number you actually care about, whether that is enquiries, sales or customers coming back.",
+    },
+    {
+      q: "How do the six services work together?",
+      a: "Strategy decides what to do before money is spent. Content and creative is the part people see. The website is where the click lands. Social media is where people check you are real. Performance marketing brings customers in, and retention brings them back.",
+    },
+    {
+      q: "Do you offer SEO and AI search optimisation?",
+      a: "Yes, as part of Website & Digital Presence: technical fixes, page structure and content for search, AI search optimisation so assistants like ChatGPT and Gemini can quote you, and Google Business Profile setup for local search and Maps.",
+    },
+  ],
+
+  /**
    * Questions on /contact, also published as FAQPage structured data. Every
    * answer restates something the site already says — no new promises, no
    * comparisons, nothing a first call couldn't stand behind.
@@ -261,6 +326,21 @@ export const site = {
         "A channel plan with a budget against it, not a wish list",
         "A launch sequence you can actually run next month",
       ],
+      /** Questions on this solution page, published as FAQPage data. */
+      faqs: [
+        {
+          q: "What does a marketing strategy from Click Again include?",
+          a: "Market research, customer and competitor analysis, a marketing plan, campaign strategy and, for a new product, branch or city, go-to-market planning. Together they answer who will buy, why they would choose you, where they spend their attention and what that is worth spending to reach.",
+        },
+        {
+          q: "What do I have at the end of the strategy work?",
+          a: "Who you are selling to, written down rather than assumed; a channel plan with a budget against every line; and a launch sequence you can actually run next month.",
+        },
+        {
+          q: "Should I work out a strategy before running ads?",
+          a: "Strategy is the work that happens before money goes out. Deciding the audience, the offer and the message first means the ads have something clear to say, and you know in advance what counts as them working.",
+        },
+      ],
       items: [
         {
           name: "Market research",
@@ -294,6 +374,21 @@ export const site = {
         "Creative built for the platform it runs on, not a poster resized",
         "Copy in the language your customer thinks in",
         "Enough variations to keep testing instead of guessing",
+      ],
+      /** Questions on this solution page, published as FAQPage data. */
+      faqs: [
+        {
+          q: "What kind of content do you create?",
+          a: "Graphic design for ads, posts, menus, brochures and packaging; copywriting; product, food, interior and team photography; video shoots and editing for reels, ads and brand films; animation and motion graphics; and Tamil creative.",
+        },
+        {
+          q: "Is your Tamil content written in Tamil or translated?",
+          a: "Written in Tamil, not translated into it. The same goes for voiceovers and on-screen text, so it sounds like a local said it.",
+        },
+        {
+          q: "Do you shoot photos and videos on location?",
+          a: "Yes. Shoots are done on location with the end use in mind, so a frame works as an ad and not only as a nice photo, and videos are cut into the lengths each platform needs.",
+        },
       ],
       items: [
         {
@@ -333,6 +428,21 @@ export const site = {
         "Found on Google — and quoted by AI assistants when people ask",
         "A Google Business Profile that brings in local calls",
       ],
+      /** Questions on this solution page, published as FAQPage data. */
+      faqs: [
+        {
+          q: "Do you design and build websites?",
+          a: "Yes. We design and build sites that are quick to load, built for the phone first, simple for you to update, and have enquiry forms that actually reach you. We also build single-campaign landing pages for paid traffic.",
+        },
+        {
+          q: "What is AI search optimisation (AEO or GEO)?",
+          a: "Structuring your business information so that AI assistants such as ChatGPT, Gemini and Google's AI answers quote you when someone asks about what you sell. It sits alongside regular SEO, which gets your pages ranking for what customers type.",
+        },
+        {
+          q: "Do you set up Google Business Profiles?",
+          a: "Yes. We set up the listing properly, with categories, photos, services, hours and reviews, so you turn up in local search and on Google Maps and the calls come in.",
+        },
+      ],
       items: [
         {
           name: "Website design & development",
@@ -366,6 +476,21 @@ export const site = {
         "A page that looks alive when a prospect checks you out",
         "DMs and comments answered, not left sitting",
         "Content planned ahead instead of made in a panic",
+      ],
+      /** Questions on this solution page, published as FAQPage data. */
+      faqs: [
+        {
+          q: "Which social media platforms do you manage?",
+          a: "Instagram, Facebook, LinkedIn and YouTube. Each runs on a schedule: posts, reels, stories and the page itself on Instagram and Facebook, company and founder posts on LinkedIn, and channel setup, thumbnails and titles on YouTube.",
+        },
+        {
+          q: "Do you reply to comments and messages?",
+          a: "Yes. DMs, comments and reviews are answered quickly and in your voice, and real enquiries are passed on to you instead of being lost in the inbox.",
+        },
+        {
+          q: "Do I approve posts before they go out?",
+          a: "Yes. Someone owns the content calendar, deciding what goes out and when, and it is approved by you ahead of time.",
+        },
       ],
       items: [
         {
@@ -413,6 +538,21 @@ export const site = {
         "Tracking that actually fires, so the numbers mean something",
         "Budget moved towards what works, every week",
       ],
+      /** Questions on this solution page, published as FAQPage data. */
+      faqs: [
+        {
+          q: "Which advertising platforms do you run?",
+          a: "Google Ads (search, Performance Max and shopping), Meta Ads on Instagram and Facebook, YouTube Ads, and marketplace ads on Amazon, Flipkart and quick-commerce apps, along with retargeting and lead generation campaigns.",
+        },
+        {
+          q: "How do you know whether the ads are working?",
+          a: "We track what each customer costs and what comes back, not just clicks and views. Analytics, tag manager and platform pixels are installed and tested so conversions fire properly, and budget is moved every week towards what is bringing in sales.",
+        },
+        {
+          q: "What is retargeting?",
+          a: "Follow-up ads shown to people who already visited your site, viewed a product or left something in their cart. They already know you, which makes them the cheapest sale available.",
+        },
+      ],
       items: [
         {
           name: "Google Ads",
@@ -454,6 +594,21 @@ export const site = {
         "Buyers who return without a second round of ad spend",
         "Follow-up that runs on its own, at the right time",
         "Fewer leads going cold in somebody's inbox",
+      ],
+      /** Questions on this solution page, published as FAQPage data. */
+      faqs: [
+        {
+          q: "How do you bring customers back?",
+          a: "With messages that arrive at the right moment: welcome flows, offers and win-backs by email, and WhatsApp broadcasts, order updates and reminders, sent to a list you own, so you don't pay for that customer's click a second time.",
+        },
+        {
+          q: "Do you use the official WhatsApp Business API?",
+          a: "Yes. Broadcasts and message templates run on the official API, so order updates, offers and reminders land where your customers actually read.",
+        },
+        {
+          q: "Can you build chatbots and AI automations?",
+          a: "Yes. Chatbots on WhatsApp, Instagram and your website answer common questions at any hour and hand over to a person when it matters. We also automate repeated jobs such as routing leads, follow-up reminders and reports, and build custom workflows and AI agents around how your business runs.",
+        },
       ],
       items: [
         {

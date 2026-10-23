@@ -101,7 +101,7 @@ export const insights: Insight[] = [
     place: "Madurai",
     services: ["marketing-strategy"],
     takeaways: [
-      "A good agency asks about your business before it shows you a package.",
+      "A good agency asks about your business before it recommends anything.",
       "Ask for a week-by-week plan for the first 90 days, and for the numbers they will report: customers and cost per customer, not just likes and reach.",
       "Your ad accounts, pages, website, domain and data should be in your name, with the agency added as a partner.",
       "Get the full cost in writing: fee, GST, ad spend, shoots, extra revisions, and how to end the contract.",

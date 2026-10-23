@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import InsightCards from "@/components/InsightCards";
 import JsonLd from "@/components/JsonLd";
+import PageFaq from "@/components/PageFaq";
 import { cardData, publishedInsights } from "@/lib/insights";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import { clip, pageMetadata } from "@/lib/seo";
@@ -90,6 +91,8 @@ export default async function ServicePage({ params }: Params) {
           </p>
         </div>
       </section>
+
+      <PageFaq items={service.faqs} />
 
       {/* guides that show this work in practice: a link from what we sell
           to proof that we know it, and a path for crawlers to the posts */}

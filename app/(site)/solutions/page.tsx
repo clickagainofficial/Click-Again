@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageFaq from "@/components/PageFaq";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
@@ -50,6 +51,7 @@ export default function SolutionsIndex() {
         ))}
       </div>
 
+      <PageFaq items={site.solutionsFaqs} />
     </div>
   );
 }

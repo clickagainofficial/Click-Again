@@ -5,7 +5,9 @@ import BrandStamp from "@/components/BrandStamp";
 import HowWeWork from "@/components/HowWeWork";
 import Manifesto from "@/components/Manifesto";
 import Marquee from "@/components/Marquee";
+import PageFaq from "@/components/PageFaq";
 import WhatWeDo from "@/components/WhatWeDo";
+import { site } from "@/site.config";
 
 /** Title and description come from the root layout; this is here for the
  *  canonical, which the most-linked URL on the site should not go without. */
@@ -61,6 +63,11 @@ export default function Home() {
 
       <section className="band band-b" id="what">
         <WhatWeDo />
+        {/* the questions sit under the services, on the same band, rather
+            than as a section of their own */}
+        <div className="shell">
+          <PageFaq items={site.homeFaqs} />
+        </div>
       </section>
 
       <section className="band band-a">

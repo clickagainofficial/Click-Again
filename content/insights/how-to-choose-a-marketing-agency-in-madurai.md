@@ -20,7 +20,7 @@ Agencies that ask you for these numbers are the ones worth talking to further.
 
 **A good answer** comes as questions back to you: who your best customers are, what they buy, what your margins look like, why people choose you over the shop down the road, and what you have already tried.
 
-**Be careful if** the first thing on the table is a package list with prices. A package is decided before anyone has understood your business.
+**Be careful if** you're told what to buy before anyone has asked how your business works. A recommendation is only as good as the understanding behind it.
 
 ### 2. "What exactly will you do in the first 90 days?"
 
@@ -124,4 +124,4 @@ The highest score is not always the cheapest quote. It is the agency you trust t
 
 ## Meeting us
 
-If you'd like to put these questions to Click Again, we'd welcome it. We start with your business, not with a package: what you sell, who buys it, what a customer is worth to you, and only then [what work makes sense](/solutions). You can see how we plan in our [marketing strategy](/solutions/marketing-strategy) work, or simply [tell us about your business](/contact) and we'll call you within a working day.
+If you'd like to put these questions to Click Again, we'd welcome it. We start with your business: what you sell, who buys it, what a customer is worth to you, and only then [what work makes sense](/solutions). You can see how we plan in our [marketing strategy](/solutions/marketing-strategy) work, or simply [tell us about your business](/contact) and we'll call you within a working day.

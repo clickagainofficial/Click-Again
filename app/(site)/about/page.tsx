@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import AboutBeliefs from "@/components/AboutBeliefs";
 import JsonLd from "@/components/JsonLd";
+import PageFaq from "@/components/PageFaq";
 import { aboutPageSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
@@ -151,6 +152,7 @@ export default function About() {
         <div className="shell">
           <h2 className="sec-title">What we believe</h2>
           <AboutBeliefs />
+          <PageFaq items={site.aboutFaqs} />
         </div>
       </section>
 
