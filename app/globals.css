@@ -2087,10 +2087,11 @@ a { color: inherit; text-decoration: none; }
 .mobile-sheet { inset: 104px 0 0; }
 
 /* ========================================================= how we work == */
-/* a thin track with a dot per step. The step in play lights up, the line
-   to the next one draws red (--move is the draw time), and after 04 it
-   starts again from 01. Under each dot: an outlined number with the
-   mascot's pose as a round avatar. On phones the track stands upright. */
+/* a thin track with a dot per step. The mascot stands on it just past the
+   dot in play (--i), walks to the next while the line behind him draws red
+   (--move is the walk time), and after 04 turns and walks back to 01.
+   Under each dot: an outlined number with his pose as a round avatar. On
+   phones the track stands upright and he doesn't walk; the avatars stay. */
 .hw-head {
   margin: 4px 0 14px;
   font-family: var(--font-display);
@@ -2264,7 +2265,7 @@ a { color: inherit; text-decoration: none; }
 .hw-runner { display: none; }
 
 @media (min-width: 980px) {
-  /* the lane he stands in is padding, not a margin on the steps — a margin
+  /* the lane he walks in is padding, not a margin on the steps — a margin
      there would collapse through .hw-loop and leave him standing on the text */
   .hw-loop { --gap: 32px; --lane: 150px; --dot-y: 0px; padding-top: var(--lane); }
 
@@ -2287,8 +2288,8 @@ a { color: inherit; text-decoration: none; }
   .hw-step:not(:last-child)::after { transform: scaleX(0); transform-origin: left; }
   .hw-step.is-past::after { transform: scaleX(1); }
 
-  /* one column wide, set over the step in play — it jumps there while he
-     is hidden, so he never slides; his feet rest on the line past the dot */
+  /* one column wide, slid along by whole columns; his feet rest on the
+     line a little past the dot */
   .hw-runner {
     display: block;
     position: absolute;
@@ -2298,6 +2299,7 @@ a { color: inherit; text-decoration: none; }
     width: calc((100% - 3 * var(--gap)) / 4);
     height: calc(var(--lane) + var(--dot) / 2 + 3px);
     transform: translateX(calc(var(--i, 0) * (100% + var(--gap))));
+    transition: transform var(--move) cubic-bezier(0.45, 0, 0.3, 1);
     pointer-events: none;
   }
 
@@ -2308,12 +2310,12 @@ a { color: inherit; text-decoration: none; }
     height: calc(var(--lane) - 8px);
     width: auto;
     opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    transition: opacity 0.25s var(--ease);
     user-select: none;
   }
 
-  .hw-runner img.is-shown { opacity: 1; transform: none; }
+  .hw-runner img.is-shown { opacity: 1; }
+  .hw-runner.is-back img { transform: scaleX(-1); }
 
   .hw-bubble {
     position: absolute;
@@ -4250,3 +4252,86 @@ button[data-cc-hidden] { display: none !important; }
 .page-faq .sec-title { margin-bottom: 22px; }
 /* when the questions end the page, leave the usual room before the footer */
 .shell > .page-faq:last-child { padding-bottom: var(--section); }
+
+/* ============================================================ faq, dark == */
+/* The questions in the same tone as the insight cards: a near-black card,
+   the open answer on the warmer panel with a red glow, white type and a
+   red round toggle. Overrides the light accordion above, everywhere it's
+   used (/contact, the main pages) and the FAQ at the end of each guide. */
+
+.faq-list {
+  margin-top: 14px;
+  padding: 8px;
+  border: 0;
+  border-radius: 28px;
+  background: #140e0c;
+  box-shadow: 0 30px 50px -34px rgba(40, 10, 0, 0.55);
+  overflow: hidden;
+}
+
+.faq-item {
+  border-radius: 20px;
+  transition: background 0.3s var(--ease);
+}
+.faq-item + .faq-item { border-top: 0; margin-top: 4px; }
+.faq-item:not(.is-open):hover { background: rgba(255, 255, 255, 0.035); }
+.faq-item.is-open {
+  background:
+    radial-gradient(90% 140% at 100% 0%, rgba(var(--red-rgb), 0.28), transparent 60%),
+    #221714;
+}
+
+.faq-q {
+  padding: 20px 20px 20px 24px;
+  color: #fff;
+  font-size: 15.5px;
+}
+
+.faq-sign {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.25s var(--ease), transform 0.3s var(--ease);
+}
+.faq-item.is-open .faq-sign { background: var(--grad-a); transform: rotate(180deg); }
+.faq-sign::before,
+.faq-sign::after { background: #fff; }
+.faq-sign::before { inset: 15px 9px; height: 2px; }
+.faq-sign::after  { inset: 9px 15px; width: 2px; }
+
+.faq-a {
+  padding: 0 24px 24px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* the FAQ at the end of a guide, which uses <details> */
+.ip-faq details {
+  margin-bottom: 4px;
+  border: 0;
+  border-radius: 20px;
+  background: #140e0c;
+}
+.ip-faq details:first-of-type { border-top-left-radius: 26px; border-top-right-radius: 26px; }
+.ip-faq details:last-of-type { border-bottom-left-radius: 26px; border-bottom-right-radius: 26px; }
+.ip-faq details[open] {
+  background:
+    radial-gradient(90% 140% at 100% 0%, rgba(var(--red-rgb), 0.28), transparent 60%),
+    #221714;
+}
+.ip-faq summary { color: #fff; }
+.ip-faq summary::after {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+}
+.ip-faq details[open] summary::after { background: var(--grad-a); }
+.ip-faq details p { color: rgba(255, 255, 255, 0.72); }

@@ -152,7 +152,17 @@ export default function About() {
         <div className="shell">
           <h2 className="sec-title">What we believe</h2>
           <AboutBeliefs />
-          <PageFaq items={site.aboutFaqs} />
+          <PageFaq
+            items={[
+              ...site.aboutFaqs,
+              // built here rather than in site.config so it follows the
+              // address and hours there if either changes
+              {
+                q: "Where is Click Again's office?",
+                a: `Our office is at ${site.legal.address}. We're open ${site.hours.label}.`,
+              },
+            ]}
+          />
         </div>
       </section>
 

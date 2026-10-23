@@ -197,6 +197,10 @@ export const site = {
       q: "How do I get started?",
       a: "Tell us about your business on our contact page, or give us a call. A member of our team will call you within one working day to understand what you sell and what you want more of, then tell you honestly where we can help.",
     },
+    {
+      q: "How soon will I see results?",
+      a: "It depends on the work. Ads start producing data within weeks; search, content and brand work build over months. Before anything starts, the plan sets out what happens and when, and you get regular word on how it's going.",
+    },
   ],
 
   /** Questions on /about, published as FAQPage data. Same rules as homeFaqs. */
@@ -236,6 +240,10 @@ export const site = {
     {
       q: "Do you offer SEO and AI search optimisation?",
       a: "Yes, as part of Website & Digital Presence: technical fixes, page structure and content for search, AI search optimisation so assistants like ChatGPT and Gemini can quote you, and Google Business Profile setup for local search and Maps.",
+    },
+    {
+      q: "What happens once we start working together?",
+      a: "Four steps that repeat: we understand your business, plan what happens and when, make and run the work week after week, then measure what came back, keep what works and go again.",
     },
   ],
 
@@ -330,7 +338,7 @@ export const site = {
       faqs: [
         {
           q: "What does a marketing strategy from Click Again include?",
-          a: "Market research, customer and competitor analysis, a marketing plan, campaign strategy and, for a new product, branch or city, go-to-market planning. Together they answer who will buy, why they would choose you, where they spend their attention and what that is worth spending to reach.",
+          a: "Market research, customer and competitor analysis, a marketing plan and campaign strategy. Together they answer who will buy, why they would choose you, where they spend their attention and what that is worth spending to reach.",
         },
         {
           q: "What do I have at the end of the strategy work?",
@@ -339,6 +347,14 @@ export const site = {
         {
           q: "Should I work out a strategy before running ads?",
           a: "Strategy is the work that happens before money goes out. Deciding the audience, the offer and the message first means the ads have something clear to say, and you know in advance what counts as them working.",
+        },
+        {
+          q: "Do you study my competitors?",
+          a: "Yes. We look at who your best customers are weighing you against: their offers, their pricing, the words they use and the gap they leave open. That gap is often where your message should sit.",
+        },
+        {
+          q: "Can you plan the launch of a new product, branch or city?",
+          a: "Yes. We work out the order of the launch: what goes out first, what follows it, and what has to be ready before day one, so the launch has a plan rather than a hope.",
         },
       ],
       items: [
@@ -379,7 +395,7 @@ export const site = {
       faqs: [
         {
           q: "What kind of content do you create?",
-          a: "Graphic design for ads, posts, menus, brochures and packaging; copywriting; product, food, interior and team photography; video shoots and editing for reels, ads and brand films; animation and motion graphics; and Tamil creative.",
+          a: "Graphic design for ads, posts, menus, brochures and packaging; copywriting; product, food, interior and team photography; video shoots and editing for reels, ads and brand films; animation; and Tamil creative.",
         },
         {
           q: "Is your Tamil content written in Tamil or translated?",
@@ -388,6 +404,14 @@ export const site = {
         {
           q: "Do you shoot photos and videos on location?",
           a: "Yes. Shoots are done on location with the end use in mind, so a frame works as an ad and not only as a nice photo, and videos are cut into the lengths each platform needs.",
+        },
+        {
+          q: "Do you write the captions and ad copy too?",
+          a: "Yes. Ad lines, captions, website copy and video scripts, written to be read in a hurry and to make the offer plain.",
+        },
+        {
+          q: "Do you make animated videos?",
+          a: "Yes. Motion graphics and animated explainers for when a still frame can't carry the point, such as product demos, offer films and logo animations.",
         },
       ],
       items: [
@@ -432,7 +456,15 @@ export const site = {
       faqs: [
         {
           q: "Do you design and build websites?",
-          a: "Yes. We design and build sites that are quick to load, built for the phone first, simple for you to update, and have enquiry forms that actually reach you. We also build single-campaign landing pages for paid traffic.",
+          a: "Yes. We design and build the site, keep it simple for you to update, and make sure the enquiry forms actually reach you.",
+        },
+        {
+          q: "Will my website work well on phones?",
+          a: "Yes. Sites are built for the phone first, where most of your customers will see them, and made quick to load.",
+        },
+        {
+          q: "Do you build landing pages for ads?",
+          a: "Yes. One page, one campaign, one action, so people clicking an ad land somewhere built to convert instead of on your home page.",
         },
         {
           q: "What is AI search optimisation (AEO or GEO)?",
@@ -481,15 +513,23 @@ export const site = {
       faqs: [
         {
           q: "Which social media platforms do you manage?",
-          a: "Instagram, Facebook, LinkedIn and YouTube. Each runs on a schedule: posts, reels, stories and the page itself on Instagram and Facebook, company and founder posts on LinkedIn, and channel setup, thumbnails and titles on YouTube.",
+          a: "Instagram, Facebook, LinkedIn and YouTube: posts, reels, stories and the page itself on Instagram and Facebook, company and founder posts on LinkedIn, and channel setup, thumbnails and titles on YouTube.",
+        },
+        {
+          q: "Do I approve posts before they go out?",
+          a: "Yes. Someone owns the content calendar, deciding what goes out and when, and it is approved by you ahead of time.",
         },
         {
           q: "Do you reply to comments and messages?",
           a: "Yes. DMs, comments and reviews are answered quickly and in your voice, and real enquiries are passed on to you instead of being lost in the inbox.",
         },
         {
-          q: "Do I approve posts before they go out?",
-          a: "Yes. Someone owns the content calendar, deciding what goes out and when, and it is approved by you ahead of time.",
+          q: "Do you run campaigns for festivals and launches?",
+          a: "Yes. A push built for a moment, such as a launch, a festival offer or a collaboration, run across your pages with one aim behind it.",
+        },
+        {
+          q: "Do you keep track of what people say about my business?",
+          a: "Yes. We watch what is said about you and your category online, so you hear about a complaint or an opening early.",
         },
       ],
       items: [
@@ -542,11 +582,19 @@ export const site = {
       faqs: [
         {
           q: "Which advertising platforms do you run?",
-          a: "Google Ads (search, Performance Max and shopping), Meta Ads on Instagram and Facebook, YouTube Ads, and marketplace ads on Amazon, Flipkart and quick-commerce apps, along with retargeting and lead generation campaigns.",
+          a: "Google Ads (search, Performance Max and shopping), Meta Ads on Instagram and Facebook, YouTube Ads, and marketplace ads on Amazon, Flipkart and quick-commerce apps.",
         },
         {
           q: "How do you know whether the ads are working?",
           a: "We track what each customer costs and what comes back, not just clicks and views. Analytics, tag manager and platform pixels are installed and tested so conversions fire properly, and budget is moved every week towards what is bringing in sales.",
+        },
+        {
+          q: "Can you bring in leads, not just online sales?",
+          a: "Yes. Form, call and WhatsApp campaigns are set up so you get leads who answer the phone, with junk enquiries filtered out before they reach your team.",
+        },
+        {
+          q: "Do you work on Amazon and Flipkart listings as well as ads?",
+          a: "Yes. Sponsored listings on the marketplaces come with work on the listing itself, the title, images and keywords, because that decides whether the click turns into a sale.",
         },
         {
           q: "What is retargeting?",
@@ -599,15 +647,23 @@ export const site = {
       faqs: [
         {
           q: "How do you bring customers back?",
-          a: "With messages that arrive at the right moment: welcome flows, offers and win-backs by email, and WhatsApp broadcasts, order updates and reminders, sent to a list you own, so you don't pay for that customer's click a second time.",
+          a: "With messages that arrive at the right moment: welcome flows, offers and win-backs by email, and WhatsApp broadcasts, order updates and reminders, so you don't pay for that customer's click a second time.",
+        },
+        {
+          q: "Why build a customer list of my own?",
+          a: "Because a list you own can be reached at almost nothing per message, whenever you need it, instead of paying for ads every time you want to talk to people who have already bought from you.",
         },
         {
           q: "Do you use the official WhatsApp Business API?",
           a: "Yes. Broadcasts and message templates run on the official API, so order updates, offers and reminders land where your customers actually read.",
         },
         {
-          q: "Can you build chatbots and AI automations?",
-          a: "Yes. Chatbots on WhatsApp, Instagram and your website answer common questions at any hour and hand over to a person when it matters. We also automate repeated jobs such as routing leads, follow-up reminders and reports, and build custom workflows and AI agents around how your business runs.",
+          q: "Can you set up chatbots for WhatsApp, Instagram and my website?",
+          a: "Yes. Chatbots answer the common questions at any hour and hand over to a person when it matters.",
+        },
+        {
+          q: "Can automation connect the tools I already use?",
+          a: "Yes. Repeated jobs such as routing leads, follow-up reminders, building reports and moving data between your tools can run on their own. For bigger needs we build custom workflows and AI agents around how your business runs.",
         },
       ],
       items: [
