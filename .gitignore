@@ -7,3 +7,6 @@ out
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+
+# personal Claude skills (client notes) — never publish in this public repo
+/skills/
