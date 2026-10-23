@@ -5,13 +5,16 @@ import { ArrowUpRight } from "lucide-react";
 import { site } from "@/site.config";
 
 /** One illustration per service, in /public/Services, numbered in nav order. */
-const art: Record<string, string> = {
-  "marketing-strategy": "/Services/map 1.png",
-  "content-creative": "/Services/camera 2.png",
-  "website-digital-presence": "/Services/laptop 3.png",
-  "social-media-management": "/Services/mobile 4.png",
-  "performance-marketing": "/Services/graph 5.png",
-  "retention-automation": "/Services/bag 6.png",
+// Alt text even though the icon sits inside aria-hidden: screen readers
+// skip it either way, and search engines (Bing flags empty alts) and image
+// search get a description of what each picture shows.
+const art: Record<string, { src: string; alt: string }> = {
+  "marketing-strategy": { src: "/Services/map 1.png", alt: "Map with a location pin and a compass, for marketing strategy" },
+  "content-creative": { src: "/Services/camera 2.png", alt: "Camera with a clapperboard and a paintbrush, for content and creative" },
+  "website-digital-presence": { src: "/Services/laptop 3.png", alt: "Laptop and phone showing a website, for website and digital presence" },
+  "social-media-management": { src: "/Services/mobile 4.png", alt: "Phone with likes, hearts and comments, for social media management" },
+  "performance-marketing": { src: "/Services/graph 5.png", alt: "Rising bar graph with a target, for performance marketing and analytics" },
+  "retention-automation": { src: "/Services/bag 6.png", alt: "Shopping bag inside a repeat arrow, for customer retention and automation" },
 };
 
 /**
@@ -38,8 +41,8 @@ export default function WhatWeDo() {
             <Link className="do-row" href={`/solutions/${s.slug}`}>
               <span className="do-icon" aria-hidden="true">
                 <Image
-                  src={art[s.slug]}
-                  alt=""
+                  src={art[s.slug].src}
+                  alt={art[s.slug].alt}
                   width={96}
                   height={96}
                   sizes="64px"

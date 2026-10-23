@@ -113,12 +113,15 @@ export default function HowWeWork() {
             <RotateCcw className="loop-ico" />
             Round again
           </span>
-          {[...steps.map((s) => s.pose), WALKER].map((src) => (
+          {[
+            ...steps.map((s) => ({ src: s.pose, alt: s.poseAlt })),
+            { src: WALKER, alt: "Our guy walking with a shoulder bag, back to the first step" },
+          ].map(({ src, alt }) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               key={src}
               src={src}
-              alt=""
+              alt={alt}
               className={src === showing ? "is-shown" : undefined}
               draggable={false}
               // the runner only exists on wide screens (display:none on
