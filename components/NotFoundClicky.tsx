@@ -66,7 +66,7 @@ export default function NotFoundClicky() {
           <Image
             key={p.src}
             src={p.src}
-            alt={n === i ? p.alt : ""}
+            alt={p.alt}
             width={p.w}
             height={560}
             priority={n === 0}

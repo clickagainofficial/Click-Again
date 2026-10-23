@@ -40,7 +40,7 @@ export default function Insights() {
           <Image
             className="in-empty-art"
             src="/How-we-work/web/thinky.webp"
-            alt=""
+            alt="Our guy thinking, clipboard in hand"
             width={239}
             height={560}
           />

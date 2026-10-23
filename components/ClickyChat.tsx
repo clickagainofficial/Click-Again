@@ -167,7 +167,7 @@ export default function ClickyChat() {
             >
               <Image
                 src="/How-we-work/web/clicky-face.webp"
-                alt=""
+                alt="Clicky, the Click Again mascot"
                 width={160}
                 height={160}
                 draggable={false}

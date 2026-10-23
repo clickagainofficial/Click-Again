@@ -30,7 +30,7 @@ export default function WhoItsFor() {
                   <img
                     className="wf-pill-art"
                     src={s.art}
-                    alt=""
+                    alt={`Illustration for ${s.name}`}
                     width={160}
                     height={160}
                     loading="lazy"

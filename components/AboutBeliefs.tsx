@@ -8,13 +8,14 @@ import { site } from "@/site.config";
 /** The big numbers are set in a serif; only this section loads it. */
 const serif = Playfair_Display({ subsets: ["latin"], weight: ["500"], display: "swap" });
 
-/** Clicky's face that shows in each card's circle on hover, in order. */
+/** Clicky's face that shows in each card's circle on hover, in order. The
+ *  alt text describes the picture for search engines and image search. */
 const faces = [
-  "/How-we-work/web/detective-face.webp",
-  "/How-we-work/web/thinky-face.webp",
-  "/How-we-work/web/clicky-face.webp",
-  "/How-we-work/web/growy-face.webp",
-  "/How-we-work/web/racer-face.webp",
+  { src: "/How-we-work/web/detective-face.webp", alt: "Clicky looking through a magnifying glass" },
+  { src: "/How-we-work/web/thinky-face.webp", alt: "Clicky thinking, with a clipboard and a lightbulb" },
+  { src: "/How-we-work/web/clicky-face.webp", alt: "Clicky, the Click Again mascot, smiling" },
+  { src: "/How-we-work/web/growy-face.webp", alt: "Clicky giving a thumbs up inside a repeat arrow" },
+  { src: "/How-we-work/web/racer-face.webp", alt: "Clicky running with a fist raised" },
 ];
 
 /** Sizes of the box's shape, in px: corner radius, circle, gap, fillet. */
@@ -80,7 +81,7 @@ function BeliefCard({
   no: string;
   label: string;
   text: string;
-  face: string;
+  face: { src: string; alt: string };
 }) {
   const boxRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState<{ w: number; h: number } | null>(null);
@@ -119,7 +120,7 @@ function BeliefCard({
             <path d="M7 17 17 7M9 7h8v8" />
           </svg>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="ab-belief-face" src={face} alt="" loading="lazy" />
+          <img className="ab-belief-face" src={face.src} alt={face.alt} loading="lazy" />
         </span>
       </div>
       <p className="ab-belief-text">{rich(text)}</p>
