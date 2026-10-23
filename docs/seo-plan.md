@@ -264,7 +264,7 @@ These are done in this repo.
         could be one hop via Vercel domain settings
   - [ ] Home H1 has no brand/Madurai words (A2); the hero sub-line covers
         Madurai. Needs your design approval
-  - [ ] /insights is thin (115 words) until posts exist (B8)
+  - [x] /insights is no longer thin: 3 guides published 23 Oct 2026 (B8)
   - [x] favicon.ico + icon.png + apple-icon.png added (23 Oct 2026, new CA
         mark). A web manifest is still optional
 - [~] **A11. Entity & AEO disambiguation** (23 Oct 2026)
@@ -468,9 +468,9 @@ The same NAP everywhere, copied from section 7.
     agency content is sales pages with unsourced stats; global guides lack
     India specifics (GST, COD/RTO, Tamil). Our angle: honest, local,
     worked numbers, no invented stats.
-- [ ] Each post answers a real question a business owner in Tamil Nadu asks
-- [ ] Each post links to the matching solution page
-- [ ] Bump `site.updated` in `site.config.ts` when page copy changes
+- [x] Each post answers a real question a business owner in Tamil Nadu asks (rule; true of the first 3)
+- [x] Each post links to the matching solution page (rule; true of the first 3)
+- [x] Bump `site.updated` in `site.config.ts` when page copy changes (rule)
 - [ ] After publishing: `npm run indexnow -- /insights/<slug>`, and
       Request indexing in Search Console
 
