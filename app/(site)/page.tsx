@@ -30,9 +30,12 @@ export default function Home() {
             <span className="accent slide-r d1">AND KEEP THEM COMING BACK.</span>
           </h1>
 
+          {/* the first sentence a reader, a crawler or an answer engine meets:
+              the name, what it is and where, in the title's own words */}
           <p className="hero-sub slide-l d2">
-            Strategy, creative, websites, social, ads and retention — for
-            businesses in Madurai and across Tamil Nadu.
+            Click Again is a marketing agency in Madurai. Strategy, creative,
+            websites, social, ads and retention — for businesses across Tamil
+            Nadu.
           </p>
 
           <div className="hero-actions slide-r d3">
