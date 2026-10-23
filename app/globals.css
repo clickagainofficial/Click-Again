@@ -4346,3 +4346,8 @@ button[data-cc-hidden] { display: none !important; }
 .faq-item.is-open .faq-q { cursor: default; }
 .faq-a { max-width: none; padding: 0 26px 22px; }
 .ip-faq details p { max-width: none; }
+
+/* inside a band the band already pads the bottom, so the FAQ adds none, and
+   the band closes tighter under the card than under a normal section */
+.band .shell > .page-faq:last-child { padding-bottom: 0; }
+.band:has(.page-faq) { padding-bottom: clamp(48px, 6vw, 72px); }
