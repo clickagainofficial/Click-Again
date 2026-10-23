@@ -3469,6 +3469,19 @@ a { color: inherit; text-decoration: none; }
 /* ============================================================ chat ====== */
 /* Clicky on the web chat's launcher. The vendor's own button is hidden and
    these forward the clicks to it, so everything here is only the face. */
+/* Their stock launcher, once Clicky has taken over. !important because the
+   embed keeps writing an inline display:flex back onto it. */
+button[data-cc-hidden] { display: none !important; }
+
+/* Their panel opens 90px off the bottom, which sat over the top of Clicky's
+   ring; lift it clear. Phones get a full-screen panel, so leave those be. */
+@media (min-width: 480px) {
+  iframe[src*="isuite.ai"] {
+    bottom: calc(clamp(14px, 3vw, 24px) + 92px) !important;
+    height: min(600px, calc(100vh - 140px)) !important;
+  }
+}
+
 /* the label sits above him, both pinned to the right edge */
 .cc {
   position: fixed;

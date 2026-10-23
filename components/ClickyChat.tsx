@@ -57,7 +57,11 @@ export default function ClickyChat() {
       if (done) return;
       done = true;
       native.current = btn;
-      btn.style.display = "none";
+      // Hidden by a stylesheet rule, not an inline style: the embed writes
+      // style.display = "flex" back onto its button every time the panel
+      // opens, closes or the window resizes, which undid an inline "none"
+      // and left their bubble sitting on top of Clicky.
+      btn.setAttribute("data-cc-hidden", "");
       btn.setAttribute("aria-hidden", "true");
       btn.tabIndex = -1;
       setReady(true);
@@ -85,7 +89,7 @@ export default function ClickyChat() {
       // put their button back the way we found it
       const btn = native.current;
       if (btn?.isConnected) {
-        btn.style.display = "";
+        btn.removeAttribute("data-cc-hidden");
         btn.removeAttribute("aria-hidden");
         btn.tabIndex = 0;
       }
