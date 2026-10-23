@@ -37,7 +37,7 @@ export const insights: Insight[] = [
       "Is Your ROAS Actually Profitable? How to Work Out Break-Even ROAS for an Indian Business",
     summary:
       "A 4x ROAS sounds healthy until GST, delivery, payment fees and COD returns come out of it. Here is how to work out the ROAS your business actually needs, with a full rupee example.",
-    date: "2026-11-06",
+    date: "2026-10-16",
     tag: "Performance marketing",
     takeaways: [
       "Break-even ROAS = revenue the ad platform reports per order ÷ what you keep from that order before ad spend.",
@@ -86,7 +86,7 @@ export const insights: Insight[] = [
       "How to Choose a Marketing Agency in Madurai: 12 Questions to Ask Before You Sign",
     summary:
       "Twelve questions to put to any marketing agency before you sign, and what a good answer sounds like, from the first 90 days and reporting to who owns your ad accounts.",
-    date: "2026-10-30",
+    date: "2026-10-09",
     tag: "Hiring an agency",
     takeaways: [
       "A good agency asks about your business before it shows you a package.",

@@ -456,12 +456,13 @@ The same NAP everywhere, copied from section 7.
       404s) until that date in India; pages re-check hourly. Never back-date.
   - [x] 23 Oct 2026 · **How to Bring Customers Back: A WhatsApp Follow-Up
         Plan for Local Businesses in Tamil Nadu** (live)
-  - [ ] 30 Oct 2026 · **How to Choose a Marketing Agency in Madurai: 12
-        Questions** (scheduled). That day: `npm run indexnow -- /insights
-        /insights/how-to-choose-a-marketing-agency-in-madurai` and Search
-        Console Request indexing
-  - [ ] 6 Nov 2026 · **Break-Even ROAS for Indian Businesses** (scheduled).
-        Same steps that day
+  - [x] Dated 9 Oct 2026 · **How to Choose a Marketing Agency in Madurai: 12
+        Questions** (live 23 Oct 2026)
+  - [x] Dated 16 Oct 2026 · **Break-Even ROAS for Indian Businesses** (live
+        23 Oct 2026)
+  - **Decision (23 Oct 2026, Kansha):** all three went live on 23 Oct, with
+    the first two dated 9 and 16 Oct (the previous two weeks) rather than
+    scheduled ahead. The scheduling feature stays for future posts.
   - Topic research (23 Oct): Semrush had no API units and Ahrefs' plan has
     no API access, so topics were picked from a SERP gap review. Local
     agency content is sales pages with unsourced stats; global guides lack
@@ -599,7 +600,7 @@ same day. Add a row whenever a new listing is created.
 
 Newest first. One line per change to the plan or step done.
 
-- **23 Oct 2026**: Blog launched (B8). New Markdown blog system with scheduling, a professional post layout, and 3 posts: WhatsApp follow-up (live today), choosing an agency (30 Oct) and break-even ROAS (6 Nov).
+- **23 Oct 2026**: Blog launched (B8). New Markdown blog system with scheduling, a professional post layout, and 3 posts: WhatsApp follow-up (dated 23 Oct), choosing an agency (dated 9 Oct) and break-even ROAS (dated 16 Oct). All three live 23 Oct.
 - **23 Oct 2026**: `/skills/` git-ignored (commit c3c55d6). AI baseline
   logged: ChatGPT can't find Click Again yet (section 1a-2).
 - **23 Oct 2026**: Brand SERP + AEO review (section 1a-2). Added the
