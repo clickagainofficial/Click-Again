@@ -190,11 +190,20 @@ These are done in this repo.
         page (no `sizes`); added `sizes`. Same for the footer logo.
   - [x] Added `app/apple-icon.tsx` (180px PNG of the favicon mark).
   - **Left as is / later:**
-  - [ ] Mobile LCP 3.3s (target < 2.5s). Re-measure after the logo fix
-  - [ ] A few decorative images slightly oversized (how-we-work avatars,
-        manifesto art, service icons): small savings
-  - [ ] Lighthouse colour-contrast flag on the manifesto words: likely the
-        fade-in animation caught mid-way. Check by eye
+  - [x] Mobile LCP (23 Oct 2026). Cause: the hero lines fade in from
+        `opacity: 0`. Chrome skips transparent text for LCP, and the
+        compositor fade never repaints, so LCP waited ~1.1s for the Inter
+        font swap to force a repaint. The slide keyframes now start at
+        `opacity: 0.01` (looks the same), and LCP = FCP in testing. Also
+        stopped preloading Caveat (About-only) on every page.
+  - [x] Images (23 Oct 2026): the 5 how-we-work runner poses (~190 KB)
+        were downloaded on phones where the runner is `display:none`; now
+        `loading="lazy"`. Service icons got `sizes="64px"`.
+  - [x] Manifesto contrast flag: **not a bug.** Words are dim until you
+        scroll to them (the scroll-lit reading effect), and Lighthouse
+        doesn't scroll. The server HTML renders every word lit, so search
+        engines read normal text. Making unlit words darker would weaken
+        the effect, so we left it as designed.
   - [ ] `http://www.` takes two 308 hops (→ https://www → apex). Minor;
         could be one hop via Vercel domain settings
   - [ ] Home H1 has no brand/Madurai words (A2); the hero sub-line covers
@@ -502,6 +511,10 @@ same day. Add a row whenever a new listing is created.
 
 Newest first. One line per change to the plan or step done.
 
+- **23 Oct 2026**: Fixed mobile LCP (hero fade started at opacity 0),
+  stopped preloading Caveat, lazy-loaded the desktop-only runner images,
+  and sized the service icons. The manifesto contrast flag was explained
+  rather than changed.
 - **22 Oct 2026**: Full technical audit (A10). Fixed share cards on every
   page, solution meta descriptions, missing canonicals, header-logo weight,
   and added an apple-icon. Lighthouse mobile: 92 / 96 / 100 / 100.

@@ -25,6 +25,9 @@ const caveat = Caveat({
   weight: ["400", "600", "700"],
   variable: "--font-hand",
   display: "swap",
+  // only the About page uses it, so don't make every page download it up
+  // front alongside the fonts the first screen actually needs
+  preload: false,
 });
 
 /** The name first, then what it is — "Click Again" plus "agency" is the

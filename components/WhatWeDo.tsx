@@ -37,7 +37,13 @@ export default function WhatWeDo() {
           <li key={s.slug}>
             <Link className="do-row" href={`/solutions/${s.slug}`}>
               <span className="do-icon" aria-hidden="true">
-                <Image src={art[s.slug]} alt="" width={96} height={96} />
+                <Image
+                  src={art[s.slug]}
+                  alt=""
+                  width={96}
+                  height={96}
+                  sizes="64px"
+                />
               </span>
               <span className="do-title">{s.title}</span>
               <span className="do-line">{s.tagline}</span>

@@ -2741,12 +2741,16 @@ a { color: inherit; text-decoration: none; }
 .slide-l { animation-name: slide-l; }
 .slide-r { animation-name: slide-r; }
 
+/* 0.01, not 0: Chrome skips fully transparent text when it picks the
+   Largest Contentful Paint, and a compositor-only fade never repaints, so
+   the hero only counted once a late font swap forced a repaint (~1s on a
+   phone). Starting a hair above zero looks identical and counts at once. */
 @keyframes slide-l {
-  from { opacity: 0; transform: translateX(-40px); }
+  from { opacity: 0.01; transform: translateX(-40px); }
   to   { opacity: 1; transform: none; }
 }
 @keyframes slide-r {
-  from { opacity: 0; transform: translateX(40px); }
+  from { opacity: 0.01; transform: translateX(40px); }
   to   { opacity: 1; transform: none; }
 }
 

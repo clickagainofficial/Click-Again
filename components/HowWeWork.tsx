@@ -121,6 +121,10 @@ export default function HowWeWork() {
               alt=""
               className={src === showing ? "is-shown" : undefined}
               draggable={false}
+              // the runner only exists on wide screens (display:none on
+              // phones); lazy means phones never download the five poses
+              loading="lazy"
+              decoding="async"
             />
           ))}
         </div>
