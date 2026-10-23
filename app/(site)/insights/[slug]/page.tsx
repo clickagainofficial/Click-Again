@@ -191,8 +191,8 @@ export default async function InsightPost({ params }: Params) {
               {post.faqs.length ? (
                 <section className="ip-faq" aria-labelledby="faq">
                   <h2 id="faq">Questions people ask</h2>
-                  {post.faqs.map((f) => (
-                    <details key={f.q}>
+                  {post.faqs.map((f, i) => (
+                    <details key={f.q} open={i === 0}>
                       <summary>{f.q}</summary>
                       <p>{f.a}</p>
                     </details>

@@ -4335,3 +4335,14 @@ button[data-cc-hidden] { display: none !important; }
 }
 .ip-faq details[open] summary::after { background: var(--grad-a); }
 .ip-faq details p { color: rgba(255, 255, 255, 0.72); }
+
+/* the open answer runs edge to edge in the card: no inner frame, no
+   narrow column of text leaving the right half empty */
+.faq-list { padding: 0; }
+.faq-item { border-radius: 0; }
+.faq-item + .faq-item { margin-top: 0; border-top: 1px solid rgba(255, 255, 255, 0.06); }
+.faq-item.is-open + .faq-item, .faq-item + .faq-item.is-open { border-top-color: transparent; }
+.faq-q { padding: 18px 22px 18px 26px; }
+.faq-item.is-open .faq-q { cursor: default; }
+.faq-a { max-width: none; padding: 0 26px 22px; }
+.ip-faq details p { max-width: none; }

@@ -183,11 +183,11 @@ export const site = {
   homeFaqs: [
     {
       q: "Is Click Again a marketing agency in Madurai?",
-      a: "Yes. Click Again is a marketing agency based in Madurai, Tamil Nadu, working with businesses across Tamil Nadu. Our work covers marketing strategy, content and creative, websites and digital presence, social media management, performance marketing and analytics, and retention and automation.",
+      a: "Yes. Click Again is a marketing agency based in Madurai, Tamil Nadu, working with businesses across the state. We help a business get found, earn trust and win customers, and then give those customers a reason to come back.",
     },
     {
-      q: "Does Click Again only run ads?",
-      a: "No. Ads are one part of the work. We start with your business — what you sell, who buys it and why they would choose you — and then decide what to do. That can be strategy, creative, a website, social media or ads, and it always includes the part that brings customers back: follow-ups by email and WhatsApp, and automation.",
+      q: "How does Click Again approach marketing?",
+      a: "As one connected chain rather than separate jobs. Strategy sets the direction, creative carries the message, your website and profiles turn interest into enquiries, social media builds trust, campaigns bring people in and retention brings them back. Each link supports the next, so we start by understanding your business and then strengthen the links that matter most.",
     },
     {
       q: "Do you work with businesses outside Madurai?",
@@ -199,7 +199,7 @@ export const site = {
     },
     {
       q: "How soon will I see results?",
-      a: "It depends on the work. Ads start producing data within weeks; search, content and brand work build over months. Before anything starts, the plan sets out what happens and when, and you get regular word on how it's going.",
+      a: "It depends on where your business starts and what you want more of. Because every part of marketing feeds the next, the first signs usually come early, such as more people finding you and more enquiries, and the bigger results build as the pieces start working together. The plan sets out what to expect at each stage, and you get regular updates along the way.",
     },
   ],
 
@@ -238,8 +238,8 @@ export const site = {
       a: "Strategy decides what to do before money is spent. Content and creative is the part people see. The website is where the click lands. Social media is where people check you are real. Performance marketing brings customers in, and retention brings them back.",
     },
     {
-      q: "Do you offer SEO and AI search optimisation?",
-      a: "Yes, as part of Website & Digital Presence: technical fixes, page structure and content for search, AI search optimisation so assistants like ChatGPT and Gemini can quote you, and Google Business Profile setup for local search and Maps.",
+      q: "Can you help my business get found online?",
+      a: "Yes. Being found is the first link in the chain. A clear website, a well-kept Google Business Profile, visibility in search and in AI answers, and an active social presence work together, so people looking for what you sell find you and trust what they see.",
     },
     {
       q: "What happens once we start working together?",
@@ -345,8 +345,8 @@ export const site = {
           a: "Who you are selling to, written down rather than assumed; a channel plan with a budget against every line; and a launch sequence you can actually run next month.",
         },
         {
-          q: "Should I work out a strategy before running ads?",
-          a: "Strategy is the work that happens before money goes out. Deciding the audience, the offer and the message first means the ads have something clear to say, and you know in advance what counts as them working.",
+          q: "Why start with strategy?",
+          a: "Because it sets the direction for everything that follows. When the audience, the offer and the message are decided first, the creative, the website, social media, campaigns and retention all pull the same way, and you know in advance what counts as success.",
         },
         {
           q: "Do you study my competitors?",
@@ -395,7 +395,7 @@ export const site = {
       faqs: [
         {
           q: "What kind of content do you create?",
-          a: "Graphic design for ads, posts, menus, brochures and packaging; copywriting; product, food, interior and team photography; video shoots and editing for reels, ads and brand films; animation; and Tamil creative.",
+          a: "The pictures, words and videos that carry your offer: graphic design for campaigns, posts, menus, brochures and packaging; copywriting; photography; video shoots and editing; animation; and Tamil creative. All of it is made for the platform where it will be seen.",
         },
         {
           q: "Is your Tamil content written in Tamil or translated?",
@@ -463,8 +463,8 @@ export const site = {
           a: "Yes. Sites are built for the phone first, where most of your customers will see them, and made quick to load.",
         },
         {
-          q: "Do you build landing pages for ads?",
-          a: "Yes. One page, one campaign, one action, so people clicking an ad land somewhere built to convert instead of on your home page.",
+          q: "Do you build landing pages for campaigns?",
+          a: "Yes. One page, one campaign, one action, so people who arrive from a campaign land somewhere built to turn their interest into an enquiry, instead of on your home page.",
         },
         {
           q: "What is AI search optimisation (AEO or GEO)?",
@@ -651,7 +651,7 @@ export const site = {
         },
         {
           q: "Why build a customer list of my own?",
-          a: "Because a list you own can be reached at almost nothing per message, whenever you need it, instead of paying for ads every time you want to talk to people who have already bought from you.",
+          a: "Because a list you own can be reached whenever you need it, at almost nothing per message, instead of paying to reach the same people again each time. It is what turns a one-time buyer into a regular.",
         },
         {
           q: "Do you use the official WhatsApp Business API?",
