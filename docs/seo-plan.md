@@ -113,8 +113,16 @@ real browser.)
 **Bing, 23 Oct 2026 (Kansha's browser): clickagain.in is #1 for "click
 again"**, with the new title "Click Again — Marketing Agency in Madurai". It
 showed a globe instead of our icon because the site only had an SVG icon
-and no /favicon.ico. Fixed with `app/favicon.ico` (16/32/48 PNG-in-ICO,
-rendered from `app/icon.svg`). Bing refreshes favicons slowly.
+and no /favicon.ico. Fixed with `app/favicon.ico`. Bing refreshes favicons
+slowly.
+
+**New "CA" mark (23 Oct 2026).** Kansha supplied a new icon, a 1500px PNG
+that had been renamed to `.ico`, uncommitted, so it never reached
+production. Everything is now generated from it: `app/favicon.ico` (real
+ICO, 16/32/48), `app/icon.png` (192px, a multiple of 48 as Google asks),
+`app/apple-icon.png` (180px) and `public/logo/clickagain-mark-512.png`.
+The old `app/icon.svg` and `app/apple-icon.tsx` were removed. The schema
+`logo` now points to the square 512px mark, which closes A7.
 
 **Business risk to check:** another page used "ClickAgain" for digital
 marketing. Check the trademark register (IP India, class 35) and consider
@@ -276,7 +284,7 @@ These are done in this repo.
   LinkedIn company page, YouTube channel + video, Crunchbase/directories.
 - [ ] **A6. NAP in the footer and on About**, matching the Business Profile
       word for word.
-- [~] **A7. Logo for schema.** Checked 17 Oct 2026: `logo/clickagain-logo.png`
+- [x] **A7. Logo for schema.** (done 23 Oct 2026: square 512px "CA" mark) Checked 17 Oct 2026: `logo/clickagain-logo.png`
       exists, but it's a wide 1826×338 wordmark. Google shows the logo in a
       square or round space (Knowledge Panel, the icon beside results), so a
       wide image gets shrunk or cropped. **Needed:** a square PNG of the mark,

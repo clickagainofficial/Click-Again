@@ -83,7 +83,9 @@ export function organizationSchema() {
       opens: site.hours.opens,
       closes: site.hours.closes,
     },
-    logo: abs("/logo/clickagain-logo.png"),
+    // square, because Google draws the logo in a square or round slot
+    // (Knowledge Panel, beside results) and shrinks a wide wordmark to nothing
+    logo: abs("/logo/clickagain-mark-512.png"),
     image: abs("/opengraph-image"),
     description: `${site.name} is a marketing agency in Madurai — strategy, creative, websites, social, ads and retention. We get you customers, and keep them coming back.`,
     address: postalAddress,
