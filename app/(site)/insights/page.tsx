@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { formatDate, publishedInsights, readingMinutes } from "@/lib/insights";
+import InsightCards from "@/components/InsightCards";
+import { cardData, publishedInsights } from "@/lib/insights";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
@@ -18,7 +19,6 @@ export const revalidate = 3600;
 
 export default function Insights() {
   const insights = publishedInsights();
-  const [lead, ...rest] = insights;
 
   return (
     <div className="shell">
@@ -31,41 +31,9 @@ export default function Insights() {
         </p>
       </section>
 
-      {lead ? (
+      {insights.length ? (
         <div className="in-list">
-          <Link className="in-feature" href={`/insights/${lead.slug}`}>
-            <span className="in-meta">
-              <span className="in-tag">{lead.tag}</span>
-              <span>Latest</span>
-            </span>
-            <span className="in-feature-title">{lead.title}</span>
-            <span className="in-feature-summary">{lead.summary}</span>
-            <span className="in-feature-foot">
-              <span>
-                {site.founder.name} · <time dateTime={lead.date}>{formatDate(lead.date)}</time> ·{" "}
-                {readingMinutes(lead)} min read
-              </span>
-              <span className="in-go">Read the guide →</span>
-            </span>
-          </Link>
-
-          {rest.length ? (
-            <ul className="in-grid">
-              {rest.map((post) => (
-                <li key={post.slug}>
-                  <Link className="in-card" href={`/insights/${post.slug}`}>
-                    <span className="in-meta">
-                      <span className="in-tag">{post.tag}</span>
-                      <time dateTime={post.date}>{formatDate(post.date)}</time>
-                    </span>
-                    <span className="in-title">{post.title}</span>
-                    <span className="in-summary">{post.summary}</span>
-                    <span className="in-go">{readingMinutes(post)} min read →</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : null}
+          <InsightCards posts={insights.map(cardData)} />
         </div>
       ) : (
         <div className="in-empty">

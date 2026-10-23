@@ -19,8 +19,10 @@ export type Insight = {
   date: string;
   /** Last meaningful edit, if any, ISO "YYYY-MM-DD". */
   updated?: string;
-  /** Short topic label shown as a pill. */
+  /** Short topic label shown as a pill, and the filter tabs on /insights. */
   tag: string;
+  /** Where the advice applies, shown as a chip on the card: "Madurai", "India"… */
+  place: string;
   /** The "In short" box at the top: the answer before the detail. */
   takeaways: string[];
   /** Shown at the end of the post and published as FAQPage data. */
@@ -39,6 +41,7 @@ export const insights: Insight[] = [
       "A 4x ROAS sounds healthy until GST, delivery, payment fees and COD returns come out of it. Here is how to work out the ROAS your business actually needs, with a full rupee example.",
     date: "2026-10-16",
     tag: "Performance marketing",
+    place: "India",
     takeaways: [
       "Break-even ROAS = revenue the ad platform reports per order ÷ what you keep from that order before ad spend.",
       "Take GST out of revenue, and take product cost, packaging, delivery, payment fees and returns out of what you keep.",
@@ -88,6 +91,7 @@ export const insights: Insight[] = [
       "Twelve questions to put to any marketing agency before you sign, and what a good answer sounds like, from the first 90 days and reporting to who owns your ad accounts.",
     date: "2026-10-09",
     tag: "Hiring an agency",
+    place: "Madurai",
     takeaways: [
       "A good agency asks about your business before it shows you a package.",
       "Ask for a week-by-week plan for the first 90 days, and for the numbers they will report: customers and cost per customer, not just likes and reach.",
@@ -137,6 +141,7 @@ export const insights: Insight[] = [
       "A step-by-step plan for shops, clinics, salons and restaurants to turn first-time customers into regulars on WhatsApp, with timings, sample messages in English and Tamil, and the rules that keep your number safe.",
     date: "2026-10-23",
     tag: "Retention",
+    place: "Tamil Nadu",
     takeaways: [
       "Ask permission first, at the counter, on the bill or on a form. WhatsApp's own policy requires opt-in before a business messages someone.",
       "Four messages do most of the work: a thank-you, a check-in, a reason to come back, and a win-back.",

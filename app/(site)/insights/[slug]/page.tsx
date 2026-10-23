@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import InsightCards from "@/components/InsightCards";
 import JsonLd from "@/components/JsonLd";
 import ReadingProgress from "@/components/ReadingProgress";
 import { insights } from "@/content/insights";
 import {
+  cardData,
   formatDate,
   isPublished,
   publishedInsights,
-  readingMinutes,
   renderInsight,
 } from "@/lib/insights";
 import { articleSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
@@ -258,21 +259,7 @@ export default async function InsightPost({ params }: Params) {
         {related.length ? (
           <section className="ip-related" aria-labelledby="ip-related-h">
             <h2 id="ip-related-h">Keep reading</h2>
-            <ul className="in-grid is-two">
-              {related.map((p) => (
-                <li key={p.slug}>
-                  <Link className="in-card" href={`/insights/${p.slug}`}>
-                    <span className="in-meta">
-                      <span className="in-tag">{p.tag}</span>
-                      <span>{readingMinutes(p)} min read</span>
-                    </span>
-                    <span className="in-title">{p.title}</span>
-                    <span className="in-summary">{p.summary}</span>
-                    <span className="in-go">Read →</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <InsightCards posts={related.map(cardData)} tabs={false} />
           </section>
         ) : null}
       </div>

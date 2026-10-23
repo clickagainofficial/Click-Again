@@ -600,6 +600,7 @@ same day. Add a row whenever a new listing is created.
 
 Newest first. One line per change to the plan or step done.
 
+- **23 Oct 2026**: Insights cards restyled to dark cards with a topic cover panel, a "Published" strip, chips (topic + place) and a red "Read now" button, plus topic filter tabs (`components/InsightCards.tsx`). Each post gained a `place` field.
 - **23 Oct 2026**: Blog launched (B8). New Markdown blog system with scheduling, a professional post layout, and 3 posts: WhatsApp follow-up (dated 23 Oct), choosing an agency (dated 9 Oct) and break-even ROAS (dated 16 Oct). All three live 23 Oct.
 - **23 Oct 2026**: `/skills/` git-ignored (commit c3c55d6). AI baseline
   logged: ChatGPT can't find Click Again yet (section 1a-2).

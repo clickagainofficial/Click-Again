@@ -98,12 +98,25 @@ export function readingMinutes(post: Insight) {
   return Math.max(1, Math.round(words / 220));
 }
 
-export function formatDate(iso: string) {
+/** What a post card needs, worked out on the server. */
+export function cardData(post: Insight) {
+  return {
+    slug: post.slug,
+    title: post.title,
+    tag: post.tag,
+    place: post.place,
+    date: post.date,
+    dateLabel: formatDate(post.date, "short"),
+    minutes: readingMinutes(post),
+  };
+}
+
+export function formatDate(iso: string, month: "long" | "short" = "long") {
   const t = Date.parse(iso);
   if (Number.isNaN(t)) return iso;
   return new Date(t).toLocaleDateString("en-IN", {
     day: "numeric",
-    month: "long",
+    month,
     year: "numeric",
     timeZone: "Asia/Kolkata",
   });
