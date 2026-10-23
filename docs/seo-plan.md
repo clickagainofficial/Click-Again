@@ -102,6 +102,20 @@ YouTube.
 
 The fix is entity corroboration plus clear disambiguation (section 3, A11).
 
+**AI baseline, 23 Oct 2026.** ChatGPT with web search, asked "What is Click
+Again, the marketing agency in Madurai?", **couldn't verify a public
+profile**. It didn't find clickagain.in, found only other Madurai agencies,
+and asked for a website, Instagram or Maps link. It didn't make anything up.
+Re-ask the same question monthly and log the answer here. (A server-side
+scrape of Bing gave misleading results, so don't trust it. Check Bing in a
+real browser.)
+
+**Bing, 23 Oct 2026 (Kansha's browser): clickagain.in is #1 for "click
+again"**, with the new title "Click Again — Marketing Agency in Madurai". It
+showed a globe instead of our icon because the site only had an SVG icon
+and no /favicon.ico. Fixed with `app/favicon.ico` (16/32/48 PNG-in-ICO,
+rendered from `app/icon.svg`). Bing refreshes favicons slowly.
+
 **Business risk to check:** another page used "ClickAgain" for digital
 marketing. Check the trademark register (IP India, class 35) and consider
 filing for "Click Again". Talk to a trademark attorney.
@@ -203,6 +217,8 @@ These are done in this repo.
       `scripts/indexnow.mjs`. **After every deploy that changes page copy,
       run `npm run indexnow`** (all sitemap URLs) or
       `npm run indexnow -- /insights/new-post` (just the changed paths).
+      In Git Bash, prefix it with `MSYS_NO_PATHCONV=1`, or `/about` gets
+      rewritten to a Windows path and IndexNow rejects it. PowerShell is fine.
 - [x] **A10. Technical audit** (22 Oct 2026, all 13 pages + Lighthouse
       mobile). Lighthouse mobile scores: Performance 92, Accessibility 96,
       Best Practices 100, SEO 100. Every page returns 200 with one H1, a
@@ -558,6 +574,8 @@ same day. Add a row whenever a new listing is created.
 
 Newest first. One line per change to the plan or step done.
 
+- **23 Oct 2026**: `/skills/` git-ignored (commit c3c55d6). AI baseline
+  logged: ChatGPT can't find Click Again yet (section 1a-2).
 - **23 Oct 2026**: Brand SERP + AEO review (section 1a-2). Added the
   disambiguation schema, AboutPage/ContactPage schema and the llms.txt
   "Which Click Again" section (A11). Business Profile, LinkedIn, YouTube and
