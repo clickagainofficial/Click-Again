@@ -446,7 +446,27 @@ The same NAP everywhere, copied from section 7.
 
 ### B8. Content (ongoing)
 
-- [ ] Publish 2–4 posts a month on `/insights`
+- [~] Publish 2–4 posts a month on `/insights`. **Blog system rebuilt
+      23 Oct 2026:** Markdown posts in `content/insights/<slug>.md`, facts in
+      `content/insights.ts` (seoTitle, takeaways, FAQs, sources). Each post
+      gets an author byline (Kansha), "In short" box, sticky outline,
+      FAQ + FAQPage schema, sources, a share card at `/insights/<slug>/og`,
+      and BlogPosting schema with a Person author. **Scheduling:** a post
+      dated in the future stays hidden (list, sitemap, llms.txt, its URL
+      404s) until that date in India; pages re-check hourly. Never back-date.
+  - [x] 23 Oct 2026 · **How to Bring Customers Back: A WhatsApp Follow-Up
+        Plan for Local Businesses in Tamil Nadu** (live)
+  - [ ] 30 Oct 2026 · **How to Choose a Marketing Agency in Madurai: 12
+        Questions** (scheduled). That day: `npm run indexnow -- /insights
+        /insights/how-to-choose-a-marketing-agency-in-madurai` and Search
+        Console Request indexing
+  - [ ] 6 Nov 2026 · **Break-Even ROAS for Indian Businesses** (scheduled).
+        Same steps that day
+  - Topic research (23 Oct): Semrush had no API units and Ahrefs' plan has
+    no API access, so topics were picked from a SERP gap review. Local
+    agency content is sales pages with unsourced stats; global guides lack
+    India specifics (GST, COD/RTO, Tamil). Our angle: honest, local,
+    worked numbers, no invented stats.
 - [ ] Each post answers a real question a business owner in Tamil Nadu asks
 - [ ] Each post links to the matching solution page
 - [ ] Bump `site.updated` in `site.config.ts` when page copy changes
@@ -579,6 +599,7 @@ same day. Add a row whenever a new listing is created.
 
 Newest first. One line per change to the plan or step done.
 
+- **23 Oct 2026**: Blog launched (B8). New Markdown blog system with scheduling, a professional post layout, and 3 posts: WhatsApp follow-up (live today), choosing an agency (30 Oct) and break-even ROAS (6 Nov).
 - **23 Oct 2026**: `/skills/` git-ignored (commit c3c55d6). AI baseline
   logged: ChatGPT can't find Click Again yet (section 1a-2).
 - **23 Oct 2026**: Brand SERP + AEO review (section 1a-2). Added the

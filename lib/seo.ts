@@ -22,6 +22,8 @@ export function pageMetadata({
   path,
   type = "website",
   publishedTime,
+  modifiedTime,
+  image: imagePath = "/opengraph-image",
 }: {
   title: Metadata["title"];
   shareTitle: string;
@@ -29,9 +31,12 @@ export function pageMetadata({
   path: string;
   type?: "website" | "article";
   publishedTime?: string;
+  modifiedTime?: string;
+  /** The share card; defaults to the site-wide one. */
+  image?: string;
 }): Metadata {
   const image = {
-    url: "/opengraph-image",
+    url: imagePath,
     width: 1200,
     height: 630,
     alt: shareTitle,
@@ -48,6 +53,7 @@ export function pageMetadata({
       locale: "en_IN",
       type,
       ...(publishedTime ? { publishedTime } : {}),
+      ...(modifiedTime ? { modifiedTime } : {}),
       images: [image],
     },
     twitter: {

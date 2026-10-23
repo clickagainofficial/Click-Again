@@ -172,29 +172,48 @@ export function breadcrumbSchema(trail: { name: string; path: string }[]) {
 }
 
 /** A written post on /insights. */
+/**
+ * One post. The founder is the author, a named person with a role rather
+ * than the company, because that is what experience signals (E-E-A-T)
+ * look for; the company is the publisher.
+ */
 export function articleSchema(post: {
   slug: string;
   title: string;
   summary: string;
   date: string;
+  updated?: string;
+  tag: string;
+  words: number;
 }) {
+  const url = abs(`/insights/${post.slug}`);
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "@id": abs(`/insights/${post.slug}#article`),
+    "@id": `${url}#article`,
     headline: post.title,
     description: post.summary,
     datePublished: post.date,
-    dateModified: post.date,
-    url: abs(`/insights/${post.slug}`),
+    dateModified: post.updated ?? post.date,
+    url,
+    image: `${url}/og`,
     inLanguage: "en-IN",
-    author: { "@id": abs("/#organization") },
+    articleSection: post.tag,
+    wordCount: post.words,
+    author: {
+      "@type": "Person",
+      "@id": abs("/about#founder"),
+      name: site.founder.name,
+      jobTitle: site.founder.role,
+      url: abs("/about"),
+      worksFor: { "@id": abs("/#organization") },
+    },
     publisher: { "@id": abs("/#organization") },
-    mainEntityOfPage: abs(`/insights/${post.slug}`),
+    isPartOf: { "@id": abs("/#website") },
+    mainEntityOfPage: url,
   };
 }
 
-/** Questions and their answers, in the shape answer engines quote directly. */
 /**
  * Marks /about and /contact as what they are, and points both at the one
  * organization, so an answer engine asked "who is Click Again" or "how do I
@@ -225,6 +244,7 @@ export function contactPageSchema() {
   };
 }
 
+/** Questions and their answers, in the shape answer engines quote directly. */
 export function faqSchema(items: readonly { q: string; a: string }[]) {
   return {
     "@context": "https://schema.org",

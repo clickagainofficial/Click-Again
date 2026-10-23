@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { insights } from "@/content/insights";
+import { publishedInsights } from "@/lib/insights";
 import { site } from "@/site.config";
 
 /**
@@ -8,7 +8,11 @@ import { site } from "@/site.config";
  * or a post and it appears here on its own — there is no second list to keep
  * in step.
  */
+// re-built hourly, so a scheduled post joins the sitemap on its publish date
+export const revalidate = 3600;
+
 export default function sitemap(): MetadataRoute.Sitemap {
+  const insights = publishedInsights();
   const url = (path: string) => new URL(path, site.url).toString();
 
   // Real edit dates only, never the build time: a lastmod that moves on every
@@ -18,7 +22,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const legalUpdated = new Date(`${site.legal.updated} UTC`);
   // the list page changes whenever a post is added
   const newestPost = insights.reduce(
-    (latest, p) => (new Date(p.date) > latest ? new Date(p.date) : latest),
+    (latest, p) => {
+      const d = new Date(p.updated ?? p.date);
+      return d > latest ? d : latest;
+    },
     updated
   );
 
@@ -41,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const posts: MetadataRoute.Sitemap = insights.map((post) => ({
     url: url(`/insights/${post.slug}`),
-    lastModified: new Date(post.date),
+    lastModified: new Date(post.updated ?? post.date),
     changeFrequency: "yearly",
     priority: 0.6,
   }));

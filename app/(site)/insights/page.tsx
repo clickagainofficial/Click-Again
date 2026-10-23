@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { insights } from "@/content/insights";
+import { formatDate, publishedInsights, readingMinutes } from "@/lib/insights";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
@@ -13,17 +13,13 @@ export const metadata: Metadata = pageMetadata({
   path: "/insights",
 });
 
-function formatDate(iso: string) {
-  const t = Date.parse(iso);
-  if (Number.isNaN(t)) return iso;
-  return new Date(t).toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-}
+// re-checked hourly, so a scheduled post appears on its date without a deploy
+export const revalidate = 3600;
 
 export default function Insights() {
+  const insights = publishedInsights();
+  const [lead, ...rest] = insights;
+
   return (
     <div className="shell">
       <section className="page-head">
@@ -35,22 +31,42 @@ export default function Insights() {
         </p>
       </section>
 
-      {insights.length ? (
-        <ul className="in-grid">
-          {insights.map((post) => (
-            <li key={post.slug}>
-              <Link className="in-card" href={`/insights/${post.slug}`}>
-                <span className="in-meta">
-                  <span className="in-tag">{post.tag}</span>
-                  <time dateTime={post.date}>{formatDate(post.date)}</time>
-                </span>
-                <span className="in-title">{post.title}</span>
-                <span className="in-summary">{post.summary}</span>
-                <span className="in-go">Read →</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+      {lead ? (
+        <div className="in-list">
+          <Link className="in-feature" href={`/insights/${lead.slug}`}>
+            <span className="in-meta">
+              <span className="in-tag">{lead.tag}</span>
+              <span>Latest</span>
+            </span>
+            <span className="in-feature-title">{lead.title}</span>
+            <span className="in-feature-summary">{lead.summary}</span>
+            <span className="in-feature-foot">
+              <span>
+                {site.founder.name} · <time dateTime={lead.date}>{formatDate(lead.date)}</time> ·{" "}
+                {readingMinutes(lead)} min read
+              </span>
+              <span className="in-go">Read the guide →</span>
+            </span>
+          </Link>
+
+          {rest.length ? (
+            <ul className="in-grid">
+              {rest.map((post) => (
+                <li key={post.slug}>
+                  <Link className="in-card" href={`/insights/${post.slug}`}>
+                    <span className="in-meta">
+                      <span className="in-tag">{post.tag}</span>
+                      <time dateTime={post.date}>{formatDate(post.date)}</time>
+                    </span>
+                    <span className="in-title">{post.title}</span>
+                    <span className="in-summary">{post.summary}</span>
+                    <span className="in-go">{readingMinutes(post)} min read →</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
       ) : (
         <div className="in-empty">
           <Image

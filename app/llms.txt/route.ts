@@ -1,4 +1,4 @@
-import { insights } from "@/content/insights";
+import { publishedInsights } from "@/lib/insights";
 import { site } from "@/site.config";
 
 /**
@@ -15,7 +15,8 @@ import { site } from "@/site.config";
  * is it for, and what would they do for me" without guessing.
  */
 
-export const dynamic = "force-static";
+// static, but rebuilt hourly so scheduled posts appear here on their date
+export const revalidate = 3600;
 
 /** site.config marks emphasis with *one* or **two** asterisks for the pages
  *  to colour; plain text wants the words without them. */
@@ -59,6 +60,7 @@ export function GET() {
 
   const sectors = site.sectors.map((s) => `- ${s.name}`).join("\n");
 
+  const insights = publishedInsights();
   const posts = insights.length
     ? insights
         .map((p) => `- [${p.title}](${url(`/insights/${p.slug}`)}): ${p.summary}`)
