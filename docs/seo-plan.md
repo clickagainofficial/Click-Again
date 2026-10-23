@@ -265,8 +265,8 @@ These are done in this repo.
   - [ ] Home H1 has no brand/Madurai words (A2); the hero sub-line covers
         Madurai. Needs your design approval
   - [ ] /insights is thin (115 words) until posts exist (B8)
-  - [ ] No /favicon.ico (the SVG icon is linked and Google accepts it) and
-        no web manifest. Both optional
+  - [x] favicon.ico + icon.png + apple-icon.png added (23 Oct 2026, new CA
+        mark). A web manifest is still optional
 - [~] **A11. Entity & AEO disambiguation** (23 Oct 2026)
   - [x] Organization schema: `disambiguatingDescription` (which Click Again:
         Madurai, clickagain.in, 2026, founder), `slogan`, `foundingLocation`,
@@ -279,11 +279,14 @@ These are done in this repo.
   - [ ] Founder `sameAs` → Kansha's LinkedIn: **on hold, Kansha said not
         now (23 Oct 2026)**
   - [ ] Home hero brand line (A2): needs design approval
-  - [ ] `geo` + square logo: waiting on Kansha
+  - [x] Square logo done (23 Oct 2026). `geo` is tracked under A4
 - **Deferred by Kansha (23 Oct 2026), do later:** Business Profile (board),
   LinkedIn company page, YouTube channel + video, Crunchbase/directories.
-- [ ] **A6. NAP in the footer and on About**, matching the Business Profile
-      word for word.
+- [x] **A6. NAP.** (checked 23 Oct 2026) The full name, address, phone and
+      email are on /contact and in the schema on every page. The footer shows
+      email, phone and "Madurai, Tamil Nadu", which is enough while the
+      address is expected to change. Put the full street address in the
+      footer once the new office is final.
 - [x] **A7. Logo for schema.** (done 23 Oct 2026: square 512px "CA" mark) Checked 17 Oct 2026: `logo/clickagain-logo.png`
       exists, but it's a wide 1826×338 wordmark. Google shows the logo in a
       square or round space (Knowledge Panel, the icon beside results), so a
@@ -322,13 +325,10 @@ These are done in this repo.
   - [x] DKIM status "Authenticating email with DKIM" confirmed in the Admin
         console (17 Oct 2026)
   - [x] Test mail to `hello@` received (17 Oct 2026)
-  - [ ] Change the email on the Instagram and Facebook bios
+  - [~] Change the email on the bios: Instagram done 21 Oct 2026; Facebook
+        to confirm
   - [ ] Optional: the contact form's SMTP (admin → SMTP settings) still
         sends through Gmail. It can move to Workspace later.
-- [ ] Business phone number for the site, schema and Business Profile
-- [ ] Is the Madurai address a public office or a home? If it's a home, set
-      the Business Profile up as a service-area business with the address
-      hidden.
 - [x] Office hours: Monday to Friday, 9:30 am – 7:30 pm (17 Oct 2026)
 - [x] Address is an **office customers can visit** (17 Oct 2026), so the
       Business Profile shows the address with a Maps pin. It isn't set up
@@ -340,9 +340,8 @@ These are done in this repo.
       Madurai address for now. When it moves, update it everywhere in one
       go: `site.config.ts` + `lib/schema.ts` postal address, Business
       Profile, every directory.
-- [ ] Where the domain is registered (needed to add DNS records)
-- [ ] Which Google account owns everything. Use one business account, not a
-      personal one.
+- [x] Domain registrar: Hostinger. Owning account: `kansha@clickagain.in`
+      (both settled 17 Oct 2026)
 
 ### B1. Google Search Console (week 1, do this first)
 
@@ -352,7 +351,7 @@ These are done in this repo.
       `google-site-verification=Cuw-VlGem…` belongs to that account. Don't
       delete it, or that account loses ownership. Workspace's token
       (`cnFgXat…`) is separate; both stay as `TXT @` at Hostinger.
-- [ ] **Decision (17 Oct 2026): move ownership to `kansha@clickagain.in`
+- [x] **Decision (17 Oct 2026): move ownership to `kansha@clickagain.in`
       and remove the Gmail account.** Order matters:
   - [x] 1. Added the property from `kansha@` (17 Oct 2026). It was **auto
         verified** through the Workspace token `cnFgXat…`, so that record
@@ -380,11 +379,9 @@ These are done in this repo.
 - [x] Submitted 11 URLs (17 Oct 2026): home, about, solutions, contact,
       insights, and the 6 solution pages. Privacy and Terms were left to the
       sitemap. Bing allows 100 URLs a day.
-- [ ] Optional, 18 Oct 2026: in Google Search Console, request indexing for
-      `/insights` and the 6 solution pages (Google allows about 10 a day).
-      The sitemap covers them anyway.
-- [ ] Bing's index feeds Copilot and ChatGPT search, so this matters for AI
-      answers too
+- [x] Google request-indexing for the remaining pages done 22 Oct 2026
+- Bing's index feeds Copilot and ChatGPT search. On 23 Oct 2026 Bing ranks
+  clickagain.in #1 for "click again"
 
 ### B3. Google Business Profile (week 1, biggest single win for brand searches)
 
