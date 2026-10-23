@@ -4,7 +4,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import FaqList from "@/components/FaqList";
 import JsonLd from "@/components/JsonLd";
-import { faqSchema } from "@/lib/schema";
+import { contactPageSchema, faqSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
@@ -111,7 +111,7 @@ export default async function Contact({
         <FaqList items={site.faqs} />
       </section>
 
-      <JsonLd data={faqSchema(site.faqs)} />
+      <JsonLd data={[contactPageSchema(), faqSchema(site.faqs)]} />
     </div>
   );
 }

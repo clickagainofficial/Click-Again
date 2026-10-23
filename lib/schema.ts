@@ -52,12 +52,29 @@ export function organizationSchema() {
       "Click Again Marketing Agency",
     ],
     url: site.url,
+    // "Click Again" is also an everyday phrase, a song title and other
+    // pages' names, so say which Click Again this is. Every fact in it is
+    // stated on the site itself (About, footer).
+    disambiguatingDescription: `The ${site.name} marketing agency based in ${site.legal.city}, ${site.legal.state}, India, at ${site.domain} — founded in ${site.founded} by ${site.founder.name}.`,
+    slogan: "One click is a sale. Click again is a business.",
     foundingDate: site.founded,
+    foundingLocation: {
+      "@type": "Place",
+      name: `${site.legal.city}, ${site.legal.state}, India`,
+    },
     founder: {
       "@type": "Person",
+      "@id": abs("/about#founder"),
       name: site.founder.name,
       jobTitle: site.founder.role,
+      worksFor: { "@id": abs("/#organization") },
     },
+    // What the agency works on, taken from the services and their items,
+    // so answer engines can tie topics to us without guessing.
+    knowsAbout: [
+      ...site.services.map((s) => s.title),
+      ...site.services.flatMap((s) => s.items.map((i) => i.name)),
+    ],
     email: site.email,
     ...(phone ? { telephone: phone } : {}),
     openingHoursSpecification: {
@@ -176,6 +193,36 @@ export function articleSchema(post: {
 }
 
 /** Questions and their answers, in the shape answer engines quote directly. */
+/**
+ * Marks /about and /contact as what they are, and points both at the one
+ * organization, so an answer engine asked "who is Click Again" or "how do I
+ * reach Click Again" knows which page answers it.
+ */
+export function aboutPageSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": abs("/about#page"),
+    url: abs("/about"),
+    name: `About ${site.name}`,
+    isPartOf: { "@id": abs("/#website") },
+    about: { "@id": abs("/#organization") },
+    mainEntity: { "@id": abs("/#organization") },
+  };
+}
+
+export function contactPageSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": abs("/contact#page"),
+    url: abs("/contact"),
+    name: `Contact ${site.name}`,
+    isPartOf: { "@id": abs("/#website") },
+    about: { "@id": abs("/#organization") },
+  };
+}
+
 export function faqSchema(items: readonly { q: string; a: string }[]) {
   return {
     "@context": "https://schema.org",

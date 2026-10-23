@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import AboutBeliefs from "@/components/AboutBeliefs";
-
+import JsonLd from "@/components/JsonLd";
+import { aboutPageSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 import { site } from "@/site.config";
 
@@ -23,6 +24,7 @@ export default function About() {
 
   return (
     <>
+      <JsonLd data={aboutPageSchema()} />
       <div className="shell">
         <section className="page-head ab-head">
           <div>

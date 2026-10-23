@@ -76,6 +76,38 @@ stays as is. It only appears on /privacy, /terms and billing.
 
 ---
 
+## 1a-2. Brand SERP and AEO findings (23 Oct 2026)
+
+**Google, "click again":** /about is **#1** and /solutions #4. In between are
+other people's results: a 2021 YouTube song called "Click Again", an old
+Facebook page "ClickAgain" (447 followers, "Digital Marketing Service
+Provider", linking to click-again.com, a domain that no longer resolves) and
+Power Thesaurus. The home page and our own Facebook/Instagram don't show.
+**Bing, "click again":** clickagain.in is #2.
+
+**We can't remove other sites' results.** Google's removal tools cover only
+your own pages or legal and personal-info cases. The only way to push them
+down is to **fill page 1 with our own properties**: sitelinks, a Knowledge
+Panel (needs the Business Profile), and our Facebook, Instagram, LinkedIn and
+YouTube.
+
+**Why AI assistants get Click Again wrong:**
+1. Their training data predates the company (2026).
+2. AI search pulls from Bing/Google, where we've been indexed for under two
+   weeks.
+3. Nothing outside our own site confirms who we are: no LinkedIn,
+   directories, Business Profile or press.
+4. The name collides with a generic phrase, a song and an old same-name
+   Facebook page.
+
+The fix is entity corroboration plus clear disambiguation (section 3, A11).
+
+**Business risk to check:** another page used "ClickAgain" for digital
+marketing. Check the trademark register (IP India, class 35) and consider
+filing for "Click Again". Talk to a trademark attorney.
+
+---
+
 ## 1b. Second goal: rank for "best marketing / digital marketing company in madurai" (added 21 Oct 2026)
 
 People will still *type* "digital marketing company madurai", so we track
@@ -211,6 +243,21 @@ These are done in this repo.
   - [ ] /insights is thin (115 words) until posts exist (B8)
   - [ ] No /favicon.ico (the SVG icon is linked and Google accepts it) and
         no web manifest. Both optional
+- [~] **A11. Entity & AEO disambiguation** (23 Oct 2026)
+  - [x] Organization schema: `disambiguatingDescription` (which Click Again:
+        Madurai, clickagain.in, 2026, founder), `slogan`, `foundingLocation`,
+        `knowsAbout` (service titles + items), founder `@id` + `worksFor`.
+        Everything in it is also stated on the site.
+  - [x] `AboutPage` schema on /about, `ContactPage` on /contact (both point
+        at `/#organization`)
+  - [x] `/llms.txt`: new "Which Click Again this is" section (not connected
+        to other uses of the name; lists the only official profiles)
+  - [ ] Founder `sameAs` → Kansha's LinkedIn: **on hold, Kansha said not
+        now (23 Oct 2026)**
+  - [ ] Home hero brand line (A2): needs design approval
+  - [ ] `geo` + square logo: waiting on Kansha
+- **Deferred by Kansha (23 Oct 2026), do later:** Business Profile (board),
+  LinkedIn company page, YouTube channel + video, Crunchbase/directories.
 - [ ] **A6. NAP in the footer and on About**, matching the Business Profile
       word for word.
 - [~] **A7. Logo for schema.** Checked 17 Oct 2026: `logo/clickagain-logo.png`
@@ -511,6 +558,10 @@ same day. Add a row whenever a new listing is created.
 
 Newest first. One line per change to the plan or step done.
 
+- **23 Oct 2026**: Brand SERP + AEO review (section 1a-2). Added the
+  disambiguation schema, AboutPage/ContactPage schema and the llms.txt
+  "Which Click Again" section (A11). Business Profile, LinkedIn, YouTube and
+  directories deferred by Kansha.
 - **23 Oct 2026**: Fixed mobile LCP (hero fade started at opacity 0),
   stopped preloading Caveat, lazy-loaded the desktop-only runner images,
   and sized the service icons. The manifesto contrast flag was explained
