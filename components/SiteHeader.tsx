@@ -93,6 +93,23 @@ export default function SiteHeader() {
     [pathname, router]
   );
 
+  /**
+   * Home (and the logo) on the home page glide back to the top from wherever
+   * you are, instead of doing nothing, and drop any #section from the URL.
+   * From any other page they navigate home as normal.
+   */
+  const goHome = useCallback(
+    (e: React.MouseEvent) => {
+      setMenuOpen(false);
+      if (pathname !== "/") return;
+      e.preventDefault();
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      if (window.location.hash) history.replaceState(null, "", "/");
+    },
+    [pathname]
+  );
+
   useEffect(() => {
     if (pathname !== "/") return;
     const id = sessionStorage.getItem(PENDING_KEY);
@@ -194,6 +211,7 @@ export default function SiteHeader() {
             href="/"
             className="header-logo"
             aria-label={`${site.name} home`}
+            onClick={goHome}
           >
             <Image
               src="/logo/clickagain-logo.png"
@@ -227,6 +245,7 @@ export default function SiteHeader() {
               href="/"
               className={`nav-link${pathname === "/" ? " is-active" : ""}`}
               onMouseEnter={(e) => moveTo(e.currentTarget)}
+              onClick={goHome}
             >
               Home
             </Link>
@@ -334,7 +353,12 @@ export default function SiteHeader() {
           <div className="mobile-sheet">
             <div className="shell">
               {tabs.slice(0, 2).map((t) => (
-                <Link key={t.href} href={t.href} className="mobile-item">
+                <Link
+                  key={t.href}
+                  href={t.href}
+                  className="mobile-item"
+                  onClick={t.href === "/" ? goHome : () => setMenuOpen(false)}
+                >
                   {t.label}
                 </Link>
               ))}
